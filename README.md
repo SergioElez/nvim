@@ -4,7 +4,7 @@ My personal nvim conf
 - Añadir al path JDTLS, FUZZYFINDER, JAVA DEBUG, JAVA TEST
 
 
-``git clone https://github.com/SergioElez/nvim C:\Users\Sergio\AppData\Local`` <br/>
+``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
 ``choco install neovim mingw make fzf maven openjdk`` 
 
 - Cambiar el nombre a nvim
