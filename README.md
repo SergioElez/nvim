@@ -5,5 +5,5 @@ My personal nvim conf
 
 
 ``git clone https://github.com/SergioElez/nvim C:\Users\Sergio\AppData\Local`` <br/>
-``choco install neovim make fzf maven openjdk`` 
+``choco install neovim mingw make fzf maven openjdk`` 
 
