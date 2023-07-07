@@ -9,3 +9,5 @@ My personal nvim conf
 
 - Cambiar el nombre a nvim
 - Abrir nvim como admin
+- Esperar a que se instalen los plugins
+- Esperar a que se compilen treesitter y etc
