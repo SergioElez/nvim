@@ -7,3 +7,5 @@ My personal nvim conf
 ``git clone https://github.com/SergioElez/nvim C:\Users\Sergio\AppData\Local`` <br/>
 ``choco install neovim mingw make fzf maven openjdk`` 
 
+- Cambiar el nombre a nvim
+- Abrir nvim como admin
