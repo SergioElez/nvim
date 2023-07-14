@@ -1,6 +1,7 @@
 # nvim
 My personal nvim conf
 - Poner como variable de entorno HOME = C:\Users\Sergio
+- JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8080
 - Añadir al path JDTLS, FUZZYFINDER, JAVA DEBUG, JAVA TEST
 
 
