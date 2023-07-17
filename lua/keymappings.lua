@@ -13,6 +13,7 @@ remap("", ":", ";", {noremap = true})
 
 -- Guardar archivo
 remap("n", "<C-s>", "<cmd>update<cr>")
+remap("i", "<C-s>", "<cmd>update<cr>")
 
 
 -- disable search highlighting by pressing enter
@@ -109,6 +110,34 @@ remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Bre
 remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
+
+-- Signs para ver todos sign list
+vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+vim.fn.sign_define('DapStopped', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'Title', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignHint', {text = '󰋼', texthl = 'WarningMsg', linehl = '', numhl = ''})
+
+require("which-key").register({
+  u = {
+    name = "DAP UI",
+  },
+}, { prefix = "<leader>d" })
+
+remap('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', bufopts, 'Toggle UI')
+remap('n', '<leader>dus', ':lua require("dapui").toggle("sidebar")<CR>', bufopts, 'Toggle sidebar')
+remap('n', '<leader>dut', ':lua require("dapui").toggle("tray")<CR>', bufopts, 'Toggle tray')
+
+-- DAP Widgets
+remap('n', '<leader>dwu', require('dap.ui.widgets').hover, bufopts, 'Show expression under cursor')
+remap('n', '<leader>dws',
+    ':lua local widgets=require("dap.ui.widgets");widgets.sidebar(widgets.scopes).open()<CR>', bufopts,
+    'Show scopes')
+remap('n', '<leader>dwf',
+    ':lua local widgets=require("dap.ui.widgets");widgets.sidebar(widgets.frames).open()<CR>', bufopts,
+    'Show frames')
+
 require("which-key").register({
   b = {
     name = "breakpoints",
@@ -127,8 +156,67 @@ remap("n", "<leader>di", function() require"dap.ui.widgets".hover() end, bufopts
 remap("n", "<leader>d?", function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end, bufopts, "Scopes")
 remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "List frames")
 remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List commands")
+
+
 require("which-key").register({
   d = {
     name = "debug",
   },
 }, { prefix = "<leader>" })
+
+require("which-key").register({
+  w = {
+    name = "Wildcat",
+  },
+}, { prefix = "<leader>d" })
+
+local function enable_auto_scroll()
+  -- vim.api.nvim_win_set_option(0, 'scrollbind', true)
+  -- vim.api.nvim_win_set_option(0, 'scrolljump', 1)
+  -- vim.cmd('autocmd WinScrolled * if &scrollbind | scrollbind | endif')
+  vim.api.nvim_command("scroll 9999")
+end
+
+-- vim.api.nvim_command([[function! scroll_auto() | silent! scroll 9999 | endfunction]])
+-- vim.api.nvim_command([[autocmd User WildcatUp call scroll_auto()]])
+
+remap("n", "<leader>dww", "<cmd>WildcatUp<cr> | lua enable_auto_scroll()", bufopts, "Wildcat Up")
+remap("n", "<leader>dwd", "<cmd>WildcatDown<cr>", bufopts, "Wildcat Down")
+
+local function get_project_path()
+  -- Ruta del archivo actual
+  local current_file_path = vim.fn.expand('%:p')
+
+  -- Buscar el directorio padre de "src" como la ruta del proyecto
+  local project_path = current_file_path
+  local src_directory = "/src/"
+
+  local src_index = string.find(project_path, src_directory)
+  while src_index do
+    project_path = string.sub(project_path, 1, src_index - 1)
+    src_index = string.find(project_path, src_directory)
+  end
+
+  -- Si no se encuentra el directorio "src", devolver la ruta actual
+  if project_path == current_file_path then
+    return vim.fn.getcwd()
+  end
+
+  return project_path
+end
+
+
+-- remap("n", "<leader>dwr", "<cmd>WildCatRun C:/Users/Sergio/Desktop/demo<cr>", bufopts, "Wildcat Run Project")
+
+-- vim.api.nvim_set_keymap('n', '<leader>dwr', string.format('<cmd>WildCatRun C:/Users/Sergio/Desktop/demo<cr>', get_project_path()), {noremap = true, silent = true})
+
+
+-- Definir la función para ejecutar WildCatRun en la ruta del proyecto
+local function run_wildcat()
+  local project_path = "C:/Users/Sergio/Desktop/demo"
+  local command = "WildCatRun " .. project_path
+  vim.fn.system(command)
+end
+
+-- Mapeo para ejecutar WildCatRun en la ruta del proyecto
+remap("n", "<leader>dwr", "<cmd>lua run_wildcat()<cr>", bufopts, "Wildcat Run Project")

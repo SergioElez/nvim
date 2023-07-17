@@ -5,7 +5,7 @@
 
 local home = os.getenv('HOME')
 local java_home = os.getenv('JAVA_HOME')
-local jdtls_path = 'B:/Program Files/JDTLS'
+-- local jdtls_path = 'B:/Program Files/JDTLS'
 local javaDebug_path = 'B:/Program Files/JDTLS/JAVA DEBUG'
 local javaTest_path = 'B:/Program Files/JDTLS/JAVA TEST'
 local jdtls = require('jdtls')
@@ -14,6 +14,21 @@ local root_dir = require('jdtls.setup').find_root(root_markers)
 local workspace_folder = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
 
 local remap = require("me.util").remap
+
+-- PRUEBA PATHS
+local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls/'
+local java_debug_jar_path = vim.fn.stdpath('data') ..
+                                '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar'
+local java_debug_bundles = vim.split(vim.fn.glob(java_debug_jar_path), '\n')
+local java_test_jar_path = vim.fn.stdpath('data') ..
+                               '/mason/packages/java-test/extension/server/*.jar'
+local java_test_bundles = vim.split(vim.fn.glob(java_test_jar_path), '\n')
+local bundles = {}
+vim.list_extend(bundles, java_debug_bundles)
+vim.list_extend(bundles, java_test_bundles)
+
+
+
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -35,7 +50,7 @@ local on_attach = function(client, bufnr)
 end
 
 local bundles = {
-  vim.fn.glob(javaDebug_path .. '/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar'),
+  vim.fn.glob(javaDebug_path .. '/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.47.0.jar'),
 }
 vim.list_extend(bundles, vim.split(vim.fn.glob(javaTest_path .. '/server/*.jar'), "\n"))
 
@@ -122,9 +137,9 @@ local config = {
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
     '-Xmx4g',
-    '-Djava.net.preferIPv4Stack=true', 
-    '-Xdebug',
-    '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005',
+    -- '-Djava.net.preferIPv4Stack=true', 
+    -- '-Xdebug',
+    -- '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005',
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',

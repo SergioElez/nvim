@@ -48,18 +48,18 @@ lspconfig['ltex'].setup {
   }
 }
 
-lspconfig['gopls'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-    },
-  }
-}
+-- lspconfig['gopls'].setup {
+  -- on_attach = on_attach,
+  -- capabilities = capabilities,
+  -- settings = {
+    -- gopls = {
+      -- analyses = {
+        -- unusedparams = true,
+      -- },
+      -- staticcheck = true,
+    -- },
+  -- }
+-- }
 
 lspconfig['pyright'].setup {
   on_attach = on_attach,
@@ -73,12 +73,29 @@ lspconfig['pyright'].setup {
   }
 }
 
-lspconfig['solargraph'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- lspconfig['solargraph'].setup {
+  -- on_attach = on_attach,
+  -- capabilities = capabilities,
+-- }
 
 lspconfig['tsserver'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
+
+-- Install and set up language servers.
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'cssls',
+        'eslint',
+        'gradle_ls',
+        'html',
+        'jdtls',
+        'jsonls',
+        'rust_analyzer',
+        'lua_ls',
+        'tsserver',
+    },
+    automatic_installation = true,
+})

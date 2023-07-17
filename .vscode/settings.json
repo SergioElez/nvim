@@ -78,5 +78,25 @@
         "*/*.gitignore": true,
         "*/**/**.meta": true
     },
-    "hide-files.files": []
+    "hide-files.files": [],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#7493ee",
+        "activityBar.background": "#7493ee",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#fce3e9",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#7493ee",
+        "statusBar.background": "#4770e8",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#7493ee",
+        "statusBarItem.remoteBackground": "#4770e8",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#4770e8",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#4770e899",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#4770e8"
 }

@@ -65,7 +65,7 @@ end
 
 
 
-rainbowColors()
+-- rainbowColors()
 
 
 vim.o.guifont="Consolas:h17"
