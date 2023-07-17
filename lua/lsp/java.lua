@@ -17,6 +17,7 @@ local remap = require("me.util").remap
 
 -- PRUEBA PATHS
 local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls/'
+local lombok_path = jdtls_path .. '/lombok.jar'
 local java_debug_jar_path = vim.fn.stdpath('data') ..
                                 '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar'
 local java_debug_bundles = vim.split(vim.fn.glob(java_debug_jar_path), '\n')
@@ -137,6 +138,7 @@ local config = {
     '-Dlog.protocol=true',
     '-Dlog.level=ALL',
     '-Xmx4g',
+    '-javaagent:' .. lombok_path,
     -- '-Djava.net.preferIPv4Stack=true', 
     -- '-Xdebug',
     -- '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005',
