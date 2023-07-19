@@ -13,3 +13,5 @@ My personal nvim conf
 - Abrir nvim como admin
 - Esperar a que se instalen los plugins
 - Esperar a que se compilen treesitter y etc
+
+``:checkhealth``
