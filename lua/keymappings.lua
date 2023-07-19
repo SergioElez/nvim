@@ -3,6 +3,10 @@
 -----------------------------------------------------------
 local remap = require("me.util").remap
 local bufopts = { silent = true, noremap = true }
+local Logger = require'utils':new("Sergio")
+local os = require("os")
+local io = require("io")
+local utils = require('utils')
 
 -- Salir del modo insertar
 remap("i", "jk", "<ESC>", {noremap = true})
@@ -206,17 +210,92 @@ local function get_project_path()
 end
 
 
--- remap("n", "<leader>dwr", "<cmd>WildCatRun C:/Users/Sergio/Desktop/demo<cr>", bufopts, "Wildcat Run Project")
+-- DESPLIEGUE DE WAR A TOMCAT
+remap("n", "<leader>dwr", "<cmd>lua deploy_to_tomcat()<cr>", bufopts, "Desplegar war a Tomcat")
 
--- vim.api.nvim_set_keymap('n', '<leader>dwr', string.format('<cmd>WildCatRun C:/Users/Sergio/Desktop/demo<cr>', get_project_path()), {noremap = true, silent = true})
+function deploy_to_tomcat()
+  -- Find the root directory of the project using the utility function from 'utils.lua'
+  local root_directory = utils.find_project_root()
 
+  if root_directory then
+    -- Log the root directory found.
+    vim.api.nvim_err_writeln("Root directory = " .. root_directory)
 
--- Definir la función para ejecutar WildCatRun en la ruta del proyecto
-local function run_wildcat()
-  local project_path = "C:/Users/Sergio/Desktop/demo"
-  local command = "WildCatRun " .. project_path
-  vim.fn.system(command)
+    -- Change the current working directory to the root directory of the project.
+    vim.fn.execute("cd " .. root_directory)
+    
+    Logger:info("Haciendo mvn clean install en: " .. root_directory)
+
+    -- Run the mvn command to clean install the project.
+    -- os.execute("mvn clean install")
+    vim.fn.system("mvn clean install")
+
+    -- Find the name of the latest .war file.
+    local latest_file = nil
+    local latest_modification_time = 0
+    for filename in io.popen("dir /B /A:-D " .. root_directory .. "\\target"):lines() do
+      local full_path = root_directory .. "\\target\\" .. filename
+      local modification_time = vim.loop.fs_stat(full_path).mtime.sec
+      if modification_time > latest_modification_time then
+        latest_file = filename
+        latest_modification_time = modification_time
+      end
+    end
+
+    if latest_file then
+      -- Log the latest file found.
+      -- Logger:error("latest_file = " .. latest_file)
+
+      -- Add the `.war` extension to the file name.
+      local war_file_with_extension = string.gsub(latest_file, "%.[^.]+$", ".war")
+
+      -- Log the war file with extension.
+      Logger:info("War encontrado: " .. war_file_with_extension)
+
+      -- Find the location of Tomcat's webapps directory using the CATALINA_HOME environment variable.
+      local tomcat_webapps = os.getenv("CATALINA_HOME") .. "\\webapps\\"
+
+      -- Run the command to copy the .war file to Tomcat's webapps directory.
+      os.execute("copy " .. root_directory .. "\\target\\" .. war_file_with_extension .. " " .. tomcat_webapps)
+      Logger:info("War desplegado en: " .. tomcat_webapps)
+    else
+      -- Log a message if there are no files in the target directory.
+      Logger:error("No hay archivos en el directorio target")
+    end
+  else
+    -- Log a message if the root directory is not found.
+    Logger:error("No se encontró el directorio raíz del proyecto")
+  end
 end
 
--- Mapeo para ejecutar WildCatRun en la ruta del proyecto
-remap("n", "<leader>dwr", "<cmd>lua run_wildcat()<cr>", bufopts, "Wildcat Run Project")
+
+function evalExpresion()
+  local current_mode = vim.fn.mode()
+  if current_mode == 'v' or current_mode == 'V' then
+        -- Guardar el contenido del registro visual en el registro "
+        vim.cmd([[normal! "vy]])
+        -- Obtener el contenido del registro "
+        local selected_text = vim.fn.getreg('"')
+        -- Escapar los caracteres especiales en el texto seleccionado
+        selected_text = vim.fn.escape(selected_text, "'\\")
+        
+        -- Copiar el texto seleccionado al portapapeles
+        vim.fn.setreg("+", selected_text)
+
+        -- Escapar el contenido del registro "+" para evitar problemas con caracteres especiales
+        local escaped_text = vim.fn.escape(selected_text, '"')
+
+        -- Emular la combinación de teclas "+p" para pegar el contenido del registro "+" en el buffer
+        local command = string.format(":lua require('dapui').eval(\"%s\")<CR>", escaped_text)
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), "n", true)
+
+  else
+    local ok require("dapui").eval(vim.fn.input("Enter debug expression: "))
+    Logger:info(ok)
+  end
+  
+end
+
+-- MOSTRAR VARIABLE BAJO EL CURSOR
+remap("n", "<leader>mk", "<cmd>lua evalExpresion()<cr>", bufopts, "evalExpresion")
+remap("v", "<leader>mk", "<cmd>lua evalExpresion()<cr>", bufopts, "evalExpresion")

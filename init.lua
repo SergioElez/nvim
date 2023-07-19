@@ -59,14 +59,7 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animation_length = 0.05
 end
 
-
--- vim.cmd.colorscheme 'molokai'
--- require ("ts-rainbow").setup()
-
-
-
 -- rainbowColors()
 
-
 vim.o.guifont="Consolas:h17"
-
+vim.wo.foldcolumn="1"
