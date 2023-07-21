@@ -6,6 +6,7 @@ vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 
 cmp.setup {
   -- documentation = {
+  -- documentation = {
     -- border = 'rounded', -- Opcional: Establece el estilo del borde del popup de documentación
   -- },
   -- completion = {
@@ -62,4 +63,6 @@ cmp.setup {
     -- completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  
+  
 }

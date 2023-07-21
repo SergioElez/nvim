@@ -266,8 +266,12 @@ function evalExpresion()
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), "n", true)
 
   else
-    local ok require("dapui").eval(vim.fn.input("Introduce la expresion: "))
-    Logger:info(ok)
+    -- local ok require("dapui").eval(vim.fn.input("Introduce la expresion: "))
+    vim.ui.input({prompt="Introduce la expresion: "}, function(input)
+      local ok = require("dapui").eval(input)
+      Logger:info(ok)
+       end
+    )
   end
   
 end
