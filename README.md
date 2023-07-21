@@ -7,6 +7,7 @@ My personal nvim conf
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
 ``choco install neovim mingw make fzf maven openjdk17 python ripgrep`` 
 
+- Instalar tomcat
 - Comprobar que tomcat se ha instalado bien por chocolatey, si no instalarlo a mano IMPORTANTE, INSTALARLO A MANO EN UNA RUTA SIN ESPACIOS
 - Cambiar el nombre a nvim
 - Abrir nvim como admin
