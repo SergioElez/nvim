@@ -3,8 +3,6 @@ My personal nvim conf
 - Poner como variable de entorno HOME = C:\Users\Sergio
 - Settear CATALINA_HOME
 - JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8080
-- Añadir al path JDTLS, FUZZYFINDER, JAVA DEBUG, JAVA TEST
-
 
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
 ``choco install neovim mingw make fzf maven openjdk17 python Tomcat`` 
