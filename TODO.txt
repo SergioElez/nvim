@@ -3,7 +3,7 @@ hacer que cuando sea un archivo java te pregunte si quieres lanzar tomcat
 - DONE hacer un atajo para que haga mvn clean install y copie a la ruta de tomcat
 hacer que salga el autocompletado en lista centrada en popup con noice
 Hacer un atajo para formatee cualquier lenguaje
-hacer que al guardar se idente
+- DONE hacer que al guardar se idente
 hacer que se pueda borrar la consola de tomcat y ponerla en pantalla completa
 atajo ir implementacion
 atajo ir superimplementacion
@@ -11,4 +11,4 @@ hacer que se guarden los breakpoints de otra sesion
 hacer atajos wichkey para noice
 - DONE hacer que selelecciones un texto y te lo pegue en la ventana de watch y te lo pegue para ver lo que vale la expresion
 hacer que en modo debug cuando se ha parado pinte la linea de otro color
-cambiar icono de breakpoint rejected
+- DONE cambiar icono de breakpoint rejected

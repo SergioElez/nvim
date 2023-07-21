@@ -16,9 +16,8 @@ remap("", ";", ":", {noremap = true})
 remap("", ":", ";", {noremap = true})
 
 -- Guardar archivo
-remap("n", "<C-s>", "<cmd>update<cr>")
+remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
 remap("i", "<C-s>", "<cmd>update<cr>")
-
 
 -- disable search highlighting by pressing enter
 remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
@@ -118,7 +117,7 @@ remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "Li
 -- Signs para ver todos sign list
 vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DapStopped', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
-vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'Title', linehl = '', numhl = ''})
+vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignHint', {text = '󰋼', texthl = 'WarningMsg', linehl = '', numhl = ''})
@@ -186,29 +185,6 @@ end
 
 remap("n", "<leader>dww", "<cmd>WildcatUp<cr> | lua enable_auto_scroll()", bufopts, "Wildcat Up")
 remap("n", "<leader>dwd", "<cmd>WildcatDown<cr>", bufopts, "Wildcat Down")
-
-local function get_project_path()
-  -- Ruta del archivo actual
-  local current_file_path = vim.fn.expand('%:p')
-
-  -- Buscar el directorio padre de "src" como la ruta del proyecto
-  local project_path = current_file_path
-  local src_directory = "/src/"
-
-  local src_index = string.find(project_path, src_directory)
-  while src_index do
-    project_path = string.sub(project_path, 1, src_index - 1)
-    src_index = string.find(project_path, src_directory)
-  end
-
-  -- Si no se encuentra el directorio "src", devolver la ruta actual
-  if project_path == current_file_path then
-    return vim.fn.getcwd()
-  end
-
-  return project_path
-end
-
 
 -- DESPLIEGUE DE WAR A TOMCAT
 remap("n", "<leader>dwr", "<cmd>lua deploy_to_tomcat()<cr>", bufopts, "Desplegar war a Tomcat")
@@ -290,12 +266,12 @@ function evalExpresion()
         vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(command, true, false, true), "n", true)
 
   else
-    local ok require("dapui").eval(vim.fn.input("Enter debug expression: "))
+    local ok require("dapui").eval(vim.fn.input("Introduce la expresion: "))
     Logger:info(ok)
   end
   
 end
 
 -- MOSTRAR VARIABLE BAJO EL CURSOR
-remap("n", "<leader>mk", "<cmd>lua evalExpresion()<cr>", bufopts, "evalExpresion")
-remap("v", "<leader>mk", "<cmd>lua evalExpresion()<cr>", bufopts, "evalExpresion")
+remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
+remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")

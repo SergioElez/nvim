@@ -11,10 +11,10 @@ require'nvim-treesitter.configs'.setup {
   matchup = {
     enable = true,
   },
-  rainbow = {
-    enable = true,
-    disable = { 'jsx', 'cpp' },
-    query = 'rainbow-parens',
-    strategy = require('ts-rainbow').strategy.global,
-  }
+  -- rainbow = {
+    -- enable = true,
+    -- disable = { 'jsx', 'cpp' },
+    -- query = 'rainbow-parens',
+    -- strategy = require('ts-rainbow').strategy.global,
+  -- }
 }

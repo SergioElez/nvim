@@ -29,16 +29,7 @@ return {
         }
     end
   },
-  -- {
-    -- "folke/noice.nvim",
-    -- event = "VeryLazy",
-    -- opts = {
-    -- },
-    -- dependencies = {
-      -- "MunifTanjim/nui.nvim",
-      -- "rcarriga/nvim-notify",
-      -- }
-  -- },
+  
   -- {
     -- 'mfussenegger/nvim-dap',
     -- config = function() require('config/nvim-dap') end,
@@ -96,10 +87,10 @@ return {
       require("which-key").setup()
     end
   },
-  {
-    'gelguy/wilder.nvim',
-    config = function() require('config/wilder') end,
-  },
+  -- {
+    -- 'gelguy/wilder.nvim',
+    -- config = function() require('config/wilder') end,
+  -- },
   {
     -- 'goolord/alpha-nvim',
     -- event = "VimEnter",
@@ -347,5 +338,58 @@ require('mason-lspconfig').setup({
   --                                              -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
   --   }
   -- }
+  -- INTERFAZ UI
+  {
+    'stevearc/dressing.nvim',
+    config = function()
+        require('dressing').setup({
+            input = {
+                insert_only = true,
+            },
+            select = {
+                backend = { 'telescope', 'fzf', 'nui', 'builtin' },
+                telescope = nil
+            },
+        })
+    end,
+  },
+  {
+    'RRethy/vim-illuminate',
+    config = function()
+      require('illuminate').configure({
+        providers = {
+            'lsp',
+            'treesitter',
+            'regex',
+        },
+        delay = 100,
+        filetypes_denylist = {
+            'dirvish',
+            'fugitive',
+        },
+        under_cursor = true,
+        large_file_cutoff = nil,
+        large_file_overrides = nil,
+        min_count_to_highlight = 1,
+      })
+    end,
+  }, 
+  {
+    'gelguy/wilder.nvim',
+    config = function() require('config/wilder') end,
+  },
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      cmdline = {
+        enabled = false
+      }
+    },
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+      }
+  },
 }
 

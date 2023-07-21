@@ -130,7 +130,6 @@ local config = {
     }
   },
   cmd = {
-    -- home .. "/.asdf/installs/java/corretto-17.0.4.9.1/bin/java",
     java_home .. "/bin/java",
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
@@ -145,7 +144,6 @@ local config = {
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-    -- '-javaagent:' .. home .. '/.local/share/eclipse/lombok.jar',
     '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
     '-configuration', jdtls_path .. '/config_win',
     '-data', workspace_folder,
