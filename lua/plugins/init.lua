@@ -85,6 +85,14 @@ return {
     'folke/which-key.nvim',
     config = function()
       require("which-key").setup()
+      window = {
+        border = "none", -- none, single, double, shadow
+        position = "bottom", -- bottom, top
+        margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+        padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
+        winblend = 0, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+        zindex = 1000, -- positive value to position WhichKey above other floating windows.
+      },
     end
   },
   -- {
@@ -350,6 +358,51 @@ require('mason-lspconfig').setup({
                 backend = { 'telescope', 'fzf', 'nui', 'builtin' },
                 telescope = nil
             },
+            input = {
+              -- Set to false to disable the vim.ui.input implementation
+              enabled = true,
+          
+              -- Default prompt string
+              default_prompt = "Input:",
+          
+              -- Can be 'left', 'right', or 'center'
+              title_pos = "left",
+          
+              -- When true, <Esc> will close the modal
+              insert_only = true,
+          
+              -- When true, input will start in insert mode.
+              start_in_insert = true,
+          
+              -- These are passed to nvim_open_win
+              anchor = "SW",
+              border = "rounded",
+              -- 'editor' and 'win' will default to being centered
+              relative = "cursor",
+          
+              -- These can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+              prefer_width = 40,
+              width = nil,
+              -- min_width and max_width can be a list of mixed types.
+              -- min_width = {20, 0.2} means "the greater of 20 columns or 20% of total"
+              max_width = { 140, 0.9 },
+              min_width = { 20, 0.2 },
+          
+              buf_options = {},
+              win_options = {
+                -- Window transparency (0-100)
+                winblend = 10,
+                -- Disable line wrapping
+                wrap = false,
+                -- Indicator for when text exceeds window
+                list = true,
+                listchars = "precedes:…,extends:…",
+                -- Increase this for more context when text scrolls off the window
+                sidescrolloff = 0,
+              },
+            }
+          
+             
         })
     end,
   },
@@ -381,6 +434,16 @@ require('mason-lspconfig').setup({
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    -- config = function()
+      -- require("noice").setup({
+        -- presets = {
+          -- bottom_search = false, -- use a classic bottom cmdline for search
+          -- command_palette = true, -- position the cmdline and popupmenu together
+          -- long_message_to_split = false, -- long messages will be sent to a split
+          -- inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          -- }
+        -- })
+    -- end,
     opts = {
       cmdline = {
         enabled = false

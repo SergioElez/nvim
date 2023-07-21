@@ -15,3 +15,4 @@ hacer que en modo debug cuando se ha parado pinte la linea de otro color
 poner iconos a nerdtree
 mirar diferencia nerdtree y oil
 hacer pruebas con git
+hacer atajo ctrl r +
