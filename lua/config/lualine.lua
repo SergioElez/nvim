@@ -66,7 +66,7 @@ require('lualine').setup {
         },
         source = { 'nvim' },
         sections = { 'error' },
-        diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
+        diagnostics_color = { error = { bg = colors.red, fg = '#ffffff' } },
       },
       {
         'diagnostics',

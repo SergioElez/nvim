@@ -65,4 +65,3 @@ vim.o.guifont="Consolas:h17"
 vim.wo.foldcolumn="1"
 vim.cmd([[hi! link PreProc Normal]])
 
-

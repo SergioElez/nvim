@@ -4,7 +4,6 @@ require('dap.ext.vscode').load_launchjs()
 local dap = require('dap')
 dap.defaults.fallback.terminal_win_cmd = 'tabnew'
 
--- nuevo
 dap.configurations.java = {
   {
     type = 'java';
@@ -12,9 +11,5 @@ dap.configurations.java = {
     name = "Debug (Attach) - Remote";
     hostName = "127.0.0.1";
     port = 8080;
-    -- port = 3587;
-    -- port = 5005;
   },
 }
-
-
