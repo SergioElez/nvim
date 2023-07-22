@@ -9,14 +9,14 @@ return {
   },
   -- Rainbow Bracket
   {'HiPhish/nvim-ts-rainbow2'},
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc" })
-      end
-    end,
-  },
+  -- {
+    -- "nvim-treesitter/nvim-treesitter",
+    -- opts = function(_, opts)
+      -- if type(opts.ensure_installed) == "table" then
+        -- vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc", "java" })
+      -- end
+    -- end,
+  -- },
   -- TODO
   {
     "AmeerTaweel/todo.nvim",
@@ -192,14 +192,7 @@ return {
       -- require('onedark').load()
     -- end
   -- },
-  {
-    'nvim-lualine/lualine.nvim',
-    config = function()
-      require('lualine').setup {
-        options = { theme = 'molokai' },
-      }
-    end
-  },
+
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -217,6 +210,11 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = function() require('config/nvim-treesitter') end,
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == "table" then
+        vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc"})
+      end
+    end,
   },
   {
     'preservim/vim-pencil',
@@ -390,6 +388,10 @@ require('mason-lspconfig').setup({
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
       }
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function() require('config/lualine') end,
   },
 }
 

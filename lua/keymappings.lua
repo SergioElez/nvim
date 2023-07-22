@@ -118,8 +118,10 @@ remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "Li
 vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DapStopped', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
-vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
-vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+-- vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+-- vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignHint', {text = '󰋼', texthl = 'WarningMsg', linehl = '', numhl = ''})
 
 require("which-key").register({

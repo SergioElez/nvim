@@ -41,7 +41,7 @@ function rainbowColors(event)
     })
 
     vim.api.nvim_set_hl(0, "TSRainbowViolet", {
-      link = "Float"
+      link = "c"
     })
   end
 
@@ -59,8 +59,10 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animation_length = 0.05
 end
 
--- rainbowColors()
+rainbowColors()
 
 vim.o.guifont="Consolas:h17"
 vim.wo.foldcolumn="1"
 vim.cmd([[hi! link PreProc Normal]])
+
+
