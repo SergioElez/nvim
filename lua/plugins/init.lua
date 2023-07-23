@@ -132,10 +132,6 @@ return {
     config = function() require('config/telescope') end,
   },
   {
-    'nvim-tree/nvim-web-devicons',
-    -- 'ryanoasis/vim-devicons',
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     config = function() require('config/nvim-treesitter') end,
@@ -178,6 +174,14 @@ return {
     end
   },
   {
+    'Weissle/persistent-breakpoints.nvim',
+    config = function()
+      require('persistent-breakpoints').setup{
+        load_breakpoints_event = { "BufReadPost" }
+      }
+    end
+  },
+  {
     'SergioElez/nvim-wildcat',
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
@@ -212,24 +216,28 @@ return {
     },
     config = function()
         -- Install and set up language servers.
-require('mason').setup()
-require('mason-lspconfig').setup({
-    ensure_installed = {
-        'cssls',
-        'eslint',
-        'gradle_ls',
-        'html',
-        'jdtls',
-        'jsonls',
-        'rust_analyzer',
-        'lua_ls',
-        'tsserver',
-    },
-    automatic_installation = true,
-    })
+      require('mason').setup()
+        require('mason-lspconfig').setup({
+          ensure_installed = {
+              'cssls',
+              'eslint',
+              'gradle_ls',
+              'html',
+              'jdtls',
+              'jsonls',
+              'rust_analyzer',
+              'lua_ls',
+              'tsserver',
+          },
+        automatic_installation = true,
+      })
     end,
   },
   -- INTERFAZ UI
+  {
+    'nvim-tree/nvim-web-devicons',
+    -- 'ryanoasis/vim-devicons',
+  },
   {
     'stevearc/dressing.nvim',
     config = function()

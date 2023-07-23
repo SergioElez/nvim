@@ -107,11 +107,19 @@ require("which-key").register({
   },
 }, { prefix = "<leader>" })
 
--- nvim-dap
+
 remap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
+remap("n", "<leader>bb", "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
+
 remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts, "Set conditional breakpoint")
-remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
+remap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", bufopts, "Set conditional breakpoint")
+-- vim.api.nvim_set_keymap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", { noremap = true, silent = true })
+
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
+remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", bufopts, "Clear breakpoints")
+-- vim.api.nvim_set_keymap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", { noremap = true, silent = true })
+
+remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
 
 -- Signs para ver todos sign list
