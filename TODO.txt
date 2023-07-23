@@ -1,3 +1,4 @@
+Hacer que en el startup menu salga el diario y se pueda checkear cosas y esten los dias y tal
 Mapeo para skipear los breakpoints
 hacer que cuando sea un archivo java te pregunte si quieres lanzar tomcat
 - DONE hacer un atajo para que haga mvn clean install y copie a la ruta de tomcat
@@ -8,7 +9,7 @@ hacer que se pueda borrar la consola de tomcat y ponerla en pantalla completa
 atajo ir implementacion
 atajo ir superimplementacion
 hacer que se guarden los breakpoints de otra sesion
-hacer atajos wichkey para noice
+hacer atajos wichkey para todos los plugins
 - DONE hacer que selelecciones un texto y te lo pegue en la ventana de watch y te lo pegue para ver lo que vale la expresion
 hacer que en modo debug cuando se ha parado pinte la linea de otro color
 - DONE cambiar icono de breakpoint rejected
@@ -16,3 +17,5 @@ poner iconos a nerdtree
 mirar diferencia nerdtree y oil
 hacer pruebas con git
 hacer atajo ctrl r +
+hacer que salgan los iconos del autocompletado
+HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE

@@ -61,7 +61,7 @@ return {
   'itspriddle/vim-marked',
   'ludovicchabant/vim-gutentags',
   'mfussenegger/nvim-jdtls',
-  -- 'neovim/nvim-lspconfig',
+  'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
   'tpope/vim-commentary',
   'tpope/vim-fugitive',
@@ -87,10 +87,6 @@ return {
       require("which-key").setup()
     end
   },
-  -- {
-    -- 'gelguy/wilder.nvim',
-    -- config = function() require('config/wilder') end,
-  -- },
   {
     -- 'goolord/alpha-nvim',
     -- event = "VimEnter",
@@ -100,6 +96,7 @@ return {
     -- end
 
     "SergioElez/startup.nvim",
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
     config = function()
       require"startup".setup()
@@ -117,67 +114,6 @@ return {
     },
     config = function() require('config/nvim-cmp') end,
   },
-  
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   version = false, -- last release is way too old
-  --   event = "InsertEnter",
-  --   dependencies = {
-  --     "hrsh7th/cmp-nvim-lsp",
-  --     "hrsh7th/cmp-buffer",
-  --     "hrsh7th/cmp-path",
-  --     "saadparwaiz1/cmp_luasnip",
-  --   },
-  --   opts = function()
-  --     vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-  --     local cmp = require("cmp")
-  --     -- local defaults = require("cmp.config.default")()
-  --     return {
-  --       completion = {
-  --         completeopt = "menu,menuone,noinsert",
-  --       },
-  --       snippet = {
-  --         expand = function(args)
-  --           require("luasnip").lsp_expand(args.body)
-  --         end,
-  --       },
-  --       mapping = cmp.mapping.preset.insert({
-  --         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-  --         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-  --         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-  --         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-  --         ["<C-Space>"] = cmp.mapping.complete(),
-  --         ["<C-e>"] = cmp.mapping.abort(),
-  --         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  --         ["<S-CR>"] = cmp.mapping.confirm({
-  --           behavior = cmp.ConfirmBehavior.Replace,
-  --           select = true,
-  --         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  --       }),
-  --       sources = cmp.config.sources({
-  --         { name = "nvim_lsp" },
-  --         { name = "luasnip" },
-  --         { name = "buffer" },
-  --         { name = "path" },
-  --       }),
-  --       formatting = {
-  --         -- format = function(_, item)
-  --           -- local icons = require("lazyvim.config").icons.kinds
-  --           -- if icons[item.kind] then
-  --             -- item.kind = icons[item.kind] .. item.kind
-  --           -- end
-  --           -- return item
-  --         -- end,
-  --       },
-  --       experimental = {
-  --         ghost_text = {
-  --           hl_group = "CmpGhostText",
-  --         },
-  --       },
-  --       -- sorting = defaults.sorting,
-  --     }
-  --   end,
-  -- },
   {
     'j-hui/fidget.nvim',
     tag = 'legacy',
@@ -190,13 +126,14 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-telescope/telescope-dap.nvim',
-      -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'nvim-telescope/telescope-ui-select.nvim',
     },
     config = function() require('config/telescope') end,
   },
   {
     'nvim-tree/nvim-web-devicons',
+    -- 'ryanoasis/vim-devicons',
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -338,7 +275,17 @@ require('mason-lspconfig').setup({
     opts = {
       cmdline = {
         enabled = false
-      }
+      },
+      messages = {
+        enabled = true, -- enables the Noice messages UI
+        view = "notify", -- default view for messages
+        -- view = "false", -- default view for messages
+        view_error = "notify", -- view for errors
+        view_warn = "notify", -- view for warnings
+        view_history = "messages", -- view for :messages
+        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+      },
+
     },
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -349,5 +296,24 @@ require('mason-lspconfig').setup({
     'nvim-lualine/lualine.nvim',
     config = function() require('config/lualine') end,
   },
+  -- Ctrl + Scroll
+  {
+    'tenxsoydev/size-matters.nvim',
+    config = function() 
+      require("size-matters").setup({
+        default_mappings = true,
+        -- font resize step size
+        step_size = 1,
+        notifications = {
+          enable = true,
+          timeout = 150,
+          delay = 300,
+        },
+        -- the font loaded when using the reset cmd / shortcut
+        reset_font = vim.api.nvim_get_option("guifont")
+      })
+    end
+  },
+  
 }
 

@@ -54,14 +54,20 @@ require('keymappings')
 
 -- Neovide
 if vim.g.neovide then
-    -- Put anything you want to happen only in Neovide here
     vim.g.neovide_cursor_trail_size = 0
     vim.g.neovide_cursor_animation_length = 0.05
+    require("size-matters")
+    vim.o.guifont="Consolas:h17"
+    -- vim.o.guifont="JetBrains Mono:h17"
+    
+    -- vim.g.nvcode_icons = {
+      -- ["ClassIcon"] = { default = "", default_color = nil, default_bg = nil };
+    -- }
 end
 
-rainbowColors()
+-- rainbowColors()
 
-vim.o.guifont="Consolas:h17"
+-- vim.o.guifont="Consolas:h17"
 vim.wo.foldcolumn="1"
 vim.cmd([[hi! link PreProc Normal]])
-
+-- vim.wo.cursorline = true

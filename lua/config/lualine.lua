@@ -76,7 +76,7 @@ require('lualine').setup {
         },
         source = { 'nvim' },
         sections = { 'warn' },
-        diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
+        diagnostics_color = { warn = { bg = colors.orange, fg = '#ffffff' } },
       },
     },
     lualine_x = {},

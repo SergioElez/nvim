@@ -116,7 +116,7 @@ remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "Li
 
 -- Signs para ver todos sign list
 vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
-vim.fn.sign_define('DapStopped', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
+vim.fn.sign_define('DapStopped', {text = '', texthl = 'WarningMsg', linehl = 'NvimTreeOpenedFile'})
 vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 -- vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
