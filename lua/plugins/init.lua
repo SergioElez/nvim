@@ -9,32 +9,15 @@ return {
   },
   -- Rainbow Bracket
   {'HiPhish/nvim-ts-rainbow2'},
-  
-  -- {
-    -- "nvim-treesitter/nvim-treesitter",
-    -- opts = function(_, opts)
-      -- if type(opts.ensure_installed) == "table" then
-        -- vim.list_extend(opts.ensure_installed, { "json", "json5", "jsonc", "java" })
-      -- end
-    -- end,
-  -- },
   -- TODO
   {
     "AmeerTaweel/todo.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
         require("todo").setup {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
         }
     end
   },
-  
-  -- {
-    -- 'mfussenegger/nvim-dap',
-    -- config = function() require('config/nvim-dap') end,
-  -- },
   {
     'mfussenegger/nvim-dap',
     pin = true,
@@ -48,7 +31,6 @@ return {
         require('config/nvim-dap')
     end,
   },
-  -- { "rcarriga/nvim-dap-ui"},
   -- OTROS PLUGINS
   'aklt/plantuml-syntax',
   'bronson/vim-visual-star-search',
@@ -89,13 +71,6 @@ return {
     end
   },
   {
-    -- 'goolord/alpha-nvim',
-    -- event = "VimEnter",
-    -- dependencies = { 'nvim-tree/nvim-web-devicons' },
-    -- config = function ()
-    --     require('alpha').setup(require'alpha.themes.startify'.config)
-    -- end
-
     "SergioElez/startup.nvim",
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
@@ -236,8 +211,8 @@ return {
   },
   -- INTERFAZ UI
   {
-    'nvim-tree/nvim-web-devicons',
-    -- 'ryanoasis/vim-devicons',
+    -- 'nvim-tree/nvim-web-devicons',
+    'ryanoasis/vim-devicons',
   },
   {
     'stevearc/dressing.nvim',
@@ -334,7 +309,15 @@ return {
       float_opts = {
         border='curved'
       }
-  } end
+    } end
   }, 
+  {'barklan/capslock.nvim',
+  config = function()
+    require("capslock").setup({
+      -- MAPEAR EN AUTOHOTKEY EL CAPSLOCK A F12
+      vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle")
+    })
+  end
+  }
 }
 

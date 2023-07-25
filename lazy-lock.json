@@ -1,4 +1,5 @@
 {
+  "capslock.nvim": { "branch": "main", "commit": "35b560dd5585cd60e45a2367ad6ff9873f4c21a2" },
   "cmp-dap": { "branch": "master", "commit": "d16f14a210cd28988b97ca8339d504533b7e09a4" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "cmp-nvim-lsp-signature-help": { "branch": "main", "commit": "3d8912ebeb56e5ae08ef0906e3a54de1c66b92f1" },
@@ -48,6 +49,7 @@
   "toggleterm.nvim": { "branch": "main", "commit": "00c13dccc78c09fa5da4c5edda990a363e75035e" },
   "trouble.nvim": { "branch": "main", "commit": "d572f59aaf7eef670d6ddc331032a7d5e59d634e" },
   "vim-commentary": { "branch": "master", "commit": "e87cd90dc09c2a203e13af9704bd0ef79303d755" },
+  "vim-devicons": { "branch": "master", "commit": "71f239af28b7214eebb60d4ea5bd040291fb7e33" },
   "vim-fugitive": { "branch": "master", "commit": "b3b838d690f315a503ec4af8c634bdff3b200aaf" },
   "vim-gutentags": { "branch": "master", "commit": "1337b1891b9d98d6f4881982f27aa22b02c80084" },
   "vim-illuminate": { "branch": "master", "commit": "a2907275a6899c570d16e95b9db5fd921c167502" },

@@ -219,13 +219,14 @@ remap("n", "<leader>bs", "<cmd>lua skip()<cr>", bufopts, "Skip breakpoints")
 
 -- Signs para ver todos sign list
 vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
-vim.fn.sign_define('DapStopped', {text = '', texthl = 'WarningMsg', linehl = 'NvimTreeOpenedFile'})
+vim.fn.sign_define('DapStopped', {text = '', texthl = 'DiagnosticSignInfo', linehl = 'NvimTreeOpenedFile'})
 vim.fn.sign_define('DapBreakpointRejected', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 -- vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DapBreakpointCondition', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 -- vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
-vim.fn.sign_define('DiagnosticSignHint', {text = '󰋼', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignHint', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 
 require("which-key").register({
   u = {
@@ -344,8 +345,8 @@ function deploy_tomcat()
     -- else
       -- Logger:info("no OCUPADO")
       
-      vim.cmd('normal! G$')
-      vim.cmd("wincmd w")
+      -- vim.cmd('normal! G$')
+      -- vim.cmd("wincmd w")
       vim.cmd('startinsert | stopinsert')
       
       -- SI ESTA ESCUCHANDO EN EL puerto 8080
@@ -456,3 +457,4 @@ end
 -- MOSTRAR VARIABLE BAJO EL CURSOR
 remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
+

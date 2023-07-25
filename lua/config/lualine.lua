@@ -29,6 +29,7 @@ local molokai_bubble = {
     a = { fg = colors.black, bg = colors.cyan },
     b = { fg = colors.white, bg = colors.grey },
     c = { fg = colors.bg, bg = colors.bg },
+    x = { fg = colors.white, bg = colors.bg },
   },
 
   insert = { a = { fg = colors.black, bg = colors.green } },
@@ -50,13 +51,15 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {
-      { 'mode', separator = { left = ' ', right = ' ' }, right_padding = 2 },
+      { 'mode', separator = { left = ' ', right = '  ' }, right_padding = 2 },
     },
     lualine_b = { 
-      { 'filename', separator = { left = '', right = '' }, right_padding = 2 },
-      {'branch'} 
+      { 'filename', separator = { left = '', right = '' }, right_padding = 2},
+      {'branch'},
+      { require("capslock").status_string, icon = {'󰪛', color={fg=colors.red}}},
     },
-    lualine_c = { 
+    lualine_c = {
+      
       'fileformat',
       {
         'diagnostics',
@@ -79,7 +82,10 @@ require('lualine').setup {
         diagnostics_color = { warn = { bg = colors.orange, fg = '#ffffff' } },
       },
     },
-    lualine_x = {},
+    lualine_x = {
+      -- { require("capslock").status_string },
+      
+    },
     lualine_y = {
       {'filetype'},
       { 'progress'},

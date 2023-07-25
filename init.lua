@@ -67,7 +67,19 @@ end
 
 -- rainbowColors()
 
-vim.o.guifont="Consolas:h17"
+-- vim.o.guifont="Consolas:h17"
+-- vim.o.guifont="Consolas Nerd Font:h17"
+-- vim.o.guifont="FiraCode Nerd Font:h17"
+-- vim.o.guifont="JetBrainsMono Nerd Font:h17"
+-- vim.o.guifont="Inconsolata Nerd Font:h17"
+-- vim.o.guifont="CodeNewRoman Nerd Font:h17"
+-- vim.o.guifont="CaskaydiaCove Nerd Font:h17"
+-- vim.o.guifont="Cousine Nerd Font:h17"
+-- vim.o.guifont="Hack Nerd Font:h17"
+-- vim.o.guifont=" Nerd Font:h17"
+-- vim.o.guifont=" Nerd Font:h17"
+-- Descargar https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/SpaceMono.zip
+vim.o.guifont="RobotoMono Nerd Font:h16"
 vim.wo.foldcolumn="1"
 vim.cmd([[hi! link PreProc Normal]])
 -- vim.wo.cursorline = true
