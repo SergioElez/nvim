@@ -2,14 +2,13 @@
 My personal nvim conf
 - Poner como variable de entorno HOME = C:\Users\Sergio
 - Settear CATALINA_HOME
-- JAVA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8080
+- CATALINA_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=8080 (SI NO ATTACHEA PONER SUSPEND=N)
 
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
 ``choco install neovim mingw make fzf maven openjdk17 python ripgrep`` 
 
 - Instalar tomcat
 - Comprobar que tomcat se ha instalado bien por chocolatey, si no instalarlo a mano IMPORTANTE, INSTALARLO A MANO EN UNA RUTA SIN ESPACIOS
-- Cambiar el nombre a nvim
 - Abrir nvim como admin
 - Esperar a que se instalen los plugins
 - Esperar a que se compilen treesitter y etc
