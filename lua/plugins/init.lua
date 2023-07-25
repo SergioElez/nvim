@@ -9,6 +9,7 @@ return {
   },
   -- Rainbow Bracket
   {'HiPhish/nvim-ts-rainbow2'},
+  
   -- {
     -- "nvim-treesitter/nvim-treesitter",
     -- opts = function(_, opts)
@@ -322,6 +323,18 @@ return {
       })
     end
   },
-  
+  {'akinsho/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
+  config = function() require('toggleterm').setup{
+      open_mapping = [[\]], -- open with double backslash
+      terminal_mappings = true, -- close by typing \\
+      insert_mappings = false, -- i sometimes actually do have to type \\
+      direction = 'float', -- open on right by default
+      size = 80, -- by default he teeny!!
+      auto_scroll = true,
+      float_opts = {
+        border='curved'
+      }
+  } end
+  }, 
 }
 

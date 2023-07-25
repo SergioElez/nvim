@@ -122,6 +122,101 @@ remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_a
 remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
 
+
+local skip_breakpoints = false
+local breakpoint_lines = {}
+function toggle_skip_breakpoints()
+  if skip_breakpoints then
+      -- Restaurar los breakpoints
+      local bufnr = vim.api.nvim_get_current_buf()
+      for _, line in ipairs(breakpoint_lines[bufnr] or {}) do
+          vim.fn.sign_place(0, "breakpoint", "Breakpoint", bufnr, { lnum = line, priority = 10 })
+      end
+      breakpoint_lines[bufnr] = nil
+  else
+      -- Guardar y borrar los breakpoints actuales
+      local bufnr = vim.api.nvim_get_current_buf()
+      local signs = vim.fn.sign_getplaced(bufnr, {group = "breakpoint"})
+      breakpoint_lines[bufnr] = {}
+      for _, sign in ipairs(signs) do
+          local line = sign.lnum
+          table.insert(breakpoint_lines[bufnr], line)
+          vim.fn.sign_unplace("breakpoint", { buffer = bufnr, id = line })
+      end
+      Logger:info(breakpoint_lines)
+  end
+  skip_breakpoints = not skip_breakpoints
+  
+  Logger:info(skip_breakpoints)
+end
+
+-- function skip()
+  -- for _ = 1, 10 do
+    -- require'dap'.continue()
+  -- end
+-- end
+
+-- function skip()
+  -- if not require("dap").session() then
+    -- Logger:info("No se ha adjuntado un proceso de depuración.")
+      -- return
+  -- end
+
+  -- local breakpoints = vim.fn.getbreakpoint()
+  -- if not breakpoints or #breakpoints == 0 then
+    -- Logger:info("No hay breakpoints activos.")
+      -- return
+  -- end
+
+  -- for _, breakpoint in ipairs(breakpoints) do
+      -- require("dap").continue(breakpoint.number)
+  -- end
+
+  -- Logger:info("Se han continuado todos los breakpoints.")
+-- end
+
+-- continued_breakpoints = {}
+-- function skip()
+
+  -- Comprobar si el proceso de depuración está adjunto
+  -- if not require("dap").session() then
+      -- Logger:info("No se ha adjuntado un proceso de depuración.")
+      -- return
+  -- end
+
+  -- Obtener los breakpoints activos
+  -- local breakpoints = require("dap").list_breakpoints()
+  -- local breakpoints = require("telescope").extensions.dap.list_breakpoints()
+  
+  
+  -- local breakpoints = require("dap.breakpoints").get()
+  -- if not breakpoints or #breakpoints == 0 then
+      -- Logger:info("No hay breakpoints activos.")
+      -- return
+  -- end
+  -- Logger:info(vim.inspect(breakpoints))
+  
+  -- for _, breakpoint in ipairs(breakpoints) do
+    -- local breakpoint_id = breakpoint.id
+    -- if not continued_breakpoints[breakpoint_id] then
+        -- require("dap").set_breakpoint(breakpoint_id, false)
+
+        -- require("dap").continue(breakpoint_id)
+
+        -- continued_breakpoints[breakpoint_id] = true
+    -- end
+  -- Logger:info("Se han continuado todos los breakpoints.")
+-- end
+
+function skip()
+  for _ = 1, 10 do
+    vim.cmd("normal! <leader>dc")
+  end
+end
+
+remap("n", "<leader>bs", "<cmd>lua skip()<cr>", bufopts, "Skip breakpoints")
+
+
 -- Signs para ver todos sign list
 vim.fn.sign_define('DapBreakpoint', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 vim.fn.sign_define('DapStopped', {text = '', texthl = 'WarningMsg', linehl = 'NvimTreeOpenedFile'})
@@ -156,6 +251,9 @@ require("which-key").register({
     name = "breakpoints",
   },
 }, { prefix = "<leader>" })
+
+remap("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
+remap("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
 
 remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
 remap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
@@ -193,7 +291,76 @@ end
 -- vim.api.nvim_command([[function! scroll_auto() | silent! scroll 9999 | endfunction]])
 -- vim.api.nvim_command([[autocmd User WildcatUp call scroll_auto()]])
 
-remap("n", "<leader>dww", "<cmd>WildcatUp<cr> | lua enable_auto_scroll()", bufopts, "Wildcat Up")
+local winid = nil
+function deploy_tomcat()
+  port = "8080"
+  local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+  ocuped = #result > 0
+  
+  for _, line in ipairs(result) do
+    local listening_pos = line:find("LISTENING")
+  end
+  Logger:info(listening_pos)
+  
+  if(ocuped and listening_pos) then
+    Logger:error("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
+    
+    
+    -- winid = vim.api.nvim_get_current_win()
+    
+    -- Logger:info("Se cierra de ventana")
+    -- vim.api.nvim_win_close(winid, true);
+    
+    for _, line in ipairs(result) do
+      local listening_pos = line:find("LISTENING")
+      if listening_pos then
+          local pid_str = line:sub(listening_pos + 10):match("(%d+)")
+          if pid_str then
+              local pid = tonumber(pid_str)
+              if pid then
+                  local kill_command = string.format('taskkill /PID %d /F', pid)
+                  vim.cmd('!' .. kill_command)
+                  Logger:info(kill_command)
+                  
+              end
+          end
+      end
+    end
+    
+    -- deploy_tomcat()
+
+  else
+
+    vim.cmd("silent! WildcatUp")
+    winid = vim.api.nvim_get_current_win()
+    
+    -- vim.cmd.sleep(2)
+    
+    -- local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+    -- ocuped = #result > 0
+    -- if(not ocuped) then
+      -- Logger:info("OCUPADO")
+      -- deploy_tomcat()
+    -- else
+      -- Logger:info("no OCUPADO")
+      
+      vim.cmd('normal! G$')
+      vim.cmd("wincmd w")
+      vim.cmd('startinsert | stopinsert')
+      
+      -- SI ESTA ESCUCHANDO EN EL puerto 8080
+      -- require'dap'.continue()
+    -- end
+    
+    
+    -- vim.api.nvim_set_keymap('n', '<C-w>w', '<Cmd>wincmd w<CR>', { noremap = true, silent = true })
+  end
+  
+end
+
+
+remap("n", "<F4>", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
+remap("n", "<leader>dww", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
 remap("n", "<leader>dwd", "<cmd>WildcatDown<cr>", bufopts, "Wildcat Down")
 
 -- DESPLIEGUE DE WAR A TOMCAT

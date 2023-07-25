@@ -19,3 +19,6 @@ hacer pruebas con git
 hacer atajo ctrl r +
 hacer que salgan los iconos del autocompletado
 HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE
+DONE - hacer mapeo para  netstat -ano | findstr :8080 taskkill /PID 15680 /F
+DONE -hacer que al levantar el tomcat primero compruebe que si hay algo levantado en el
+HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
