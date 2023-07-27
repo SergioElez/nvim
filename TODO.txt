@@ -8,20 +8,25 @@ Hacer un atajo para formatee cualquier lenguaje, probar a pasarle un sql y que l
 hacer que se pueda borrar la consola de tomcat y ponerla en pantalla completa
 atajo ir implementacion
 atajo ir superimplementacion
-hacer que se guarden los breakpoints de otra sesion
+- DONE hacer que se guarden los breakpoints de otra sesion
 hacer atajos wichkey para todos los plugins
 - DONE hacer que selelecciones un texto y te lo pegue en la ventana de watch y te lo pegue para ver lo que vale la expresion
-hacer que en modo debug cuando se ha parado pinte la linea de otro color
+- DONE hacer que en modo debug cuando se ha parado pinte la linea de otro color
 - DONE cambiar icono de breakpoint rejected
 poner iconos a nerdtree
 mirar diferencia nerdtree y oil
 hacer pruebas con git
 hacer atajo ctrl r +
-hacer que salgan los iconos del autocompletado
-HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE
-DONE - hacer mapeo para  netstat -ano | findstr :8080 taskkill /PID 15680 /F
-DONE -hacer que al levantar el tomcat primero compruebe que si hay algo levantado en el
+- DONE hacer que salgan los iconos del autocompletado
+- DONE HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE
+- DONE hacer mapeo para  netstat -ano | findstr :8080 taskkill /PID 15680 /F
+- DONE hacer que al levantar el tomcat primero compruebe que si hay algo levantado en el
 HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
-HACER QUE SI ESTA PULSADO CAPSLOCK SALGA EN LUALINE
-
-hacer que si has puesto toggleterminal y pulsas escape se salga
+-DONE HACER QUE SI ESTA PULSADO CAPSLOCK SALGA EN LUALINE
+bajarse un plugin para que ponga brackets 
+- DONE hacer que si has puesto toggleterminal y pulsas escape se salga
+hacer que se oculten los imports por defecto
+hacer que con un atajo te pinte la linea actual
+hacer atajo para que te abra la config de tomcat
+hacer archivo para config de proyetos y meter el xRetiro
+hacer archivo para term colors

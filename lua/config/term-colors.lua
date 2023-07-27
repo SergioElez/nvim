@@ -1,0 +1,10 @@
+function term_colors()
+    -- vim.cmd.syntax("clear")
+    vim.cmd.syntax([[match Float /\d\+/]])
+    vim.cmd.syntax([[match DiagnosticInfo /\v[A-Z]:.*>\>/]])
+    vim.cmd.syntax([[match DiagnosticError /\v[!-/:\\]/]])
+    vim.cmd.syntax("keyword DiagnosticError ERROR FAILURE")
+    vim.cmd.syntax("keyword DiagnosticInfo INFO")
+    vim.cmd.syntax("keyword DiagnosticWarn WARNING")
+    vim.cmd.syntax("keyword DiagnosticOk OK SUCCESS")
+end
