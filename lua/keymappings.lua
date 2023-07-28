@@ -93,7 +93,7 @@ require("which-key").register({
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
 -- NerdTree
-remap("n", "<leader><leader>", "<cmd>NERDTreeToggle<cr>", bufopts, "Oil")
+remap("n", "<leader><leader>", "<cmd>NERDTreeToggle<cr>", bufopts, "Explorador de archivos")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")
@@ -113,11 +113,9 @@ remap("n", "<leader>bb", "<cmd>lua require('persistent-breakpoints.api').toggle_
 
 remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts, "Set conditional breakpoint")
 remap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", bufopts, "Set conditional breakpoint")
--- vim.api.nvim_set_keymap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", { noremap = true, silent = true })
 
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
 remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", bufopts, "Clear breakpoints")
--- vim.api.nvim_set_keymap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", { noremap = true, silent = true })
 
 remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
@@ -282,15 +280,6 @@ require("which-key").register({
   },
 }, { prefix = "<leader>d" })
 
-local function enable_auto_scroll()
-  -- vim.api.nvim_win_set_option(0, 'scrollbind', true)
-  -- vim.api.nvim_win_set_option(0, 'scrolljump', 1)
-  -- vim.cmd('autocmd WinScrolled * if &scrollbind | scrollbind | endif')
-  vim.api.nvim_command("scroll 9999")
-end
-
--- vim.api.nvim_command([[function! scroll_auto() | silent! scroll 9999 | endfunction]])
--- vim.api.nvim_command([[autocmd User WildcatUp call scroll_auto()]])
 
 local winid = nil
 function deploy_tomcat()
@@ -457,16 +446,7 @@ end
 -- MOSTRAR VARIABLE BAJO EL CURSOR
 remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
-
--- Salir de toggle term con ESC
-remap("t", "<esc>", "<cmd>ToggleTerm<cr>", bufopts, "ToggleTerm")
-
-function ClearTerminal()
-  vim.fn.termopen("sed 's/\\[8080\\]/\\x1b[31m&\\x1b[0m/'", { on_exit = function() vim.cmd('redraw') end })
-end
-
-
--- remap("t", "<leader>tc", [[<C-\><C-n>:silent !clear<CR>]], bufopts, "Inspeccionar expresion")
-vim.api.nvim_set_keymap('t', '<f2>', "<cmd>lua ClearTerminal()<cr>", { noremap = true })
-
+-- Noice
 remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
+-- Pintar linea
+remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")

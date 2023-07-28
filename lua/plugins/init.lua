@@ -98,6 +98,64 @@ return {
     end
   },
   {
+    'm4xshen/autoclose.nvim',
+    config = function ()
+      require("autoclose").setup({
+        keys = {
+           ["$"] = { escape = true, close = true, pair = "$$", disabled_filetypes = {} },
+        },
+     })
+    end
+  },
+  { 'anuvyklack/pretty-fold.nvim',
+   config = function()
+      require('pretty-fold').setup({
+        config = {
+          sections = {
+             left = {
+                'content',
+             },
+             right = {
+                ' ', 'number_of_folded_lines', ': ', 'percentage', ' ',
+                function(config) return config.fill_char:rep(3) end
+             }
+          },
+          fill_char = '•',
+       
+          remove_fold_markers = true,
+       
+          -- Keep the indentation of the content of the fold string.
+          keep_indentation = true,
+       
+          -- Possible values:
+          -- "delete" : Delete all comment signs from the fold string.
+          -- "spaces" : Replace all comment signs with equal number of spaces.
+          -- false    : Do nothing with comment signs.
+          process_comment_signs = 'spaces',
+       
+          -- Comment signs additional to the value of `&commentstring` option.
+          comment_signs = {},
+       
+          -- List of patterns that will be removed from content foldtext section.
+          stop_words = {
+             '@brief%s*', -- (for C++) Remove '@brief' and all spaces after.
+          },
+       
+          add_close_pattern = true, -- true, 'last_line' or false
+       
+          matchup_patterns = {
+             {  '{', '}' },
+             { '%(', ')' }, -- % to escape lua pattern char
+             { '%[', ']' }, -- % to escape lua pattern char
+             { 'import ', ';' }, -- % to escape lua pattern char
+          },
+       
+          ft_ignore = { 'neorg' },
+       }
+      })
+   end
+  },
+  {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
@@ -212,8 +270,7 @@ return {
   },
   -- INTERFAZ UI
   {
-    -- 'nvim-tree/nvim-web-devicons',
-    'ryanoasis/vim-devicons',
+    'nvim-tree/nvim-web-devicons',
   },
   {
     'stevearc/dressing.nvim',
@@ -238,7 +295,7 @@ return {
             'treesitter',
             'regex',
         },
-        delay = 100,
+        delay = 800,
         filetypes_denylist = {
             'dirvish',
             'fugitive',
@@ -300,10 +357,10 @@ return {
     end
   },
   -- TERMINAL
-  {'akinsho/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
+  {'SergioElez/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
   config = function() require('toggleterm').setup{
       open_mapping = [[\]],
-      terminal_mappings = true, -- close by typing \\
+      terminal_mappings = true, -- close by typing \
       insert_mappings = false,
       direction = 'float', 
       size = 80, 
@@ -326,58 +383,21 @@ return {
     ft = 'toggleterm',
     version = '1.*',
   },
-  -- 'norcalli/nvim-colorizer.lua',
-  {'brenoprata10/nvim-highlight-colors',
-  config = function()
-    local colors = {
-      blue   = '#80a0ff',
-      cyan   = '#79dac8',
-      black  = '#080808',
-      white  = '#c6c6c6',
-      red    = '#ff5189',
-      violet = '#d183e8',
-      grey   = '#303030',
-      
-      
-      bg_inactive = "#2f3336",
-      bg = "#3E4347",
-      fg = "#f8f8f2",
-      fg_gutter = "#808080",
-      comment = "#7e8e91",
-      blue = "#ffffff",
-      cyan = "#6694EF",
-      magenta = "#f92672",
-      purple = "#ae81ff",
-      orange = "#fd971f",
-      yellow = "#e6db74",
-      green = "#8AC21B",
-      springgreen = "#00ff87",
-      red = "#ff4a44",
-    }
-    
-    require("nvim-highlight-colors").setup({
-      render = 'foreground', -- or 'foreground' or 'first_column'
-      enable_named_colors = true,
-      custom_colors = {
-        {label = 'ERROR', color = colors.red},
-        {label = 'INFO', color = colors.cyan},
-        {label = 'Spring Boot', color = colors.green},
-        {label = '2023', color = colors.purple},
-      }
-    })
-  end
+  'norcalli/nvim-colorizer.lua',
+  {'Pocco81/HighStr.nvim',
+     config = function()
+      local high_str = require("high-str")
+
+      high_str.setup({
+      	verbosity = 0,
+      	saving_path = "/tmp/highstr/",
+      	highlight_colors = {
+      		-- color_id = {"bg_hex_code",<"fg_hex_code"/"smart">}
+      		color_0 = {"#6694EF", "smart"},	-- Cosmic charcoal
+      	}
+      })
+    end
   },
-  -- {'caenrique/buffer-term.nvim',
-    -- config = function()
-      -- require('buffer-term').setup({
-        -- terminal_options = {
-        -- start_insert = true,
-        -- buf_listed = false,
-        -- no_numbers = false,
-        -- }
-      -- })
-    -- end
-  -- },
   {'barklan/capslock.nvim',
   config = function()
     require("capslock").setup({

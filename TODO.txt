@@ -23,10 +23,10 @@ hacer atajo ctrl r +
 - DONE hacer que al levantar el tomcat primero compruebe que si hay algo levantado en el
 HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
 -DONE HACER QUE SI ESTA PULSADO CAPSLOCK SALGA EN LUALINE
-bajarse un plugin para que ponga brackets 
+- DONE bajarse un plugin para que ponga brackets 
 - DONE hacer que si has puesto toggleterminal y pulsas escape se salga
 hacer que se oculten los imports por defecto
-hacer que con un atajo te pinte la linea actual
+- DONE hacer que con un atajo te pinte la linea actual
 hacer atajo para que te abra la config de tomcat
-hacer archivo para config de proyetos y meter el xRetiro
-hacer archivo para term colors
+- DONE hacer archivo para config de proyetos y meter el xRetiro
+- DONE hacer archivo para term colors
