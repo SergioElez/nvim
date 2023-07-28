@@ -1,7 +1,8 @@
+require('config/term-colors')
+
 -----------------------------------------------------------
 -- Autocommand functions
 -----------------------------------------------------------
-
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
 
@@ -70,3 +71,14 @@ autocmd({"colorscheme"}, {
   callback = rainbowColors,
   group = "MisAutocomandos"
 })
+autocmd({"colorscheme"}, {
+  pattern = {"*"},
+  callback = rainbowColors,
+  group = "MisAutocomandos"
+})
+
+autocmd({"TermOpen"},{
+  callback = term_colors,
+  group = "MisAutocomandos"
+})
+

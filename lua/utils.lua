@@ -53,4 +53,15 @@ function M:info(msg)
     logger(self.plugin_name, msg)(vim.log.levels.INFO)
 end
 
+function M:addEnvVariable(name, value)
+  local currentValue = vim.env[name]
+  
+  if(currentValue) then
+    value = currentValue .. " " .. value
+  end
+  
+  vim.env[name] = value
+  os.execute('set ' .. name .. '=' .. vim.env[name])
+end
+
 return M

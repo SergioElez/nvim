@@ -200,8 +200,9 @@ return {
               'gradle_ls',
               'html',
               'jdtls',
+              'java-test',
+              'java-debug-adaptor',
               'jsonls',
-              'rust_analyzer',
               'lua_ls',
               'tsserver',
           },
@@ -298,19 +299,85 @@ return {
       })
     end
   },
+  -- TERMINAL
   {'akinsho/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
   config = function() require('toggleterm').setup{
-      open_mapping = [[\]], -- open with double backslash
+      open_mapping = [[\]],
       terminal_mappings = true, -- close by typing \\
-      insert_mappings = false, -- i sometimes actually do have to type \\
-      direction = 'float', -- open on right by default
-      size = 80, -- by default he teeny!!
+      insert_mappings = false,
+      direction = 'float', 
+      size = 80, 
       auto_scroll = true,
+      close_on_exit = true,
+      shade_terminals = false,
       float_opts = {
         border='curved'
-      }
+      },
+      highlights = {
+        FloatBorder = {
+          guifg = "#6694EF",
+          -- guibg = "#2f3336"
+        }
+      },
     } end
-  }, 
+  },
+  {
+    'chomosuke/term-edit.nvim',
+    ft = 'toggleterm',
+    version = '1.*',
+  },
+  -- 'norcalli/nvim-colorizer.lua',
+  {'brenoprata10/nvim-highlight-colors',
+  config = function()
+    local colors = {
+      blue   = '#80a0ff',
+      cyan   = '#79dac8',
+      black  = '#080808',
+      white  = '#c6c6c6',
+      red    = '#ff5189',
+      violet = '#d183e8',
+      grey   = '#303030',
+      
+      
+      bg_inactive = "#2f3336",
+      bg = "#3E4347",
+      fg = "#f8f8f2",
+      fg_gutter = "#808080",
+      comment = "#7e8e91",
+      blue = "#ffffff",
+      cyan = "#6694EF",
+      magenta = "#f92672",
+      purple = "#ae81ff",
+      orange = "#fd971f",
+      yellow = "#e6db74",
+      green = "#8AC21B",
+      springgreen = "#00ff87",
+      red = "#ff4a44",
+    }
+    
+    require("nvim-highlight-colors").setup({
+      render = 'foreground', -- or 'foreground' or 'first_column'
+      enable_named_colors = true,
+      custom_colors = {
+        {label = 'ERROR', color = colors.red},
+        {label = 'INFO', color = colors.cyan},
+        {label = 'Spring Boot', color = colors.green},
+        {label = '2023', color = colors.purple},
+      }
+    })
+  end
+  },
+  -- {'caenrique/buffer-term.nvim',
+    -- config = function()
+      -- require('buffer-term').setup({
+        -- terminal_options = {
+        -- start_insert = true,
+        -- buf_listed = false,
+        -- no_numbers = false,
+        -- }
+      -- })
+    -- end
+  -- },
   {'barklan/capslock.nvim',
   config = function()
     require("capslock").setup({

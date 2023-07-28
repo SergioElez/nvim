@@ -331,8 +331,8 @@ function deploy_tomcat()
     -- deploy_tomcat()
 
   else
-
     vim.cmd("silent! WildcatUp")
+    term_colors()
     winid = vim.api.nvim_get_current_win()
     
     -- vim.cmd.sleep(2)
@@ -458,3 +458,15 @@ end
 remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 
+-- Salir de toggle term con ESC
+remap("t", "<esc>", "<cmd>ToggleTerm<cr>", bufopts, "ToggleTerm")
+
+function ClearTerminal()
+  vim.fn.termopen("sed 's/\\[8080\\]/\\x1b[31m&\\x1b[0m/'", { on_exit = function() vim.cmd('redraw') end })
+end
+
+
+-- remap("t", "<leader>tc", [[<C-\><C-n>:silent !clear<CR>]], bufopts, "Inspeccionar expresion")
+vim.api.nvim_set_keymap('t', '<f2>', "<cmd>lua ClearTerminal()<cr>", { noremap = true })
+
+remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
