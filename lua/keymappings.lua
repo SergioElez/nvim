@@ -16,7 +16,8 @@ remap("", ";", ":", {noremap = true})
 remap("", ":", ";", {noremap = true})
 
 -- Guardar archivo
-remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
+-- remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
+remap("n", "<C-s>", "<cmd>update<cr>")
 remap("i", "<C-s>", "<cmd>update<cr>")
 
 -- disable search highlighting by pressing enter

@@ -11,6 +11,13 @@ require'nvim-treesitter.configs'.setup {
   matchup = {
     enable = true,
   },
+  indent = {
+    enable = true, -- Habilita el ajuste de indentación mediante Treesitter
+  },
+  folding = {
+    enable = true, -- Habilita el plegado mediante Treesitter
+    disable = { 'java' }, -- Deshabilita el plegado predeterminado para Java (lo manejaremos manualmente)
+  },
   -- rainbow = {
     -- enable = true,
     -- disable = { 'jsx', 'cpp' },
@@ -18,3 +25,22 @@ require'nvim-treesitter.configs'.setup {
     -- strategy = require('ts-rainbow').strategy.global,
   -- }
 }
+-- Define la función de plegado para Java
+function FoldJavaImports()
+  -- Verifica que el archivo tenga extensión ".java"
+  local filename = vim.fn.expand('%:t')
+  if vim.fn.match(filename, "%.java$") == -1 then
+    return
+  end
+
+  -- Ejecuta el comando :Fold de vim-fugitive para plegar las líneas de import
+  vim.cmd('Fold')
+end
+
+-- Configura el plegado automático para Java después de cargar el buffer
+vim.cmd([[
+  augroup AutoFoldJavaImports
+    autocmd!
+    autocmd FileType java autocmd BufEnter <buffer> lua FoldJavaImports()
+  augroup END
+]])
