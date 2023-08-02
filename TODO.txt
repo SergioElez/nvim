@@ -27,6 +27,10 @@ HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
 - DONE hacer que si has puesto toggleterminal y pulsas escape se salga
 hacer que se oculten los imports por defecto
 - DONE hacer que con un atajo te pinte la linea actual
-hacer atajo para que te abra la config de tomcat
 - DONE hacer archivo para config de proyetos y meter el xRetiro
 - DONE hacer archivo para term colors
+- DONE HACER QUE EN NERDTREE TE SALGAN VARIOS PROYECTOS Y A LA DERECHA SU RAMA
+HACER QUE AL ABRIR NVIM SE ABRA EL ULTIMO FICHERO QUE SE ABRIO EN LA ULTIMA SESION
+Meter chatgpt
+traducir nvim al español
+poner diccionario español

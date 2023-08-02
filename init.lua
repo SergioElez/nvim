@@ -74,3 +74,8 @@ vim.wo.foldcolumn="1"
 vim.cmd([[hi! link PreProc Normal]])
 -- vim.wo.cursorline = true
 vim.cmd('set termguicolors')
+
+-- Folds
+vim.o.foldmethod="manual"
+vim.o.foldlevelstart=1
+vim.o.fillchars = [[foldopen:,foldsep: ,foldclose:]]

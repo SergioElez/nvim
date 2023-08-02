@@ -82,3 +82,44 @@ autocmd({"TermOpen"},{
   group = "MisAutocomandos"
 })
 
+
+
+function AutoFoldImports()
+  -- local import_regex = [[%s*import%s+.*;]]
+  local import_regex = [[/*import*/]]
+  -- local import_regex = [[/\d\+/]]
+
+  local fold_lines = {}
+
+  for lnum = 1, vim.fn.line('$') do
+    local line = vim.fn.getline(lnum)
+
+    if vim.fn.match(line, import_regex) >= 0 then
+      table.insert(fold_lines, lnum)
+    end
+  end
+  vim.fn.setline('$', {})
+  vim.fn.setline(1, fold_lines)
+  vim.cmd("normal! zM")
+  
+end
+
+
+
+-- vim.cmd([[
+-- augroup MisAutocomandos
+  -- autocmd!
+  -- autocmd FileType java silent! 1,?import?fold
+  -- autocmd FileType java silent! 1,?import?foldclose
+-- augroup END
+-- ]])
+
+-- autocmd({"BufNew"},{
+  -- callback = AutoFoldImports,
+  -- group = "MisAutocomandos"
+-- })
+
+
+
+
+
