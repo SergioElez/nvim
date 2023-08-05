@@ -34,3 +34,10 @@ HACER QUE AL ABRIR NVIM SE ABRA EL ULTIMO FICHERO QUE SE ABRIO EN LA ULTIMA SESI
 Meter chatgpt
 traducir nvim al español
 poner diccionario español
+hacer que no salgan tantos mensajes del jdtls
+ver si se puede mutear algunos mensajes de noice
+hacer fold en todas las funciones y si eso comentarios
+cambiar el sign I que es para el TODO
+probar busqueda de texto en todo el workspace
+probar git conflicts
+

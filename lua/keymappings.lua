@@ -283,72 +283,60 @@ require("which-key").register({
 
 
 local winid = nil
-function deploy_tomcat()
-  port = "8080"
-  local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
-  ocuped = #result > 0
-  
-  for _, line in ipairs(result) do
-    local listening_pos = line:find("LISTENING")
-  end
-  Logger:info(listening_pos)
-  
-  if(ocuped and listening_pos) then
-    Logger:error("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
-    
-    
-    -- winid = vim.api.nvim_get_current_win()
-    
-    -- Logger:info("Se cierra de ventana")
-    -- vim.api.nvim_win_close(winid, true);
-    
-    for _, line in ipairs(result) do
-      local listening_pos = line:find("LISTENING")
-      if listening_pos then
-          local pid_str = line:sub(listening_pos + 10):match("(%d+)")
-          if pid_str then
-              local pid = tonumber(pid_str)
-              if pid then
-                  local kill_command = string.format('taskkill /PID %d /F', pid)
-                  vim.cmd('!' .. kill_command)
-                  Logger:info(kill_command)
-                  
-              end
-          end
-      end
-    end
-    
-    -- deploy_tomcat()
 
-  else
-    vim.cmd("silent! WildcatUp")
-    term_colors()
-    winid = vim.api.nvim_get_current_win()
-    
-    -- vim.cmd.sleep(2)
-    
-    -- local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
-    -- ocuped = #result > 0
-    -- if(not ocuped) then
-      -- Logger:info("OCUPADO")
-      -- deploy_tomcat()
-    -- else
-      -- Logger:info("no OCUPADO")
-      
-      -- vim.cmd('normal! G$')
-      -- vim.cmd("wincmd w")
-      vim.cmd('startinsert | stopinsert')
-      
-      -- SI ESTA ESCUCHANDO EN EL puerto 8080
-      -- require'dap'.continue()
-    -- end
-    
-    
-    -- vim.api.nvim_set_keymap('n', '<C-w>w', '<Cmd>wincmd w<CR>', { noremap = true, silent = true })
-  end
-  
+function WaitForListening(port, max_attempts, attempts)
+    local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+    local listening_pos = nil
+
+    for _, line in ipairs(result) do
+        listening_pos = line:find("LISTENING")
+        if listening_pos then
+            print("Puerto está 'Listening'.")  -- Log si el puerto está "Listening"
+            vim.cmd('ToggleTerm')
+            vim.cmd('startinsert | stopinsert')
+            require('dap').continue()
+            return
+        end
+    end
+
+    attempts = attempts + 1
+    if attempts < max_attempts then
+        print("Esperando, intento número: " .. attempts)  -- Log para mostrar los intentos
+        vim.defer_fn(function()
+            WaitForListening(port, max_attempts, attempts)
+        end, 1000)
+    else
+        print("El puerto: " .. port .. " no está disponible después de esperar.")  -- Log si los intentos fallan
+    end
 end
 
+function deploy_tomcat()
+    local port = "8080"
+    local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+    local ocuped = #result > 0
+
+    local listening_pos = nil
+
+    for _, line in ipairs(result) do
+        listening_pos = line:find("LISTENING")
+    end
+    print(listening_pos)  -- Log para mostrar el resultado de listening_pos
+
+    if ocuped and listening_pos then
+        print("false")  -- Log si el puerto está ocupado
+        print("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
+    else
+        print("true")  -- Log si el puerto no está ocupado
+        vim.cmd("silent! WildcatUp")
+        term_colors()
+        winid = vim.api.nvim_get_current_win()
+
+        -- Esperar hasta que esté "Listening"
+        local max_attempts = 5  -- Intentos reducidos para facilitar la depuración
+        local attempts = 0
+        WaitForListening(port, max_attempts, attempts)
+    end
+end
 
 remap("n", "<F4>", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
 remap("n", "<leader>dww", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
@@ -449,5 +437,6 @@ remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar 
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 -- Noice
 remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
+remap("n", "<leader>m", "<cmd>messages<cr>", bufopts, "Messages")
 -- Pintar linea
 remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")
