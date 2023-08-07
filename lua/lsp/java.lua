@@ -5,9 +5,6 @@
 
 local home = os.getenv('HOME')
 local java_home = os.getenv('JAVA_HOME')
--- local jdtls_path = 'B:/Program Files/JDTLS'
-local javaDebug_path = 'B:/Program Files/JDTLS/JAVA DEBUG'
-local javaTest_path = 'B:/Program Files/JDTLS/JAVA TEST'
 local jdtls = require('jdtls')
 local root_markers = {'gradlew', 'mvnw', '.git'}
 local root_dir = require('jdtls.setup').find_root(root_markers)
@@ -49,11 +46,7 @@ local on_attach = function(client, bufnr)
   remap("n", "<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
   remap("v", "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], bufopts, "Extract method")
 end
-
-local bundles = {
-  vim.fn.glob(javaDebug_path .. '/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-0.47.0.jar'),
-}
-vim.list_extend(bundles, vim.split(vim.fn.glob(javaTest_path .. '/server/*.jar'), "\n"))
+-- vim.list_extend(bundles, vim.split(vim.fn.glob(javaTest_path .. '/server/*.jar'), "\n"))
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)

@@ -4,7 +4,7 @@ wilder.set_option('renderer', wilder.popupmenu_renderer(
   wilder.popupmenu_palette_theme({
     highlights = {
         gradient = gradient,
-        border = 'FloatBorder',
+        border = 'DiagnosticSignInfo',
         default = 'NormalFloat'
     },
     highlighter = wilder.highlighter_with_gradient({

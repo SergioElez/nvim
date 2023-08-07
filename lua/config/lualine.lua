@@ -55,7 +55,7 @@ require('lualine').setup {
     },
     lualine_b = { 
       { 'filename', separator = { left = '', right = '' }, right_padding = 2},
-      {'branch'},
+      {'branch', icon = {'', color={fg=colors.magenta}}},
       { require("capslock").status_string, icon = {'󰪛', color={fg=colors.red}}},
     },
     lualine_c = {

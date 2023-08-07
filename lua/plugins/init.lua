@@ -42,7 +42,7 @@ return {
   },
   'godlygeek/tabular',
   'itspriddle/vim-marked',
-  'ludovicchabant/vim-gutentags',
+  -- 'ludovicchabant/vim-gutentags',
   'mfussenegger/nvim-jdtls',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
@@ -95,6 +95,50 @@ return {
     tag = 'legacy',
     config = function ()
       require('fidget').setup()
+    end
+  },
+  {
+    'm4xshen/autoclose.nvim',
+    config = function ()
+      require("autoclose").setup({
+        keys = {
+           ["$"] = { escape = true, close = true, pair = "$$", disabled_filetypes = {} },
+        },
+     })
+    end
+  },
+  { 'anuvyklack/pretty-fold.nvim',
+   config = function()
+    require('pretty-fold').setup({
+      keep_indentation = false,
+      fill_char = '━',
+      sections = {
+         left = {
+            '━━', function() return string.rep('󱓻━━', vim.v.foldlevel) end, '', 'content', ''
+         },
+         right = {
+            ' ', 'number_of_folded_lines', ': ', 'percentage', ' ━━',
+         }
+      },
+      process_comment_signs = 'spaces',
+    })
+   end
+  },
+  {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require('telescope').load_extension('projects')
+      require("project_nvim").setup({
+        {
+          manual_mode = false,
+          detection_methods = { "lsp", "pattern" },
+          patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+          show_hidden = false,
+          silent_chdir = true,
+          scope_chdir = 'global',
+          datapath = vim.fn.stdpath("data"),
+        }
+      })
     end
   },
   {
@@ -171,14 +215,57 @@ return {
     }
     end
   },
-  -- {
-  --   'stevearc/oil.nvim',
-  --   config = function()
-  --     require("oil").setup({})
-  --   end
-  -- },
   {'rcarriga/cmp-dap'},
-  {'preservim/nerdtree'},
+  --Explorador
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "echasnovski/mini.base16",
+      "nvim-tree/nvim-web-devicons",
+      "antosha417/nvim-lsp-file-operations",
+    },
+    config = function()
+      require("nvim-tree").setup({
+        sort_by = "case_sensitive",
+        view = {
+          width = 30,
+        },
+        renderer = {
+          group_empty = true,
+        },
+        filters = {
+          dotfiles = true,
+        },
+      })
+    end,
+  },
+  -- {'preservim/nerdtree'},
+  -- {'ryanoasis/vim-devicons'},
+  -- {'Xuyuanp/nerdtree-git-plugin'},
+  -- {'tiagofumo/vim-nerdtree-syntax-highlight'},
+  {
+    'stevearc/oil.nvim',
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        skip_confirm_for_simple_edits = true,
+        float = {
+          padding = 2,
+          max_width = 100,
+          max_height = 20,
+          border = "rounded",
+          win_options = {
+            winblend = 10,
+          },
+          override = function(conf)
+            return conf
+          end,
+        },
+      })
+    end
+  },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
@@ -200,8 +287,9 @@ return {
               'gradle_ls',
               'html',
               'jdtls',
+              'java-test',
+              'java-debug-adaptor',
               'jsonls',
-              'rust_analyzer',
               'lua_ls',
               'tsserver',
           },
@@ -212,7 +300,7 @@ return {
   -- INTERFAZ UI
   {
     -- 'nvim-tree/nvim-web-devicons',
-    'ryanoasis/vim-devicons',
+    'ryanoasis/vim-devicons'
   },
   {
     'stevearc/dressing.nvim',
@@ -237,7 +325,7 @@ return {
             'treesitter',
             'regex',
         },
-        delay = 100,
+        delay = 800,
         filetypes_denylist = {
             'dirvish',
             'fugitive',
@@ -257,6 +345,32 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
+      routes = {
+        {
+        -- Quita el aviso de cuando guardas
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "escritos",
+          },
+          -- Quita el aviso de cuando abres un archivo
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "--",
+          },
+          opts = { skip = true },
+        },
+      },
+      notify = {
+        enabled = false,
+        view = "notify",
+      },
+      lsp = {
+        message = { enabled = false},
+        progress = {
+          enabled = false}
+      },
       cmdline = {
         enabled = false
       },
@@ -298,19 +412,48 @@ return {
       })
     end
   },
-  {'akinsho/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
+  -- TERMINAL
+  {'SergioElez/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
   config = function() require('toggleterm').setup{
-      open_mapping = [[\]], -- open with double backslash
-      terminal_mappings = true, -- close by typing \\
-      insert_mappings = false, -- i sometimes actually do have to type \\
-      direction = 'float', -- open on right by default
-      size = 80, -- by default he teeny!!
+      open_mapping = [[\]],
+      terminal_mappings = true, -- close by typing \
+      insert_mappings = false,
+      direction = 'float', 
+      size = 80, 
       auto_scroll = true,
+      close_on_exit = true,
+      shade_terminals = false,
       float_opts = {
         border='curved'
-      }
+      },
+      highlights = {
+        FloatBorder = {
+          guifg = "#6694EF",
+          -- guibg = "#2f3336"
+        }
+      },
     } end
-  }, 
+  },
+  {
+    'chomosuke/term-edit.nvim',
+    ft = 'toggleterm',
+    version = '1.*',
+  },
+  'norcalli/nvim-colorizer.lua',
+  {'Pocco81/HighStr.nvim',
+     config = function()
+      local high_str = require("high-str")
+
+      high_str.setup({
+      	verbosity = 0,
+      	saving_path = "/tmp/highstr/",
+      	highlight_colors = {
+      		-- color_id = {"bg_hex_code",<"fg_hex_code"/"smart">}
+      		color_0 = {"#6694EF", "smart"},	-- Cosmic charcoal
+      	}
+      })
+    end
+  },
   {'barklan/capslock.nvim',
   config = function()
     require("capslock").setup({
@@ -318,6 +461,111 @@ return {
       vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle")
     })
   end
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      options = { "buffers", "curdir", "tabpages", "winsize" }
+    }
+  },
+  {
+    "nanozuki/tabby.nvim",
+      config = function()
+        local theme = {
+          fill = 'TabLineFill',
+          head = 'TabLine',
+          current_tab = 'TabLineSel',
+          tab = 'TabLine',
+          win = 'TabLine',
+          tail = 'TabLine',
+        }
+        require('tabby.tabline').set(function(line)
+          return {
+            {
+              { ' 󰓩 ', hl = theme.head },
+              line.sep('', theme.head, theme.fill),
+            },
+            line.tabs().foreach(function(tab)
+              local hl = tab.is_current() and theme.current_tab or theme.tab
+              return {
+                line.sep('', hl, theme.fill),
+                tab.is_current() and '' or '',
+                tab.number(),
+                tab.name(),
+                tab.close_btn(''),
+                line.sep(' ', hl, theme.fill),
+                hl = hl,
+                margin = ' ',
+              }
+            end),
+            line.spacer(),
+            line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+              return {
+                line.sep('', theme.win, theme.fill),
+                win.is_current() and '' or '',
+                win.buf_name(),
+                line.sep('', theme.win, theme.fill),
+                hl = theme.win,
+                margin = '   ',
+              }
+            end),
+            {
+              line.sep('', theme.tail, theme.fill),
+              { '  ', hl = theme.tail },
+            },
+            hl = theme.fill,
+          }
+        end)
+        
+      end
+  },
+  {
+    "TC72/telescope-tele-tabby.nvim",
+      config = function()
+        require('telescope').setup {
+          extensions = {
+              tele_tabby = {
+                  use_highlighter = true,
+              }
+          }
+        }
+      end
+  },
+  {
+    'tanvirtin/vgit.nvim',
+    tag = "v0.2.1",
+    requires = {
+      'nvim-lua/plenary.nvim'
+    },
+    config = function()
+      require('vgit').setup()
+    end
+  },
+  'ray-x/guihua.lua',
+  'ray-x/forgit.nvim',
+  {
+    'aspeddro/gitui.nvim',
+    config = function()
+      require('gitui').setup(
+        {
+          command = {
+            enable = true,
+          },
+          binary = "gitui",
+          -- Argumens to gitui
+          -- @type: table of string
+          args = {},
+          window = {
+            options = {
+              width = 90,
+              height = 80,
+              border = "rounded",
+            },
+          },
+        }
+      )
+    end
   }
 }
 

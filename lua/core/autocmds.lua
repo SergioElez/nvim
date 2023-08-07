@@ -1,7 +1,8 @@
+require('config/term-colors')
+
 -----------------------------------------------------------
 -- Autocommand functions
 -----------------------------------------------------------
-
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
 
@@ -70,3 +71,72 @@ autocmd({"colorscheme"}, {
   callback = rainbowColors,
   group = "MisAutocomandos"
 })
+autocmd({"colorscheme"}, {
+  pattern = {"*"},
+  callback = rainbowColors,
+  group = "MisAutocomandos"
+})
+
+autocmd({"TermOpen"},{
+  callback = term_colors,
+  group = "MisAutocomandos"
+})
+
+
+
+-- function AutoFoldImports()
+  -- local import_regex = [[/*import*/]]
+
+  -- local fold_lines = {}
+
+  -- for lnum = 1, vim.fn.line('$') do
+    -- local line = vim.fn.getline(lnum)
+
+    -- if vim.fn.match(line, import_regex) >= 0 then
+      -- table.insert(fold_lines, lnum)
+    -- end
+  -- end
+  -- vim.fn.setline('$', {})
+  -- vim.fn.setline(1, fold_lines)
+  -- vim.cmd("normal! zM")
+  
+-- end
+
+
+
+-- vim.cmd([[
+-- augroup MisAutocomandos
+  -- autocmd!
+  -- autocmd FileType java silent! 1,?import?fold
+  -- autocmd FileType java silent! 1,?import?foldclose
+-- augroup END
+-- ]])
+
+-- autocmd({"BufNew"},{
+  -- callback = AutoFoldImports,
+  -- group = "MisAutocomandos"
+-- })
+
+
+
+
+
+-- vim.g.NERDTreeGitStatusIndicatorMapCustom = {
+  -- Modified  = "✹ ",
+  -- Staged    = "✚ ",
+  -- Untracked = "✭ ",
+  -- Renamed   = "➜ ",
+  -- Unmerged  = "═ ",
+  -- Deleted   = "✖ ",
+  -- Dirty     = "✗ ",
+  -- Clean     = "✔︎ ",
+  -- Ignored   = "☒ ",
+  -- Unknown   = "? ",
+-- }
+
+-- vim.cmd([[
+    -- autocmd FileType nerdtree syntax match HideBracketsInNerdTree "\]" conceal
+    -- autocmd FileType nerdtree syntax match HideBracketsInNerdTree "\[" conceal
+    -- autocmd FileType nerdtree setlocal conceallevel=1
+    -- autocmd FileType nerdtree setlocal concealcursor=nvic
+  -- ]])

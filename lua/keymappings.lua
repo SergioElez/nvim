@@ -16,7 +16,8 @@ remap("", ";", ":", {noremap = true})
 remap("", ":", ";", {noremap = true})
 
 -- Guardar archivo
-remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
+-- remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
+remap("n", "<C-s>", "<cmd>update<cr>")
 remap("i", "<C-s>", "<cmd>update<cr>")
 
 -- disable search highlighting by pressing enter
@@ -93,7 +94,9 @@ require("which-key").register({
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
 -- NerdTree
-remap("n", "<leader><leader>", "<cmd>NERDTreeToggle<cr>", bufopts, "Oil")
+-- remap("n", "<leader><leader>", "<cmd>NERDTreeToggle<cr>", bufopts, "Explorador de archivos")
+remap("n", "<leader><leader>", "<cmd>NvimTreeToggle<cr>", bufopts, "Explorador de archivos")
+remap("n", "<F3>", "<cmd>lua require'oil'.open_float()<cr>", bufopts, "Explorador de archivos")
 
 -- vim-test
 remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")
@@ -113,11 +116,9 @@ remap("n", "<leader>bb", "<cmd>lua require('persistent-breakpoints.api').toggle_
 
 remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts, "Set conditional breakpoint")
 remap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", bufopts, "Set conditional breakpoint")
--- vim.api.nvim_set_keymap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", { noremap = true, silent = true })
 
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
 remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", bufopts, "Clear breakpoints")
--- vim.api.nvim_set_keymap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", { noremap = true, silent = true })
 
 remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
@@ -226,7 +227,10 @@ vim.fn.sign_define('DapBreakpointCondition', {text = '', texthl = 'Diagnostic
 vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
 vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
 -- vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError', linehl = '', numhl = ''})
-vim.fn.sign_define('DiagnosticSignHint', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignHint', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+vim.fn.sign_define('DiagnosticSignInfo', {text = '', texthl = 'DiagnosticSignInfo', linehl = '', numhl = ''})
+vim.fn.sign_define('todo-sign-TODO', {text = '', texthl = 'WarningMsg', linehl = '', numhl = ''})
+
 
 require("which-key").register({
   u = {
@@ -282,83 +286,62 @@ require("which-key").register({
   },
 }, { prefix = "<leader>d" })
 
-local function enable_auto_scroll()
-  -- vim.api.nvim_win_set_option(0, 'scrollbind', true)
-  -- vim.api.nvim_win_set_option(0, 'scrolljump', 1)
-  -- vim.cmd('autocmd WinScrolled * if &scrollbind | scrollbind | endif')
-  vim.api.nvim_command("scroll 9999")
-end
-
--- vim.api.nvim_command([[function! scroll_auto() | silent! scroll 9999 | endfunction]])
--- vim.api.nvim_command([[autocmd User WildcatUp call scroll_auto()]])
 
 local winid = nil
-function deploy_tomcat()
-  port = "8080"
-  local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
-  ocuped = #result > 0
-  
-  for _, line in ipairs(result) do
-    local listening_pos = line:find("LISTENING")
-  end
-  Logger:info(listening_pos)
-  
-  if(ocuped and listening_pos) then
-    Logger:error("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
-    
-    
-    -- winid = vim.api.nvim_get_current_win()
-    
-    -- Logger:info("Se cierra de ventana")
-    -- vim.api.nvim_win_close(winid, true);
-    
+
+function WaitForListening(port, max_attempts, attempts)
+    local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+    local listening_pos = nil
+
     for _, line in ipairs(result) do
-      local listening_pos = line:find("LISTENING")
-      if listening_pos then
-          local pid_str = line:sub(listening_pos + 10):match("(%d+)")
-          if pid_str then
-              local pid = tonumber(pid_str)
-              if pid then
-                  local kill_command = string.format('taskkill /PID %d /F', pid)
-                  vim.cmd('!' .. kill_command)
-                  Logger:info(kill_command)
-                  
-              end
-          end
-      end
+        listening_pos = line:find("LISTENING")
+        if listening_pos then
+            print("Puerto está 'Listening'.")  -- Log si el puerto está "Listening"
+            vim.cmd('ToggleTerm')
+            vim.cmd('startinsert | stopinsert')
+            require('dap').continue()
+            return
+        end
     end
-    
-    -- deploy_tomcat()
 
-  else
-
-    vim.cmd("silent! WildcatUp")
-    winid = vim.api.nvim_get_current_win()
-    
-    -- vim.cmd.sleep(2)
-    
-    -- local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
-    -- ocuped = #result > 0
-    -- if(not ocuped) then
-      -- Logger:info("OCUPADO")
-      -- deploy_tomcat()
-    -- else
-      -- Logger:info("no OCUPADO")
-      
-      -- vim.cmd('normal! G$')
-      -- vim.cmd("wincmd w")
-      vim.cmd('startinsert | stopinsert')
-      
-      -- SI ESTA ESCUCHANDO EN EL puerto 8080
-      -- require'dap'.continue()
-    -- end
-    
-    
-    -- vim.api.nvim_set_keymap('n', '<C-w>w', '<Cmd>wincmd w<CR>', { noremap = true, silent = true })
-  end
-  
+    attempts = attempts + 1
+    if attempts < max_attempts then
+        print("Esperando, intento número: " .. attempts)  -- Log para mostrar los intentos
+        vim.defer_fn(function()
+            WaitForListening(port, max_attempts, attempts)
+        end, 1000)
+    else
+        print("El puerto: " .. port .. " no está disponible después de esperar.")  -- Log si los intentos fallan
+    end
 end
 
+function deploy_tomcat()
+    local port = "8080"
+    local result = vim.fn.systemlist('netstat -ano | findstr :' .. port)
+    local ocuped = #result > 0
+
+    local listening_pos = nil
+
+    for _, line in ipairs(result) do
+        listening_pos = line:find("LISTENING")
+    end
+    print(listening_pos)  -- Log para mostrar el resultado de listening_pos
+
+    if ocuped and listening_pos then
+        print("false")  -- Log si el puerto está ocupado
+        print("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
+    else
+        print("true")  -- Log si el puerto no está ocupado
+        vim.cmd("silent! WildcatUp")
+        term_colors()
+        winid = vim.api.nvim_get_current_win()
+
+        -- Esperar hasta que esté "Listening"
+        local max_attempts = 5  -- Intentos reducidos para facilitar la depuración
+        local attempts = 0
+        WaitForListening(port, max_attempts, attempts)
+    end
+end
 
 remap("n", "<F4>", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
 remap("n", "<leader>dww", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
@@ -457,4 +440,29 @@ end
 -- MOSTRAR VARIABLE BAJO EL CURSOR
 remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
+-- Noice
+remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
+remap("n", "<leader>m", "<cmd>messages<cr>", bufopts, "Messages")
+-- Pintar linea
+remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")
+remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Remove Paint Line")
+-- Restaurar sesion
+remap("n", "<leader>sd", "<cmd>lua require('persistence').load()<cr>", bufopts, "Restaurar la última sesión del directorio")
+remap("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>", bufopts, "Restaurar la ultima sesión")
 
+remap("n", "<leader>gc", "<cmd>VGit project_commit_preview *<cr>", bufopts, "project_commit_preview")
+remap("n", "<leader>gs", "<cmd>VGit setup<cr>", bufopts, "setup")
+remap("n", "<leader>gp", "<cmd>VGit buffer_hunk_preview<cr>", bufopts, "buffer_hunk_preview")
+remap("n", "<leader>gh", "<cmd>VGit buffer_history_preview<cr>", bufopts, "buffer_history_preview")
+remap("n", "<leader>gb", "<cmd>VGit buffer_diff_staged_preview<cr>", bufopts, "buffer_diff_staged_preview")
+
+
+vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tn", ":tabn<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { noremap = true })
+-- move current tab to previous position
+vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
+-- move current tab to next position
+vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })

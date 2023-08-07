@@ -1,11 +1,9 @@
 Hacer que en el startup menu salga el diario y se pueda checkear cosas y esten los dias y tal
 Mapeo para skipear los breakpoints
-hacer que cuando sea un archivo java te pregunte si quieres lanzar tomcat
 - DONE hacer un atajo para que haga mvn clean install y copie a la ruta de tomcat
-- hacer que salga el autocompletado en lista centrada en popup con noice
+- DONE hacer que salga el autocompletado en lista centrada en popup con noice
 Hacer un atajo para formatee cualquier lenguaje, probar a pasarle un sql y que lo idente bien
 - DONE hacer que al guardar se idente
-hacer que se pueda borrar la consola de tomcat y ponerla en pantalla completa
 atajo ir implementacion
 atajo ir superimplementacion
 - DONE hacer que se guarden los breakpoints de otra sesion
@@ -13,20 +11,30 @@ hacer atajos wichkey para todos los plugins
 - DONE hacer que selelecciones un texto y te lo pegue en la ventana de watch y te lo pegue para ver lo que vale la expresion
 - DONE hacer que en modo debug cuando se ha parado pinte la linea de otro color
 - DONE cambiar icono de breakpoint rejected
-poner iconos a nerdtree
-mirar diferencia nerdtree y oil
+- DONE poner iconos a nerdtree
 hacer pruebas con git
 hacer atajo ctrl r +
 - DONE hacer que salgan los iconos del autocompletado
 - DONE HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE
 - DONE hacer mapeo para  netstat -ano | findstr :8080 taskkill /PID 15680 /F
 - DONE hacer que al levantar el tomcat primero compruebe que si hay algo levantado en el
-HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
--DONE HACER QUE SI ESTA PULSADO CAPSLOCK SALGA EN LUALINE
-bajarse un plugin para que ponga brackets 
+- DONE HACER QUE DETECTE QUE TOMCAT ESTA ESCUCHANDO Y HAGA EL DAP CONTINUE
+- DONE HACER QUE SI ESTA PULSADO CAPSLOCK SALGA EN LUALINE
+- DONE bajarse un plugin para que ponga brackets 
 - DONE hacer que si has puesto toggleterminal y pulsas escape se salga
-hacer que se oculten los imports por defecto
-hacer que con un atajo te pinte la linea actual
-hacer atajo para que te abra la config de tomcat
-hacer archivo para config de proyetos y meter el xRetiro
-hacer archivo para term colors
+- DONE hacer que se oculten los imports por defecto
+- DONE hacer que con un atajo te pinte la linea actual
+- DONE hacer archivo para config de proyetos y meter el xRetiro
+- DONE hacer archivo para term colors
+- DONE HACER QUE EN NERDTREE TE SALGAN VARIOS PROYECTOS Y A LA DERECHA SU RAMA
+- DONE HACER QUE AL ABRIR NVIM SE ABRA EL ULTIMO FICHERO QUE SE ABRIO EN LA ULTIMA SESION
+traducir nvim al español
+poner diccionario español
+- DONE hacer que no salgan tantos mensajes del jdtls
+- DONE ver si se puede mutear algunos mensajes de noice
+hacer fold en todas las funciones y si eso comentarios
+- DONE cambiar el sign I que es para el TODO
+probar busqueda de texto en todo el workspace
+probar git conflicts
+probar como son los commits de git (quiero que salga un listado con los cambios) 
+- DONE hacer que si pulso f2 en una linea pintada se borre
