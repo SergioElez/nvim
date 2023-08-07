@@ -98,50 +98,6 @@ return {
     end
   },
   {
-    'm4xshen/autoclose.nvim',
-    config = function ()
-      require("autoclose").setup({
-        keys = {
-           ["$"] = { escape = true, close = true, pair = "$$", disabled_filetypes = {} },
-        },
-     })
-    end
-  },
-  { 'anuvyklack/pretty-fold.nvim',
-   config = function()
-    require('pretty-fold').setup({
-      keep_indentation = false,
-      fill_char = '━',
-      sections = {
-         left = {
-            '━━', function() return string.rep('󱓻━━', vim.v.foldlevel) end, '', 'content', ''
-         },
-         right = {
-            ' ', 'number_of_folded_lines', ': ', 'percentage', ' ━━',
-         }
-      },
-      process_comment_signs = 'spaces',
-    })
-   end
-  },
-  {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require('telescope').load_extension('projects')
-      require("project_nvim").setup({
-        {
-          manual_mode = false,
-          detection_methods = { "lsp", "pattern" },
-          patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-          show_hidden = false,
-          silent_chdir = true,
-          scope_chdir = 'global',
-          datapath = vim.fn.stdpath("data"),
-        }
-      })
-    end
-  },
-  {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
@@ -300,7 +256,7 @@ return {
   -- INTERFAZ UI
   {
     -- 'nvim-tree/nvim-web-devicons',
-    'ryanoasis/vim-devicons'
+    'ryanoasis/vim-devicons',
   },
   {
     'stevearc/dressing.nvim',
@@ -461,111 +417,6 @@ return {
       vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle")
     })
   end
-  },
-  {
-    "folke/persistence.nvim",
-    event = "BufReadPre", -- this will only start session saving when an actual file was opened
-    opts = {
-      options = { "buffers", "curdir", "tabpages", "winsize" }
-    }
-  },
-  {
-    "nanozuki/tabby.nvim",
-      config = function()
-        local theme = {
-          fill = 'TabLineFill',
-          head = 'TabLine',
-          current_tab = 'TabLineSel',
-          tab = 'TabLine',
-          win = 'TabLine',
-          tail = 'TabLine',
-        }
-        require('tabby.tabline').set(function(line)
-          return {
-            {
-              { ' 󰓩 ', hl = theme.head },
-              line.sep('', theme.head, theme.fill),
-            },
-            line.tabs().foreach(function(tab)
-              local hl = tab.is_current() and theme.current_tab or theme.tab
-              return {
-                line.sep('', hl, theme.fill),
-                tab.is_current() and '' or '',
-                tab.number(),
-                tab.name(),
-                tab.close_btn(''),
-                line.sep(' ', hl, theme.fill),
-                hl = hl,
-                margin = ' ',
-              }
-            end),
-            line.spacer(),
-            line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
-              return {
-                line.sep('', theme.win, theme.fill),
-                win.is_current() and '' or '',
-                win.buf_name(),
-                line.sep('', theme.win, theme.fill),
-                hl = theme.win,
-                margin = '   ',
-              }
-            end),
-            {
-              line.sep('', theme.tail, theme.fill),
-              { '  ', hl = theme.tail },
-            },
-            hl = theme.fill,
-          }
-        end)
-        
-      end
-  },
-  {
-    "TC72/telescope-tele-tabby.nvim",
-      config = function()
-        require('telescope').setup {
-          extensions = {
-              tele_tabby = {
-                  use_highlighter = true,
-              }
-          }
-        }
-      end
-  },
-  {
-    'tanvirtin/vgit.nvim',
-    tag = "v0.2.1",
-    requires = {
-      'nvim-lua/plenary.nvim'
-    },
-    config = function()
-      require('vgit').setup()
-    end
-  },
-  'ray-x/guihua.lua',
-  'ray-x/forgit.nvim',
-  {
-    'aspeddro/gitui.nvim',
-    config = function()
-      require('gitui').setup(
-        {
-          command = {
-            enable = true,
-          },
-          binary = "gitui",
-          -- Argumens to gitui
-          -- @type: table of string
-          args = {},
-          window = {
-            options = {
-              width = 90,
-              height = 80,
-              border = "rounded",
-            },
-          },
-        }
-      )
-    end
   }
 }
 
