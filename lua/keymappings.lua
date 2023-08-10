@@ -147,7 +147,7 @@ function toggle_skip_breakpoints()
       Logger:info(breakpoint_lines)
   end
   skip_breakpoints = not skip_breakpoints
-  
+
   Logger:info(skip_breakpoints)
 end
 
@@ -188,15 +188,15 @@ end
   -- Obtener los breakpoints activos
   -- local breakpoints = require("dap").list_breakpoints()
   -- local breakpoints = require("telescope").extensions.dap.list_breakpoints()
-  
-  
+
+
   -- local breakpoints = require("dap.breakpoints").get()
   -- if not breakpoints or #breakpoints == 0 then
       -- Logger:info("No hay breakpoints activos.")
       -- return
   -- end
   -- Logger:info(vim.inspect(breakpoints))
-  
+
   -- for _, breakpoint in ipairs(breakpoints) do
     -- local breakpoint_id = breakpoint.id
     -- if not continued_breakpoints[breakpoint_id] then
@@ -360,7 +360,7 @@ function deploy_to_tomcat()
 
     -- Change the current working directory to the root directory of the project.
     vim.fn.execute("cd " .. root_directory)
-    
+
     Logger:info("Haciendo mvn clean install en: " .. root_directory)
 
     -- Run the mvn command to clean install the project.
@@ -415,7 +415,7 @@ function evalExpresion()
         local selected_text = vim.fn.getreg('"')
         -- Escapar los caracteres especiales en el texto seleccionado
         selected_text = vim.fn.escape(selected_text, "'\\")
-        
+
         -- Copiar el texto seleccionado al portapapeles
         vim.fn.setreg("+", selected_text)
 
@@ -434,7 +434,7 @@ function evalExpresion()
        end
     )
   end
-  
+
 end
 
 -- MOSTRAR VARIABLE BAJO EL CURSOR
@@ -466,3 +466,5 @@ vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
 -- move current tab to next position
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
+
+--a asdasda
