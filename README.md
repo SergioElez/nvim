@@ -6,6 +6,7 @@ My personal nvim conf
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
 ``choco install neovim git mingw make fzf maven openjdk17 python ripgrep`` 
 
+- Descargar Nerdfont y ponerla en el terminal de windows
 - Instalar tomcat
 - Comprobar que tomcat se ha instalado bien por chocolatey, si no instalarlo a mano IMPORTANTE, INSTALARLO A MANO EN UNA RUTA SIN ESPACIOS
 - Abrir nvim como admin
