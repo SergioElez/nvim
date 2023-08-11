@@ -4,7 +4,7 @@ My personal nvim conf
 - Settear CATALINA_HOME
 
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
-``choco install neovim mingw make fzf maven openjdk17 python ripgrep`` 
+``choco install neovim git mingw make fzf maven openjdk17 python ripgrep`` 
 
 - Instalar tomcat
 - Comprobar que tomcat se ha instalado bien por chocolatey, si no instalarlo a mano IMPORTANTE, INSTALARLO A MANO EN UNA RUTA SIN ESPACIOS
