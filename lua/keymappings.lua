@@ -450,11 +450,11 @@ remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Remove Pain
 remap("n", "<leader>sd", "<cmd>lua require('persistence').load()<cr>", bufopts, "Restaurar la última sesión del directorio")
 remap("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>", bufopts, "Restaurar la ultima sesión")
 
-remap("n", "<leader>gc", "<cmd>VGit project_commit_preview *<cr>", bufopts, "project_commit_preview")
-remap("n", "<leader>gs", "<cmd>VGit setup<cr>", bufopts, "setup")
-remap("n", "<leader>gp", "<cmd>VGit buffer_hunk_preview<cr>", bufopts, "buffer_hunk_preview")
-remap("n", "<leader>gh", "<cmd>VGit buffer_history_preview<cr>", bufopts, "buffer_history_preview")
-remap("n", "<leader>gb", "<cmd>VGit buffer_diff_staged_preview<cr>", bufopts, "buffer_diff_staged_preview")
+remap("n", "<leader>gc", "<cmd>DiffviewOpen<cr>", bufopts, "Git commit")
+remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Toggle git files")
+remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Commits History")
+remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "File History")
+remap("n", "<leader>gg", "<cmd>lua require('persistence').actions.toggle_stage_entry<cr>", bufopts, "File History")
 
 
 vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })
