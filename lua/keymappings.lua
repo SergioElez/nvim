@@ -444,7 +444,6 @@ end
 -- end
 
 function get_git_commit_counts()
-  -- Ejecutar el comando :G
   
   local result = vim.fn.systemlist('git cherry -v')
 
@@ -475,8 +474,12 @@ remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Toggle git fi
 remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Commits History")
 remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "File History")
 remap("n", "<leader>gg", "<cmd>Git pull<cr>", bufopts, "Git pull")
-remap("n", "<leader>gp", "<cmd>Git push<cr>", bufopts, "Git Push")
+remap("n", "<leader>gp", "<cmd>lua git_push<cr>", bufopts, "Git Push")
 
+function git_push()
+  local total_commits = 0;
+  vim.cmd("Git push")
+end
 
 
 

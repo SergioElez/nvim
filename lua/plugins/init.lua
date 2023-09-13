@@ -513,7 +513,10 @@ return {
     'sindrets/diffview.nvim',
     config = function ()
       local actions = require("diffview.actions")
-
+      function gitCommit() 
+        total_commits = total_commits + 1
+        vim.cmd('botright Git commit') 
+      end
       require("diffview").setup({
         keymaps = {
           file_panel = {
@@ -521,7 +524,7 @@ return {
             { "n", "<Space>",           actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
             { "n", "F",                 actions.close_fold,                        { desc = "Collapse fold" } },
             { "n", "h",                 actions.open_fold,                        { desc = "Open fold" } },
-            { "n", "C", function() vim.cmd('botright Git commit') end,          { desc = "Git commit" } },
+            { "n", "C", gitCommit,          { desc = "Git commit" } },
           },
         }
       })

@@ -63,19 +63,23 @@ end
 
 function get_git_commit_counts()
   
-  local result = vim.fn.systemlist('git cherry -v')
+  -- local result = vim.fn.systemlist('git cherry -v')
 
-  local cont_commits_to_push = 0;
-  for _, line in ipairs(result) do
-    cont_commits_to_push = cont_commits_to_push + 1;
-  end
+  -- local cont_commits_to_push = 0;
+  -- for _, line in ipairs(result) do
+    -- cont_commits_to_push = cont_commits_to_push + 1;
+  -- end
   
-  if(cont_commits_to_push ==  0) then
+  if(total_commits ==  0) then
     return ""
   else
-    return cont_commits_to_push .. "󱦲"
+    return total_commits .. "󱦲"
   end
+  
+  -- local result = vim.fn.system('echo hola')
 end
+
+total_commits = 0
 
 require('lualine').setup {
   options = {
@@ -84,9 +88,9 @@ require('lualine').setup {
     component_separators = '',
     section_separators = { left = '', right = '' },
     refresh = {
-      statusline = 100000,
-      tabline = 10000,
-      winbar = 10000,
+      statusline = 5000,
+      tabline = 5000,
+      winbar = 5000,
     }
   },
   sections = {

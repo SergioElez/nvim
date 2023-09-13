@@ -82,7 +82,6 @@ autocmd({"TermOpen"},{
   group = "MisAutocomandos"
 })
 
-
 -- function AutoFoldImports()
   -- local import_regex = [[/*import*/]]
 
