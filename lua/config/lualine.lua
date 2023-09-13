@@ -83,6 +83,11 @@ require('lualine').setup {
     -- component_separators = '',
     component_separators = '',
     section_separators = { left = '', right = '' },
+    refresh = {
+      statusline = 100000,
+      tabline = 10000,
+      winbar = 10000,
+    }
   },
   sections = {
     lualine_a = {

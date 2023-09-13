@@ -18,7 +18,7 @@ return {
         }
     end
   },
-  {
+  {-- prueba
     'mfussenegger/nvim-dap',
     pin = true,
     dependencies = {
@@ -292,7 +292,7 @@ return {
         min_count_to_highlight = 1,
       })
     end,
-  }, 
+  },
   {
     'gelguy/wilder.nvim',
     config = function() require('config/wilder') end,
@@ -353,7 +353,7 @@ return {
   -- Ctrl + Scroll
   {
     'tenxsoydev/size-matters.nvim',
-    config = function() 
+    config = function()
       require("size-matters").setup({
         default_mappings = true,
         -- font resize step size
@@ -374,8 +374,8 @@ return {
       open_mapping = [[\]],
       terminal_mappings = true, -- close by typing \
       insert_mappings = false,
-      direction = 'float', 
-      size = 80, 
+      direction = 'float',
+      size = 80,
       auto_scroll = true,
       close_on_exit = true,
       shade_terminals = false,
@@ -513,7 +513,7 @@ return {
     'sindrets/diffview.nvim',
     config = function ()
       local actions = require("diffview.actions")
-      
+
       require("diffview").setup({
         keymaps = {
           file_panel = {
