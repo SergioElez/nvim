@@ -454,7 +454,10 @@ remap("n", "<leader>gc", "<cmd>DiffviewOpen<cr>", bufopts, "Git commit")
 remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Toggle git files")
 remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Commits History")
 remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "File History")
-remap("n", "<leader>gg", "<cmd>lua require('persistence').actions.toggle_stage_entry<cr>", bufopts, "File History")
+remap("n", "<leader>gg", "<cmd>Git pull<cr>", bufopts, "Git pull")
+remap("n", "<leader>gp", "<cmd>Git push<cr>", bufopts, "Git Push")
+
+
 
 
 vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })

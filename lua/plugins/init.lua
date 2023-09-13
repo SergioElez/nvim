@@ -518,7 +518,10 @@ return {
         keymaps = {
           file_panel = {
             { "n", "<CR>",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
-            { "n", "<Space>",              actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
+            { "n", "<Space>",           actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
+            { "n", "F",                 actions.close_fold,                        { desc = "Collapse fold" } },
+            { "n", "h",                 actions.open_fold,                        { desc = "Open fold" } },
+            { "n", "C", function() vim.cmd('botright Git commit') end,          { desc = "Git commit" } },
           },
         }
       })

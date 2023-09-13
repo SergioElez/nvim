@@ -82,12 +82,6 @@ autocmd({"TermOpen"},{
   group = "MisAutocomandos"
 })
 
-vim.cmd[[
-  augroup DiffviewKeymap
-    autocmd!
-    autocmd FileType DiffviewFilePanel nnoremap <buffer> - <CR>
-  augroup END
-]]
 
 -- function AutoFoldImports()
   -- local import_regex = [[/*import*/]]
