@@ -60,10 +60,28 @@ local function is_file_modified()
   end
 end
 
+
+function get_git_commit_counts()
+  
+  local result = vim.fn.systemlist('git cherry -v')
+
+  local cont_commits_to_push = 0;
+  for _, line in ipairs(result) do
+    cont_commits_to_push = cont_commits_to_push + 1;
+  end
+  
+  if(cont_commits_to_push ==  0) then
+    return ""
+  else
+    return cont_commits_to_push .. "󱦲"
+  end
+end
+
 require('lualine').setup {
   options = {
     theme = molokai_bubble,
-    component_separators = '',
+    -- component_separators = '',
+    component_separators = '',
     section_separators = { left = '', right = '' },
   },
   sections = {
@@ -77,10 +95,12 @@ require('lualine').setup {
         modified = '󰷈',      -- Text to show when the buffer is modified
         readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
         unnamed = '[No Name]', -- Text to show for unnamed buffers.
-        newfile = '[New]',     -- Text to show for newly created file before first write
+        newfile = '',     -- Text to show for newly created file before first write
+        -- newfile = '[New]',     -- Text to show for newly created file before first write
         },
       },
       {'branch', icon = {'', color={fg=colors.magenta}}},
+      {get_git_commit_counts},
       { require("capslock").status_string, icon = {'󰪛', color={fg=colors.red}}},
     },
     lualine_c = {
