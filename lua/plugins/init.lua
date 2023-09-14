@@ -514,17 +514,25 @@ return {
     config = function ()
       local actions = require("diffview.actions")
       function gitCommit() 
-        total_commits = total_commits + 1
+      
+        local result = vim.fn.systemlist('git cherry -v')
+  
+        local cont_commits_to_push = 0;
+        for _, line in ipairs(result) do
+          cont_commits_to_push = cont_commits_to_push + 1;
+        end
+      
         vim.cmd('botright Git commit') 
+        total_commits = cont_commits_to_push + 1
       end
       require("diffview").setup({
         keymaps = {
           file_panel = {
-            { "n", "<CR>",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
             { "n", "<Space>",           actions.select_entry,                   { desc = "Open the diff for the selected entry" } },
-            { "n", "F",                 actions.close_fold,                        { desc = "Collapse fold" } },
-            { "n", "h",                 actions.open_fold,                        { desc = "Open fold" } },
-            { "n", "C", gitCommit,          { desc = "Git commit" } },
+            { "n", "F",                 actions.close_fold,                     { desc = "Collapse fold" } },
+            { "n", "h",                 actions.open_fold,                      { desc = "Open fold" } },
+            { "n", "C",                 gitCommit,                              { desc = "Git commit" } },
+            { "n", "<CR>",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
           },
         }
       })
