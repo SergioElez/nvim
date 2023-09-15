@@ -77,10 +77,10 @@ autocmd({"colorscheme"}, {
   group = "MisAutocomandos"
 })
 
-autocmd({"TermOpen"},{
-  callback = term_colors,
-  group = "MisAutocomandos"
-})
+-- autocmd({"TermOpen"},{
+  -- callback = term_colors,
+  -- group = "MisAutocomandos"
+-- })
 
 -- function AutoFoldImports()
   -- local import_regex = [[/*import*/]]

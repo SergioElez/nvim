@@ -6,8 +6,8 @@ local colors = {
   red    = '#ff5189',
   violet = '#d183e8',
   grey   = '#303030',
-  
-  
+
+
   bg_inactive = "#2f3336",
   bg = "#3E4347",
   fg = "#f8f8f2",
@@ -62,20 +62,20 @@ end
 
 
 function get_git_commit_counts()
-  
+
   -- local result = vim.fn.systemlist('git cherry -v')
 
   -- local cont_commits_to_push = 0;
   -- for _, line in ipairs(result) do
     -- cont_commits_to_push = cont_commits_to_push + 1;
   -- end
-  
+
   if(total_commits ==  0) then
     return ""
   else
     return total_commits .. "󱦲"
   end
-  
+
   -- local result = vim.fn.system('echo hola')
 end
 
@@ -97,15 +97,14 @@ require('lualine').setup {
     lualine_a = {
       { 'mode', separator = { left = ' ', right = '  ' }, right_padding = 2 },
     },
-    lualine_b = { 
+    lualine_b = {
       { is_file_modified},
       { 'filename', separator = { left = '', right = '' }, right_padding = 2,
       symbols = {
         modified = '󰷈',      -- Text to show when the buffer is modified
-        readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-        unnamed = '[No Name]', -- Text to show for unnamed buffers.
-        newfile = '',     -- Text to show for newly created file before first write
-        -- newfile = '[New]',     -- Text to show for newly created file before first write
+        readonly = '󱪟',      -- Text to show when the file is non-modifiable or readonly.
+        unnamed = '󱪗', -- Text to show for unnamed buffers.
+        newfile = '󱪝',     -- Text to show for newly created file before first write
         },
       },
       {'branch', icon = {'', color={fg=colors.magenta}}},
@@ -113,7 +112,7 @@ require('lualine').setup {
       { require("capslock").status_string, icon = {'󰪛', color={fg=colors.red}}},
     },
     lualine_c = {
-      
+
       'fileformat',
       {
         'diagnostics',
@@ -141,7 +140,7 @@ require('lualine').setup {
       {'selectioncount', icon = {'󰈚', color={fg='#ffffff'}}}
     },
     lualine_y = {
-    
+
       {'filetype'},
       { 'progress'},
     },

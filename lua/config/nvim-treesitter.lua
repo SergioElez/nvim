@@ -1,5 +1,7 @@
 require'nvim-treesitter.configs'.setup {
   highlight = {
+  -- Desabilitado en lua porque da error
+    disable = { 'lua' },
     enable = true,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.

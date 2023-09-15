@@ -1,3 +1,4 @@
+-- prueba
 return {
   {
     -- Colorscheme
@@ -172,24 +173,175 @@ return {
     end
   },
   {'rcarriga/cmp-dap'},
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require'colorizer'.setup({
+        })
+    end
+  },
+  -- Scroll
+  {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require'neoscroll'.setup({
+        })
+    end
+  },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require'scrollbar'.setup({
+        marks = {
+          Cursor = {
+              text = "",
+          },
+        }
+        })
+    end
+  },
+  {
+    'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("nvim-web-devicons").setup {
+        strict = true,
+        override = {
+          folder = {
+            color = "#F66B42"
+          }
+         },
+        override_by_filename = {
+          [".git"] = {
+            icon = "",
+            color = "#ff0000",
+            name = "Gitignore"
+          },
+          [".github"] = {
+            icon = "",
+            color = "#ff0000",
+            name = "Github"
+          },
+          ["config"] = {
+            icon = "",
+            color = "#e6db74",
+            name = "Config"
+         },
+         ["node_modules"] = {
+          icon = "",
+          color = "#e6db74",
+          name = "node_modules"
+         },
+         ["img"] = {
+          icon = "󰉏",
+          color = "#e6db74",
+          name = "Images"
+         },
+         ["resources"] = {
+          icon = "󱋣",
+          color = "#e6db74",
+          name = "resources"
+         },
+         ["target"] = {
+          icon = "󰉒",
+          color = "#e6db74",
+          name = "target"
+         },
+         ["core"] = {
+          icon = "",
+          color = "#e6db74",
+          name = "core"
+         },
+        }
+      }
+    end
+  },
   --Explorador
   {
     "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
+
+    -- tag = "v0.8.5",
+    -- branch = "main",
     dependencies = {
       "echasnovski/mini.base16",
-      "nvim-tree/nvim-web-devicons",
       "antosha417/nvim-lsp-file-operations",
     },
     config = function()
+      local api = require('nvim-tree.api')
+
+      local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+      vim.keymap.set('n', '<Space>',  api.node.open.edit,                    opts('Open'))
+
+
       require("nvim-tree").setup({
         sort_by = "case_sensitive",
+        actions = {
+          open_file = {
+            quit_on_open = true,
+          }
+        },
         view = {
           width = 30,
         },
         renderer = {
           group_empty = true,
+          icons = {
+            web_devicons = {
+              file = {
+                enable = true,
+                color = true,
+              },
+              folder = {
+                enable = true,
+                color = true,
+              },
+            },
+            git_placement = "after",
+            modified_placement = "before",
+            padding = " ",
+            glyphs = {
+              default = "",
+              symlink = "",
+              bookmark = "󰆤",
+              modified = "●",
+              folder = {
+                arrow_closed = "",
+                arrow_open = "",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              },
+              git = {
+                unstaged = "",
+                staged = "",
+                unmerged = "",
+                renamed = "󱔏",
+                untracked = "★",
+                deleted = "󱪛",
+                ignored = "",
+              },
+            },
+          },
+        },
+        diagnostics = {
+          enable = false,
+          show_on_dirs = false,
+          show_on_open_dirs = true,
+          debounce_delay = 50,
+          severity = {
+            min = vim.diagnostic.severity.HINT,
+            max = vim.diagnostic.severity.ERROR,
+          },
+          icons = {
+            hint = "",
+            info = "",
+            warning = "",
+            error = "",
+          },
         },
         filters = {
           dotfiles = true,
@@ -513,16 +665,16 @@ return {
     'sindrets/diffview.nvim',
     config = function ()
       local actions = require("diffview.actions")
-      function gitCommit() 
-      
+      function gitCommit()
+
         local result = vim.fn.systemlist('git cherry -v')
-  
+
         local cont_commits_to_push = 0;
         for _, line in ipairs(result) do
           cont_commits_to_push = cont_commits_to_push + 1;
         end
-      
-        vim.cmd('botright Git commit') 
+
+        vim.cmd('botright Git commit')
         total_commits = cont_commits_to_push + 1
       end
       require("diffview").setup({
