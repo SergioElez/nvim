@@ -22,6 +22,17 @@ local colors = {
   green = "#8AC21B",
   springgreen = "#00ff87",
   red = "#ff4a44",
+  
+  teal = "#3AC1A8",
+  lavender = "#B57EDC",
+  goldenyellow = "#F7C547",
+  pastelpink = "#FF9AA2",
+  navyblue = "#1B365D",
+  limagreen = "#C7FF46",
+  burntorange = "#FF6B24",
+  deeppurple = "#6E1E6E",
+  emeraldgreen = "#00965E",
+  crimsonred = "#E60026"
 }
 
 local molokai_bubble = {

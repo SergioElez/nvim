@@ -13,6 +13,14 @@ require("nvim-tree").setup({
       quit_on_open = true,
     }
   },
+  filters = {
+    git_ignored = true,
+    dotfiles = false,
+    git_clean = false,
+    no_buffer = false,
+    custom = {},
+    exclude = {},
+  },
   view = {
     width = 30,
   },
@@ -91,8 +99,5 @@ require("nvim-tree").setup({
       warning = "",
       error = "",
     },
-  },
-  filters = {
-    dotfiles = true,
   },
 })

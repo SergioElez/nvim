@@ -437,26 +437,8 @@ function evalExpresion()
 
 end
 
--- function get_git_commit_counts()
-  -- local fugitive_status = vim.fn["fugitive#statusline"]()
-  -- local push_count = tonumber(fugitive_status:match("Your branch is ahead of (%d+"))
-  -- print(push_count)
--- end
-
-function get_git_commit_counts()
-  
-  local result = vim.fn.systemlist('git cherry -v')
-
-  local cont_commits_to_push = 0;
-  for _, line in ipairs(result) do
-    cont_commits_to_push = cont_commits_to_push + 1;
-  end
-
-  print(cont_commits_to_push)
-end
 
 -- MOSTRAR VARIABLE BAJO EL CURSOR
-remap("n", "<leader>ee", "<cmd>lua get_git_commit_counts()<cr>", bufopts, "Inspeccionar expresion")
 remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 -- Noice

@@ -196,6 +196,8 @@ return {
           Cursor = {
               text = "",
           },
+          Info = { color = "#ff0000"},
+          Hint = { color = "#ff0000"},
         }
         })
     end
