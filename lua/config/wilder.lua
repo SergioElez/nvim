@@ -50,5 +50,5 @@ vim.keymap.set('c', '<M-j>', 'wilder#reject_completion() ? wilder#can_reject_com
 --Bajar historial
 vim.keymap.set('c', '<M-k>', 'wilder#accept_completion() ? wilder#can_accept_completion() : "\\<C-n>"', { expr = true })
 --Enter
-vim.keymap.set('c', '<M-Space>', 'wilder#accept_completion() ? wilder#can_accept_completion() : "\\<C-m>"', { expr = true })
+vim.keymap.set('c', '<C-Space>', 'wilder#accept_completion() ? wilder#can_accept_completion() : "\\<C-m>"', { expr = true })
 

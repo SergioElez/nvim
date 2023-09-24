@@ -1,5 +1,6 @@
 require('telescope').setup({
   defaults = {
+    sorting_strategy = 'ascending',
     path_display = {
       shorten = {
         len = 3, exclude = {1, -1}
@@ -9,10 +10,16 @@ require('telescope').setup({
     dynamic_preview_title = true,
     mappings = {
       n = {
-    	  ['<c-d>'] = require('telescope.actions').delete_buffer
+    	  ['<c-d>'] = require('telescope.actions').delete_buffer,
+        ['<C-j>'] = require('telescope.actions').move_selection_next,
+        ['<C-k>'] = require('telescope.actions').move_selection_previous,
+        ['<C-Space>'] = require('telescope.actions').select_default
       },
       i = {
-        ['<c-d>'] = require('telescope.actions').delete_buffer
+        ['<c-d>'] = require('telescope.actions').delete_buffer,
+        ['<C-j>'] = require('telescope.actions').move_selection_next,
+        ['<C-k>'] = require('telescope.actions').move_selection_previous,
+        ['<C-Space>'] = require('telescope.actions').select_default
       },
     },
   },
