@@ -47,40 +47,14 @@ local molokai_bubble = {
     c = { fg = colors.black, bg = colors.bg_inactive },
   },
 }
-local function prueba()
-  return 'a'
-end
-
-local function is_file_modified()
-  local bufnr = vim.fn.bufnr('%') -- Obtener el número del búfer actual
-  local buf_info = vim.fn.getbufinfo(bufnr)[1] -- Obtener información del búfer actual
-
-  print(buf_info)
-  -- Comprobar si el tiempo de modificación del archivo es mayor que el tiempo en que se abrió
-  if buf_info and buf_info.modified == 1 then
-      return "+"
-  else
-      return ""
-  end
-end
 
 
 function get_git_commit_counts()
-
-  -- local result = vim.fn.systemlist('git cherry -v')
-
-  -- local cont_commits_to_push = 0;
-  -- for _, line in ipairs(result) do
-    -- cont_commits_to_push = cont_commits_to_push + 1;
-  -- end
-
   if(total_commits ==  0) then
     return ""
   else
     return total_commits .. "󱦲"
   end
-
-  -- local result = vim.fn.system('echo hola')
 end
 
 total_commits = 0
@@ -102,7 +76,6 @@ require('lualine').setup {
       { 'mode', separator = { left = ' ', right = '  ' }, right_padding = 2 },
     },
     lualine_b = {
-      { is_file_modified},
       { 'filename', separator = { left = '', right = '' }, right_padding = 2,
       symbols = {
         modified = '󰷈',      -- Text to show when the buffer is modified
@@ -116,7 +89,6 @@ require('lualine').setup {
       { require("capslock").status_string, icon = {'󰪛', color={fg=colors.red}}},
     },
     lualine_c = {
-
       'fileformat',
       {
         'diagnostics',

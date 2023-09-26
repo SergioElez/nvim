@@ -78,7 +78,7 @@ vim.cmd([[hi! link PreProc Normal]])
 vim.cmd('set termguicolors')
 
 vim.opt.foldclose = 'all'
-vim.opt.foldopen = 'all'
+-- vim.opt.foldopen = 'all'
 
 vim.opt.laststatus = 3
 

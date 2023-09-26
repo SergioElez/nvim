@@ -22,7 +22,7 @@ local colors = {
   green = "#8AC21B",
   springgreen = "#00ff87",
   red = "#ff4a44",
-  
+
   teal = "#3AC1A8",
   lavender = "#B57EDC",
   goldenyellow = "#F7C547",
@@ -45,8 +45,7 @@ require("nvim-web-devicons").setup {
   override_by_filename = {
     [".git"] = {
       icon = "",
-      color = "#ff0000",
-      name = "Gitignore"
+      color = colors.comment,
     },
     [".github"] = {
       icon = "",

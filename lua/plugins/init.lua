@@ -118,7 +118,7 @@ return {
       end
     end,
   },
-  {
+    {
     'preservim/vim-pencil',
     dependencies = {
       'preservim/vim-litecorrect',
@@ -142,6 +142,7 @@ return {
       })
     end
   },
+
   {
     'simrat39/symbols-outline.nvim',
     config = function()
@@ -176,8 +177,7 @@ return {
   {
     'norcalli/nvim-colorizer.lua',
     config = function()
-      require'colorizer'.setup({
-        })
+      require'colorizer'.setup({'*'})
     end
   },
   -- Scroll
@@ -408,7 +408,6 @@ return {
     ft = 'toggleterm',
     version = '1.*',
   },
-  'norcalli/nvim-colorizer.lua',
   {'Pocco81/HighStr.nvim',
      config = function()
       local high_str = require("high-str")

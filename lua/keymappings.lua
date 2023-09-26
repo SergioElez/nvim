@@ -93,8 +93,7 @@ require("which-key").register({
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
--- NerdTree
--- remap("n", "<leader><leader>", "<cmd>NERDTreeToggle<cr>", bufopts, "Explorador de archivos")
+-- Nvim tree
 remap("n", "<leader><leader>", "<cmd>NvimTreeToggle<cr>", bufopts, "Explorador de archivos")
 remap("n", "<F3>", "<cmd>lua require'oil'.open_float()<cr>", bufopts, "Explorador de archivos")
 
@@ -443,7 +442,7 @@ remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar 
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 -- Noice
 remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
-remap("n", "<leader>m", "<cmd>messages<cr>", bufopts, "Messages")
+remap("n", "<leader>m", "<cmd>botright messages<cr>", bufopts, "Messages")
 -- Pintar linea
 remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")
 remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Remove Paint Line")
@@ -457,6 +456,8 @@ remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Commits Histo
 remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "File History")
 remap("n", "<leader>gg", "<cmd>Git pull<cr>", bufopts, "Git pull")
 remap("n", "<leader>gp", "<cmd>lua git_push()<cr>", bufopts, "Git Push")
+remap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", bufopts, "Git Branches")
+
 
 function git_push()
   total_commits = 0

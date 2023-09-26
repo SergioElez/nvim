@@ -12,7 +12,6 @@ hacer atajos wichkey para todos los plugins
 - DONE hacer que en modo debug cuando se ha parado pinte la linea de otro color
 - DONE cambiar icono de breakpoint rejected
 - DONE poner iconos a nerdtree
-hacer pruebas con git
 hacer atajo ctrl r +
 - DONE hacer que salgan los iconos del autocompletado
 - DONE HACER ATAJO PARA NOICE HISTORY Y TODO LO DE NOICE
@@ -35,6 +34,13 @@ poner diccionario español
 hacer fold en todas las funciones y si eso comentarios
 - DONE cambiar el sign I que es para el TODO
 probar busqueda de texto en todo el workspace
-probar git conflicts
-probar como son los commits de git (quiero que salga un listado con los cambios) 
 - DONE hacer que si pulso f2 en una linea pintada se borre
+- DONE hacer atajo para buscar el historial de commits del fichero actual
+- DONE - hacer atajo para hacer diff split en el archivo que tengo en el cursor en la pantalla de commit
+Probar a hacer un conficto
+probar bien los workspaces
+- DONEmirar que en el tree se vean los cambios de git
+- DONE - quitar tabs de la misma window
+- DONE - hacer que salga en lualine los caracteres selccionados si hay commit por subir o por bajar
+
+hacer que no salga las concurrencias en nvim tree
