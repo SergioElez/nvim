@@ -44,3 +44,10 @@ probar bien los workspaces
 - DONE - hacer que salga en lualine los caracteres selccionados si hay commit por subir o por bajar
 
 hacer que no salga las concurrencias en nvim tree
+hacer atajo para que se abra nvim tree en la ruta del archivo actual
+hacer run java aplication o probar si todos los proyectos funcionan con tomcat
+hacer arbol de dependencias de pom.xml
+
+
+
+

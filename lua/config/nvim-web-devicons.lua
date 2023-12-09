@@ -46,6 +46,7 @@ require("nvim-web-devicons").setup {
     [".git"] = {
       icon = "",
       color = colors.comment,
+      name = "git"
     },
     [".github"] = {
       icon = "",

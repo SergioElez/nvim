@@ -10,6 +10,7 @@ local function my_on_attach(bufnr)
 
   -- custom mappings
   vim.keymap.set('n', '<Space>',  api.node.open.edit,                    opts('Open'))
+  vim.keymap.set('n', '<Escape>',  api.tree.close,                    opts('Close'))
 end
 
 require("nvim-tree").setup({

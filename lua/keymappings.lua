@@ -65,7 +65,7 @@ remap("n", "<leader>qs", "<Plug>ReplaceWithStraight", bufopts, "Straighten quote
 
 -- telescope
 remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
-remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")
+remap("n", "<leader>fw", "<cmd>Telescope live_grep<cr>", bufopts, "Find word")
 remap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", bufopts, "Find buffer")
 remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Find mark")
 remap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", bufopts, "Find references (LSP)")
