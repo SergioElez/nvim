@@ -2,7 +2,7 @@ Hacer que en el startup menu salga el diario y se pueda checkear cosas y esten l
 Mapeo para skipear los breakpoints
 - DONE hacer un atajo para que haga mvn clean install y copie a la ruta de tomcat
 - DONE hacer que salga el autocompletado en lista centrada en popup con noice
-Hacer un atajo para formatee cualquier lenguaje, probar a pasarle un sql y que lo idente bien
+Hacer un atajo para formatee cualquier lenguaje, probar a pasarle un sql y que lo idente bien (COPIAR DEVTOOLS)
 - DONE hacer que al guardar se idente
 atajo ir implementacion
 atajo ir superimplementacion
@@ -39,7 +39,7 @@ probar busqueda de texto en todo el workspace
 - DONE - hacer atajo para hacer diff split en el archivo que tengo en el cursor en la pantalla de commit
 Probar a hacer un conficto
 probar bien los workspaces
-- DONEmirar que en el tree se vean los cambios de git
+- DONE mirar que en el tree se vean los cambios de git
 - DONE - quitar tabs de la misma window
 - DONE - hacer que salga en lualine los caracteres selccionados si hay commit por subir o por bajar
 
@@ -47,7 +47,8 @@ hacer que no salga las concurrencias en nvim tree
 hacer atajo para que se abra nvim tree en la ruta del archivo actual
 hacer run java aplication o probar si todos los proyectos funcionan con tomcat
 hacer arbol de dependencias de pom.xml
+MIRAR SI ES POSIBLE HACER QUE SE BORRE EL TERMINAL DE TOMCAT
 
-
-
+HACER UNA EXTENSION DE ARCHIVO CUSTOM PARA ESCRIBIR NOTAS, ATAJO FECHA ACTUAL
+hacer que en wilder te salgan los comandos mas recientes
 
