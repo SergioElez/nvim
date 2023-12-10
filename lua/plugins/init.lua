@@ -208,7 +208,7 @@ return {
   },
   {
     'stevearc/oil.nvim',
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {"nvim-tree/nvim-web-devicons"},
     config = function()
       require("oil").setup({
         skip_confirm_for_simple_edits = true,
@@ -423,8 +423,7 @@ return {
   {'barklan/capslock.nvim',
   config = function()
     require("capslock").setup({
-      -- MAPEAR EN AUTOHOTKEY EL CAPSLOCK A F12
-      vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle")
+      -- vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle")
     })
   end
   },
@@ -480,18 +479,6 @@ return {
       end
   },
   {
-    "TC72/telescope-tele-tabby.nvim",
-      config = function()
-        require('telescope').setup {
-          extensions = {
-              tele_tabby = {
-                  use_highlighter = true,
-              }
-          }
-        }
-      end
-  },
-  {
     'm4xshen/autoclose.nvim',
     config = function ()
       require("autoclose").setup({
@@ -544,22 +531,6 @@ return {
             { "n", "C",                 gitCommit,                              { desc = "Git commit" } },
             { "n", "<CR>",              actions.toggle_stage_entry,             { desc = "Stage / unstage the selected entry" } },
           },
-        }
-      })
-    end
-  },
-  {
-    "eatgrass/maven.nvim",
-    cmd = { "Maven", "MavenExec" },
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function()
-      require('maven').setup({
-        executable = "./mvnw", -- `mvn` should be in your `PATH`, or the path to the maven exectable, for example `./mvnw`
-        cwd = nil, -- work directory, default to `vim.fn.getcwd()`
-        settings = nil, -- specify the settings file or use the default settings
-        commands = { -- add custom goals to the command list
-          { cmd = { "clean", "compile" }, desc = "clean then compile" },
-          { cmd = { "clean", "install" }, desc = "clean then install" },
         }
       })
     end
