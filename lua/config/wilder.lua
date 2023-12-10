@@ -1,5 +1,16 @@
 local wilder = require('wilder')
 
+local gradient = {
+  '#f4468f', '#fd4a85', '#ff507a', '#ff566f', '#ff5e63',
+  '#ff6658', '#ff704e', '#ff7a45', '#ff843d', '#ff9036',
+  '#f89b31', '#efa72f', '#e6b32e', '#dcbe30', '#d2c934',
+  '#c8d43a', '#bfde43', '#b6e84e', '#aff05b'
+}
+
+for i, fg in ipairs(gradient) do
+  gradient[i] = wilder.make_hl('WilderGradient' .. i, 'Pmenu', {{a = 1}, {a = 1}, {foreground = fg}})
+end
+
 wilder.set_option('renderer', wilder.popupmenu_renderer(
   wilder.popupmenu_palette_theme({
     highlights = {
@@ -30,7 +41,14 @@ wilder.setup({modes = {':', '/', '?'},
 wilder.set_option('use_python_remote_plugin', 0)
 wilder.set_option('pipeline', {
   wilder.branch(
-    wilder.cmdline_pipeline({
+    {
+      wilder.check(function(_, x) return x == '' end),
+      wilder.history(50),
+    },
+    wilder.cmdline_pipeline(
+    {
+      -- wilder.history(5, ":"),
+      -- wilder.check({ctx, x -> empty(x)}),
       fuzzy = 1,
       set_pcre2_pattern = 1,
     }),
@@ -40,6 +58,7 @@ wilder.set_option('pipeline', {
     wilder.search_pipeline()
   ),
 })
+
 
 -- Subir
 vim.keymap.set('c', '<C-j>', 'wilder#in_context() ? wilder#next() : "\\<C-j>"', { expr = true })

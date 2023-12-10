@@ -332,7 +332,7 @@ function deploy_tomcat()
     else
         print("true")  -- Log si el puerto no está ocupado
         vim.cmd("silent! WildcatUp")
-        term_colors()
+        -- term_colors()
         winid = vim.api.nvim_get_current_win()
 
         -- Esperar hasta que esté "Listening"
@@ -442,7 +442,8 @@ remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar 
 remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
 -- Noice
 remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
-remap("n", "<leader>m", "<cmd>botright messages<cr>", bufopts, "Messages")
+remap("n", "<F1>", "<cmd>botright messages<cr>", bufopts, "Messages")
+remap("n", "<C-F1>", "<cmd>messages clear<cr>", bufopts, "Messages clear")
 -- Pintar linea
 remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")
 remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Remove Paint Line")
