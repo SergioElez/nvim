@@ -48,6 +48,7 @@ local molokai_bubble = {
   },
 }
 
+total_commits = 0
 
 function get_git_commit_counts()
   if(total_commits ==  0) then
@@ -56,8 +57,6 @@ function get_git_commit_counts()
     return total_commits .. "󱦲"
   end
 end
-
-total_commits = 0
 
 require('lualine').setup {
   options = {

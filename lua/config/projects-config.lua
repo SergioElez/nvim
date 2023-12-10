@@ -24,11 +24,6 @@ run.config = {
 
 
 
-
-
-
-
-
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local pickers = require('telescope.pickers')

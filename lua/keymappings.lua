@@ -8,6 +8,9 @@ local os = require("os")
 local io = require("io")
 local utils = require('utils')
 
+-- Toggle capslock
+vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle<cmd>lua require('lualine').refresh()<cr>")
+
 -- Salir del modo insertar
 remap("i", "jk", "<ESC>", {noremap = true})
 
@@ -21,6 +24,7 @@ remap("n", "<C-s>", "<cmd>update<cr>")
 remap("i", "<C-s>", "<cmd>update<cr>")
 
 -- disable search highlighting by pressing enter
+remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
 remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
 
 -- tab management
