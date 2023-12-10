@@ -19,7 +19,7 @@ return {
         }
     end
   },
-  {-- prueba
+  {
     'mfussenegger/nvim-dap',
     pin = true,
     dependencies = {
@@ -43,7 +43,6 @@ return {
   },
   'godlygeek/tabular',
   'itspriddle/vim-marked',
-  -- 'ludovicchabant/vim-gutentags',
   'mfussenegger/nvim-jdtls',
   'neovim/nvim-lspconfig',
   'nvim-lua/plenary.nvim',
@@ -315,6 +314,12 @@ return {
             kind = "",
             find = "escritos",
           },
+          -- Quita el aviso cuando abres el explorador
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "lines",
+          },
           -- Quita el aviso de cuando abres un archivo
           filter = {
             event = "msg_show",
@@ -559,5 +564,5 @@ return {
       })
     end
   },
-}
+} 
 
