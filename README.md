@@ -6,7 +6,7 @@ My personal nvim conf
 - Settear CATALINA_HOME
 
 ## Dependencias
-``choco install neovim git mingw make fzf maven openjdk17 python ripgrep`` 
+``choco install neovim git mingw make fzf maven openjdk17 python ripgrep msys2`` 
 - Descargar Nerdfont y ponerla en el terminal de windows
   
 ## Instalación
