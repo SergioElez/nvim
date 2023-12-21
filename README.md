@@ -8,6 +8,10 @@ My personal nvim conf
 ## Dependencias
 ``choco install neovim neovide git mingw make fzf maven openjdk17 python ripgrep`` 
 - Descargar Nerdfont y ponerla en el terminal de windows
+- Instalar wsl ubuntu
+- Instalar tmux en el wsl
+- Hacer clone del dotfile de tmux
+- git clone https://github.com/SergioElez/dotfiles ~
   
 ## Instalación
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
