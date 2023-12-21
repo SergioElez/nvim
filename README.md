@@ -3,7 +3,7 @@ My personal nvim conf
 
 ## Requisitos
 - Poner como variable de entorno HOME = C:\Users\Sergio
-- Settear CATALINA_HOME
+- Settear CATALINA_HOME = /mnt/b/apache-tomcat-10.1.11
 
 ## Dependencias
 ``choco install neovim neovide git mingw make fzf maven openjdk17 python ripgrep`` 
