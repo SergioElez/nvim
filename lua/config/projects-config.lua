@@ -14,6 +14,7 @@ run = {}
 -- Configuración de comandos
 run.config = {
     {name="Clean install", dir=[[{root}]], cmd="mvn clean install"},
+    {name="Edit config", dir=[[C:\Users\Sergio\AppData\Local\nvim\lua]], cmd="nvim "},
 }
 
 
@@ -72,7 +73,7 @@ end
 
 function run.execute_selected_command(entry)
     local root_directory = utils.find_project_root()
-
+    
     -- Escapar los caracteres especiales en entry.dir antes de realizar la sustitución
     local escaped_dir = entry.dir:gsub("[%^%$%(%)%%%.%[%]%*%+%-%?]", "%%%1")
 

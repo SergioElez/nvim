@@ -9,10 +9,12 @@ local io = require("io")
 local utils = require('utils')
 
 -- Toggle capslock
-vim.keymap.set({ "i", "c", "n" }, "<F12>", "<Plug>CapsLockToggle<cmd>lua require('lualine').refresh()<cr>")
+vim.keymap.set({ "i", "c", "n"}, "<F12>", "<Plug>CapsLockToggle<cmd>lua require('lualine').refresh()<cr>")
 
 -- Salir del modo insertar
 remap("i", "jk", "<ESC>", {noremap = true})
+
+remap("n", "<leader>o", "<cmd>edit C:\\Users\\Sergio\\AppData\\Local\\nvim\\lua\\keymappings.lua<cr>", bufopts, "Open config")
 
 -- Cambiar : por ;
 remap("", ";", ":", {noremap = true})
@@ -95,7 +97,7 @@ require("which-key").register({
 }, { prefix = "<leader>" })
 
 -- symbols-outline
-remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
+remap("n", "<leader>so", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
 -- Nvim tree
 remap("n", "<leader><leader>", "<cmd>NvimTreeToggle<cr>", bufopts, "Explorador de archivos")
@@ -299,22 +301,22 @@ function WaitForListening(port, max_attempts, attempts)
     for _, line in ipairs(result) do
         listening_pos = line:find("LISTENING")
         if listening_pos then
-            print("Puerto está 'Listening'.")  -- Log si el puerto está "Listening"
-            vim.cmd('ToggleTerm')
-            vim.cmd('startinsert | stopinsert')
-            require('dap').continue()
+            -- Logger:info("Puerto está 'Listening'.")  -- Log si el puerto está "Listening"
+            -- vim.cmd('ToggleTerm')
+            -- vim.cmd('startinsert | stopinsert')
+            -- require('dap').continue()
             return
         end
     end
 
     attempts = attempts + 1
     if attempts < max_attempts then
-        print("Esperando, intento número: " .. attempts)  -- Log para mostrar los intentos
+        Logger:info("Esperando, intento número: " .. attempts)  -- Log para mostrar los intentos
         vim.defer_fn(function()
             WaitForListening(port, max_attempts, attempts)
         end, 1000)
     else
-        print("El puerto: " .. port .. " no está disponible después de esperar.")  -- Log si los intentos fallan
+        Logger:info("El puerto: " .. port .. " no está disponible después de esperar.")  -- Log si los intentos fallan
     end
 end
 
@@ -328,13 +330,15 @@ function deploy_tomcat()
     for _, line in ipairs(result) do
         listening_pos = line:find("LISTENING")
     end
-    print(listening_pos)  -- Log para mostrar el resultado de listening_pos
-
+    Logger:info(listening_pos)  -- Log para mostrar el resultado de listening_pos
+    
     if ocuped and listening_pos then
-        print("false")  -- Log si el puerto está ocupado
-        print("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
+        Logger:info("false")  -- Log si el puerto está ocupado
+        Logger:info("El puerto: " .. port .. " esta ocupado, relanza el despliegue")
+        Logger:info("Cerrando el servidor...")
+        vim.cmd("TermExec cmd=\"tmux kill-server\"")
     else
-        print("true")  -- Log si el puerto no está ocupado
+        Logger:info("true")  -- Log si el puerto no está ocupado
         vim.cmd("silent! WildcatUp")
         -- term_colors()
         winid = vim.api.nvim_get_current_win()

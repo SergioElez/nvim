@@ -383,10 +383,15 @@ return {
   {'SergioElez/toggleterm.nvim', version = "*", event = 'VeryLazy', -- terminal handling
   config = function() require('toggleterm').setup{
       open_mapping = [[\]],
+      shell = "wsl tmux",
       terminal_mappings = true, -- close by typing \
-      insert_mappings = false,
+      insert_mappings = true,
       direction = 'float',
+      start_in_insert = true,
+      autochdir = true,
       size = 80,
+      persist_mode = true,
+      hide_numbers = false,
       auto_scroll = true,
       close_on_exit = true,
       shade_terminals = false,
@@ -396,15 +401,9 @@ return {
       highlights = {
         FloatBorder = {
           guifg = "#6694EF",
-          -- guibg = "#2f3336"
         }
       },
     } end
-  },
-  {
-    'chomosuke/term-edit.nvim',
-    ft = 'toggleterm',
-    version = '1.*',
   },
   {'Pocco81/HighStr.nvim',
      config = function()
@@ -488,23 +487,7 @@ return {
      })
     end
   },
-  { 'anuvyklack/pretty-fold.nvim',
-   config = function()
-    require('pretty-fold').setup({
-      keep_indentation = false,
-      fill_char = ' ',
-      sections = {
-         left = {
-            '', function() return string.rep('', vim.v.foldlevel) end, '', 'content', ' '
-         },
-         right = {
-            ' ', 'number_of_folded_lines', ': ', 'percentage', '   ',
-         }
-      },
-      process_comment_signs = 'spaces',
-    })
-   end
-  },
+  
   -- GIT
   {
     'sindrets/diffview.nvim',
@@ -535,5 +518,18 @@ return {
       })
     end
   },
+  {
+    'niuiic/dap-utils.nvim',
+    config = function()
+      require("dap-utils").setup()
+    end,
+  },
+  {
+    'theHamsta/nvim-dap-virtual-text',
+    config = function()
+      require("nvim-dap-virtual-text").setup()
+    end,
+  },
+  
 } 
 

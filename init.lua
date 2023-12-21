@@ -68,7 +68,7 @@ end
 
 -- rainbowColors()
 
-vim.cmd('set encoding=UTF-8')
+-- vim.cmd('set encoding=UTF-8')
 
 -- Descargar https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/RobotoMono16.zip
 vim.o.guifont="RobotoMono Nerd Font:h16"
@@ -77,10 +77,19 @@ vim.cmd([[hi! link PreProc Normal]])
 -- vim.wo.cursorline = true
 vim.cmd('set termguicolors')
 
+vim.opt.autoread = true
+vim.cmd('set autoread')
+
+
+
+vim.opt.encoding='UTF-8'
+
 vim.opt.foldclose = 'all'
 -- vim.opt.foldopen = 'all'
 
 vim.opt.laststatus = 3
+
+vim.g.neoterm_shell = [["C:\Program Files\Git\bin\bash.exe"]]
 
 -- Folds
 vim.o.foldmethod="manual"

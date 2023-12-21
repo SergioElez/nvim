@@ -35,11 +35,20 @@ autocmd('BufWritePre', {
   command = ":%s/\\s\\+$//e"
 })
 
--- -- Don't auto comment new lines
--- autocmd('BufEnter', {
---   pattern = '',
---   command = 'set fo-=c fo-=r fo-=o'
--- })
+
+-- autocmd TermOpen * startinsert
+autocmd('TermOpen', {
+  pattern = '*',
+  command = "startinsert"
+})
+
+-- Auto insert mode when entering terminal
+local augroup_term_insert = vim.api.nvim_create_augroup("Term-Insert", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter", "TermOpen", "TermEnter" }, {
+  group = augroup_term_insert,
+  pattern = 'term://*',
+  command = 'startinsert'
+})
 
 -- Terminal settings:
 ---------------------
