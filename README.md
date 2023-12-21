@@ -11,7 +11,7 @@ My personal nvim conf
 - Instalar wsl ubuntu
 - Instalar tmux en el wsl
 - Hacer clone del dotfile de tmux
-- git clone https://github.com/SergioElez/dotfiles ~
+- wget -O ~/.tmux.conf https://raw.githubusercontent.com/SergioElez/dotfiles/master/.tmux.conf
   
 ## Instalación
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
