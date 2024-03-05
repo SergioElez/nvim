@@ -14,6 +14,7 @@ run = {}
 -- Configuración de comandos
 run.config = {
     {name="Clean install", dir=[[{root}]], cmd="mvn clean install"},
+    {name="Clean install -U", dir=[[{root}]], cmd="mvn clean install -U"},
     {name="Edit config", dir=[[C:\Users\Sergio\AppData\Local\nvim\lua]], cmd="nvim "},
 }
 

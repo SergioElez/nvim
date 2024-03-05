@@ -131,19 +131,16 @@ local config = {
     '-Dlog.level=ALL',
     '-Xmx4g',
     '-javaagent:' .. lombok_path,
-    -- '-Djava.net.preferIPv4Stack=true', 
-    -- '-Xdebug',
-    -- '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005',
     '--add-modules=ALL-SYSTEM',
     '--add-opens', 'java.base/java.util=ALL-UNNAMED',
     '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
     '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
     '-configuration', jdtls_path .. '/config_win',
     '-data', workspace_folder,
-  },
-}
+  }
 
-local M = {}
+}
+local M = {}    
 function M.make_jdtls_config()
   return config
 end
