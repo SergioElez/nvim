@@ -6,7 +6,7 @@ My personal nvim conf
 - Settear CATALINA_HOME = /mnt/b/apache-tomcat-10.1.11
 
 ## Dependencias
-``choco install neovim neovide git mingw make fzf maven openjdk17 python ripgrep`` 
+``choco install neovim neovide git make fzf maven openjdk17 python ripgrep nerd-fonts-RobotoMono`` 
 - Descargar Nerdfont y ponerla en el terminal de windows
 - Instalar wsl ubuntu
 - Instalar tmux en el wsl
