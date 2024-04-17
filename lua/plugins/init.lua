@@ -26,6 +26,7 @@ return {
         {'nvim-telescope/telescope-dap.nvim', pin = true},
         {'theHamsta/nvim-dap-virtual-text', pin = true},
         {'rcarriga/nvim-dap-ui', pin = true},
+        {'nvim-neotest/nvim-nio', pin = true},
         {'mxsdev/nvim-dap-vscode-js', pin = true},
     },
     config = function()

@@ -1,5 +1,7 @@
-vim.g.mapleader = ' '
+local username = vim.loop.os_getenv('USERNAME')
+vim.env["HOME"] = username
 
+vim.g.mapleader = ' '
 
 -- Automatically install lazy.nvim if it does not exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
