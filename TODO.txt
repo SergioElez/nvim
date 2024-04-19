@@ -1,5 +1,10 @@
 Hacer que en el startup menu salga el diario y se pueda checkear cosas y esten los dias y tal
+HACER QUE SE PUEDA INSTALAR NVIM SIN ADMIN
+- DONE HACER QUE CUANDO ABRAS EL TREE SE ABRA EN EL FICHERO ACTUAL
+- DONE HACER QUE SI ESTAS EN NVIMTREE Y PULSAS ESC QUE QUITE EL NVIMTREE1
+- DONE HACER QUE NVIMTREE TE SIGA EL SCROLL EN EL CENTRO DE LA PANTALLA
 Mapeo para skipear los breakpoints
+HACER QUE SALGA EL VALOR DE LAS VARIABLES CUANDO SE PARA EL DEBUG (https://github.com/theHamsta/nvim-dap-virtual-text)
 - DONE hacer un atajo para que haga mvn clean install y copie a la ruta de tomcat
 - DONE hacer que salga el autocompletado en lista centrada en popup con noice
 Hacer un atajo para formatee cualquier lenguaje, probar a pasarle un sql y que lo idente bien

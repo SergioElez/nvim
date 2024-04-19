@@ -19,7 +19,7 @@ return {
         }
     end
   },
-  {-- prueba
+  {
     'mfussenegger/nvim-dap',
     pin = true,
     dependencies = {
@@ -33,6 +33,165 @@ return {
         require('config/nvim-dap')
     end,
   },
+  {
+    'niuiic/dap-utils.nvim',
+    pin = true,
+    dependencies = {
+        {'niuiic/core.nvim', pin = true},
+    },
+    config = function()
+      require("dap-utils").setup({
+        javascript = function(run)
+          local core = require("core")
+          run({
+            {
+              name = "Launch project",
+              type = "pwa-node",
+              request = "launch",
+              cwd = "${workspaceFolder}",
+              runtimeExecutable = "pnpm",
+              runtimeArgs = {
+                "debug",
+              },
+            },
+            {
+              name = "Launch cmd",
+              type = "pwa-node",
+              request = "launch",
+              cwd = core.file.root_path(),
+              runtimeExecutable = "pnpm",
+              runtimeArgs = {
+                "debug:cmd",
+              },
+            },
+            {
+              name = "Launch file",
+              type = "pwa-node",
+              request = "launch",
+              program = "${file}",
+              cwd = "${workspaceFolder}",
+            },
+            {
+              name = "Attach",
+              type = "pwa-node",
+              request = "attach",
+              processId = require("dap.utils").pick_process,
+              cwd = "${workspaceFolder}",
+            },
+          })
+        end,
+      })
+      
+    end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    config = function()
+      require("nvim-dap-virtual-text").setup {
+        enabled = true,                        -- enable this plugin (the default)
+        enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+        highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+        highlight_new_as_changed = false,      -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+        show_stop_reason = true,               -- show stop reason when stopped for exceptions
+        commented = false,                     -- prefix virtual text with comment string
+        only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
+        all_references = false,                -- show virtual text on all all references of the variable (not only definitions)
+        clear_on_continue = false,             -- clear virtual text on "continue" (might cause flickering when stepping)
+        --- A callback that determines how a variable is displayed or whether it should be omitted
+        --- @param variable Variable https://microsoft.github.io/debug-adapter-protocol/specification#Types_Variable
+        --- @param buf number
+        --- @param stackframe dap.StackFrame https://microsoft.github.io/debug-adapter-protocol/specification#Types_StackFrame
+        --- @param node userdata tree-sitter node identified as variable definition of reference (see `:h tsnode`)
+        --- @param options nvim_dap_virtual_text_options Current options for nvim-dap-virtual-text
+        --- @return string|nil A text how the virtual text should be displayed or nil, if this variable shouldn't be displayed
+        display_callback = function(variable, buf, stackframe, node, options)
+          if options.virt_text_pos == 'inline' then
+            return ' = ' .. variable.value
+          else
+            return variable.name .. ' = ' .. variable.value
+          end
+        end,
+        -- position of virtual text, see `:h nvim_buf_set_extmark()`, default tries to inline the virtual text. Use 'eol' to set to end of line
+        virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
+    
+        -- experimental features:
+        all_frames = false,                    -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+        virt_lines = false,                    -- show virtual lines instead of virtual text (will flicker!)
+        virt_text_win_col = nil                -- position the virtual text at a fixed window column (starting from the first text column) ,
+                                               -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
+    }
+    end
+  },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre", -- this will only start session saving when an actual file was opened
+    opts = {
+      dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
+      options = { "buffers", "curdir", "tabpages", "winsize" }, -- sessionoptions used for saving
+      pre_save = nil, -- a function to call before saving the session
+      save_empty = false, -- don't save if there are no open file buffers
+    }
+  },
+  -- {
+  --   "niuiic/multiple-session.nvim",
+  --   config = function()
+  --     -- default config
+  --     require("multiple-session").setup({
+  --     	-- used to search root path of the project
+  --     	-- if .git does not exist, current directory path would be used
+  --     	root_pattern = ".git",
+  --     	-- where to store session
+  --     	session_dir = function(project_root)
+  --     		return project_root .. "/.nvim/session"
+  --     	end,
+  --     	-- name of default session
+  --     	default_session = "default",
+  --     	-- whether to auto load session when neovim start
+  --     	auto_load_session = function(_, cur_session_path)
+  --     		if #vim.v.argv > 2 then
+  --     			return false
+  --     		end
+      
+  --     		-- detect whether in a nested instance
+  --     		if vim.env.NVIM then
+  --     			return false
+  --     		end
+      
+  --     		local core = require("core")
+  --     		if not core.file.file_or_dir_exists(cur_session_path) then
+  --     			return false
+  --     		end
+      
+  --     		return true
+  --     	end,
+  --     	-- whether to auto save session when neovim exits
+  --     	auto_save_session = function(_, cur_session_path)
+  --     		if #vim.v.argv > 2 then
+  --     			return false
+  --     		end
+      
+  --     		if vim.env.NVIM then
+  --     			return false
+  --     		end
+      
+  --     		local core = require("core")
+  --     		if not core.file.file_or_dir_exists(cur_session_path) then
+  --     			return false
+  --     		end
+      
+  --     		return true
+  --     	end,
+  --     	---@type fun(session_dir: string)
+  --     	on_session_to_save = function() end,
+  --     	---@type fun(session_dir: string)
+  --     	on_session_saved = function() end,
+  --     	---@type fun(session_dir: string)
+  --     	on_session_to_restore = function() end,
+  --     	---@type fun(session_dir: string)
+  --     	on_session_restored = function() end,
+  --     })
+  --   end
+  -- },
   -- OTROS PLUGINS
   'aklt/plantuml-syntax',
   'bronson/vim-visual-star-search',
@@ -299,6 +458,7 @@ return {
         filetypes_denylist = {
             'dirvish',
             'fugitive',
+            'NvimTree',
         },
         under_cursor = true,
         large_file_cutoff = nil,

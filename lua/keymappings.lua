@@ -15,6 +15,7 @@ remap("i", "jk", "<ESC>", {noremap = true})
 remap("", ";", ":", {noremap = true})
 remap("", ":", ";", {noremap = true})
 
+
 -- Guardar archivo
 -- remap("n", "<C-s>", "vapJgqap<cmd>update<cr>")
 remap("n", "<C-s>", "<cmd>update<cr>")
@@ -93,8 +94,21 @@ require("which-key").register({
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
 
+
+function get_current_directory()
+  -- Obtiene la ruta relativa del directorio del archivo abierto
+  local relative_directory = vim.fn.expand('%:p:h')
+
+  -- Obtiene la ruta absoluta del directorio del archivo abierto
+  local absolute_directory = vim.fn.fnamemodify(relative_directory, ':p')
+  
+  return absolute_directory
+end
+
 -- Nvim tree
-remap("n", "<leader><leader>", "<cmd>NvimTreeToggle<cr>", bufopts, "Explorador de archivos")
+remap("n", "<leader><leader>", "<cmd>lua require('nvim-tree.api').tree.open({ path = get_current_directory() })<cr>", bufopts, "Explorador de archivos")
+remap("n", "<leader>vv", "<cmd>lua require('nvim-tree.api').node.navigate.opened.prev()<cr>", bufopts, "Open prev")
+remap("n", "<leader>cc", "<cmd>lua require('nvim-tree.api').node.navigate.sibling.prev()<cr>", bufopts, "Open prev")
 remap("n", "<F3>", "<cmd>lua require'oil'.open_float()<cr>", bufopts, "Explorador de archivos")
 
 -- vim-test
@@ -476,4 +490,7 @@ vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
 -- move current tab to next position
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
 
---a asdasda
+--SESIONES 
+remap("n", "<leader>sd", [[<cmd>lua require("persistence").load()<cr>]], bufopts, "Cargar sesion del directorio")
+remap("n", "<leader>ss", [[<cmd>lua require("persistence").load({ last = true })<cr>]], bufopts, "Cargar ultima sesion")
+remap("n", "<leader>sq", [[<cmd>lua require("persistence").stop()<cr>]], bufopts, "No guardar sesion al salir")

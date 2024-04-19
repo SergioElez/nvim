@@ -1,7 +1,17 @@
 local username = vim.loop.os_getenv('USERNAME')
 vim.env["HOME"] = username
+vim.env["CATALINA_HOME"] = [[/mnt/b/apache-tomcat-10.1.11]]
 
 vim.g.mapleader = ' '
+
+--Si no hay permisos de admin coge git y make del choco portable
+if not vim.fn.executable("git") == 1 then
+  --Git
+  vim.env.PATH = vim.env.PATH .. 'C:/Tools/git/bin'
+  --Make
+  vim.env.PATH = vim.env.PATH .. 'C:/ProgramData/chocoportable/lib/make/tools/install/bin'
+  vim.fn.system([[git config --global http.sslverify "false"]])
+end
 
 -- Automatically install lazy.nvim if it does not exist
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -89,3 +99,5 @@ vim.o.foldmethod="manual"
 vim.o.foldlevelstart=1
 vim.o.fillchars = [[foldopen:,foldsep: ,foldclose:]]
 vim.o.showtabline = 1
+
+vim.opt.scrolloff = 10

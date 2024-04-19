@@ -138,3 +138,8 @@ autocmd({"colorscheme"}, {
     -- autocmd FileType nerdtree setlocal conceallevel=1
     -- autocmd FileType nerdtree setlocal concealcursor=nvic
   -- ]])
+
+-- Scroll de 15 en NvimTree
+vim.cmd[[
+  autocmd FileType * if &filetype == 'NvimTree' | set scrolloff=15 | else | set scrolloff=10 | endif
+]]
