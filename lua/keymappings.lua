@@ -38,15 +38,16 @@ remap("n", "tt", "<cmd>:tabedit<cr>", bufopts, "New tab")
 remap("n", "td", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 remap("n", "tn", "<cmd>:tabmove -1<cr>", bufopts, "Move tab next")
 remap("n", "tm", "<cmd>:tabmove +1<cr>", bufopts, "Move tab previous")
-require("which-key").register({
-  t = {
-    name = "tabs",
-  },
-})
 
 -- window management
 remap("n", "<C-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimize window")
 remap("n", "<C-Left>", "<cmd>:vertical resize +1<cr>", bufopts, "Maximize window")
+
+require("which-key").register({
+  Q = {
+    name = "Formatear parágrafo",
+  },
+}, { prefix = "<leader>" })
 
 -- formatting
 remap("n", "Q", "gqap", bufopts, "Format paragraph")
@@ -59,6 +60,12 @@ remap("n", "<leader>Q", "vapJgqap", bufopts, "Merge paragraphs")
 
 -- vim-marked
 remap("n", "<leader>mo", "<cmd>MarkedOpen<cr>", bufopts, "Open marked")
+
+require("which-key").register({
+  q = {
+    name = "Vim pencil",
+  },
+}, { prefix = "<leader>" })
 
 -- vim-pencil
 remap("n", "<leader>qc", "<Plug>ReplaceWithCurly", bufopts, "Curl quotes")
@@ -77,7 +84,7 @@ remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Fin
 remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
 require("which-key").register({
   f = {
-    name = "find",
+    name = "Buscar",
   },
 }, { prefix = "<leader>" })
 
@@ -87,7 +94,7 @@ remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts
 remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
 require("which-key").register({
   x = {
-    name = "errors",
+    name = "Errores",
   },
 }, { prefix = "<leader>" })
 
@@ -119,7 +126,7 @@ remap("n", "<leader>vl", "<cmd>TestLast<cr>", bufopts, "Test last")
 remap("n", "<leader>vg", "<cmd>TestVisit<cr>", bufopts, "Go to test")
 require("which-key").register({
   v = {
-    name = "test",
+    name = "Testing",
   },
 }, { prefix = "<leader>" })
 
@@ -266,7 +273,7 @@ remap('n', '<leader>dwf',
 
 require("which-key").register({
   b = {
-    name = "breakpoints",
+    name = "Breakpoints",
   },
 }, { prefix = "<leader>" })
 
@@ -289,7 +296,7 @@ remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List comma
 
 require("which-key").register({
   d = {
-    name = "debug",
+    name = "Debug",
   },
 }, { prefix = "<leader>" })
 
@@ -452,17 +459,22 @@ end
 
 
 -- MOSTRAR VARIABLE BAJO EL CURSOR
-remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
-remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresion")
+remap("n", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresión")
+remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresión")
+remap("v", "<leader>de", "<cmd>lua evalExpresion()<cr>", bufopts, "Inspeccionar expresión")
 -- Noice
-remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Noice History")
-remap("n", "<leader>m", "<cmd>botright messages<cr>", bufopts, "Messages")
+remap("n", "<leader>n", "<cmd>NoiceHistory<cr>", bufopts, "Historial de Noice")
+remap("n", "<leader>m", "<cmd>botright messages<cr>", bufopts, "Mensajes")
 -- Pintar linea
-remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Paint Line")
-remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Remove Paint Line")
--- Restaurar sesion
-remap("n", "<leader>sd", "<cmd>lua require('persistence').load()<cr>", bufopts, "Restaurar la última sesión del directorio")
-remap("n", "<leader>ss", "<cmd>lua require('persistence').load({ last = true })<cr>", bufopts, "Restaurar la ultima sesión")
+remap("n", "<F2>", "V:normal! <c-u>HSHighlight 0<cr>", bufopts, "Pintar linea")
+remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Limpiar linea pintada")
+
+
+require("which-key").register({
+  g = {
+    name = "Git",
+  },
+}, { prefix = "<leader>" })
 
 remap("n", "<leader>gc", "<cmd>DiffviewOpen<cr>", bufopts, "Git commit")
 remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Toggle git files")
@@ -478,8 +490,13 @@ function git_push()
   vim.cmd("Git push")
 end
 
+require("which-key").register({
+  t = {
+    name = "Tabs",
+  },
+}, { prefix = "<leader>" })
 
-
+-- TABS
 vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true })
@@ -489,6 +506,20 @@ vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
 -- move current tab to next position
 vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
+
+require("which-key").register({
+  s = {
+    name = "Sesión",
+  },
+}, { prefix = "<leader>" })
+
+--Buffers
+remap("n", "<leader>sp", '<Cmd>BufferLineTogglePin<CR>', bufopts, 'Toggle pin')
+remap("n", "<leader>sP", '<Cmd>BufferLineGroupClose ungrouped<CR>', bufopts, 'Delete non-pinned buffers')
+remap("n", "<leader>so", '<Cmd>BufferLineCloseOthers<CR>', bufopts, 'Delete other buffers')
+remap("n", "<leader>sr", '<Cmd>BufferLineCloseRight<CR>', bufopts, 'Delete buffers to the right')
+remap("n", "<leader>sl", '<Cmd>BufferLineCloseLeft<CR>', bufopts, 'Delete buffers to the left')
+remap("n", "<leader>tp", '<Cmd>BufferLinePick<CR>', bufopts, 'Tab Pick')
 
 --SESIONES 
 remap("n", "<leader>sd", [[<cmd>lua require("persistence").load()<cr>]], bufopts, "Cargar sesion del directorio")
