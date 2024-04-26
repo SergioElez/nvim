@@ -15,11 +15,19 @@ local function my_on_attach(bufnr)
 end
 
 require("nvim-tree").setup({
+  update_focused_file = {
+    enable = true,
+    update_root = {
+      enable = true,
+      ignore_list = {},
+    },
+    exclude = false,
+  },
   on_attach = my_on_attach,
   sort_by = "case_sensitive",
   actions = {
     open_file = {
-      quit_on_open = true,
+      quit_on_open = false,
     },
     file_popup = {
       open_win_config = {
@@ -120,7 +128,7 @@ require("nvim-tree").setup({
     show_on_open_dirs = true,
   },
   diagnostics = {
-    enable = true,
+    enable = false,
     show_on_dirs = true,
     show_on_open_dirs = true,
     debounce_delay = 50,

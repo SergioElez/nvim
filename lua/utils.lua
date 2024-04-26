@@ -19,6 +19,7 @@ function M.find_project_root()
     root_directory = parent_directory
   end
 
+  print('root '..root_directory)
   return root_directory
 end
 

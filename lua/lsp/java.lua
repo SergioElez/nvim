@@ -12,8 +12,8 @@ local workspace_folder = home .. "/.local/share/eclipse/" .. vim.fn.fnamemodify(
 
 local remap = require("me.util").remap
 
--- PRUEBA PATHS
-local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls/'
+-- local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls/'
+local jdtls_path = home .. '/AppData/Local/nvim-data/mason/packages/jdtls/'
 local lombok_path = jdtls_path .. '/lombok.jar'
 local java_debug_jar_path = vim.fn.stdpath('data') ..
                                 '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar'
@@ -39,12 +39,12 @@ local on_attach = function(client, bufnr)
   require("lsp.defaults").on_attach(client, bufnr)
 
   -- Java extensions
-  remap("n", "<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
-  remap("n", "<leader>vc", jdtls.test_class, bufopts, "Test class (DAP)")
-  remap("n", "<leader>vm", jdtls.test_nearest_method, bufopts, "Test method (DAP)")
-  remap("n", "<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
-  remap("n", "<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
-  remap("v", "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], bufopts, "Extract method")
+  remap("n", "<C-o>", jdtls.organize_imports, bufopts, "Organizar imports")
+  remap("n", "<leader>vc", jdtls.test_class, bufopts, "Testear clase (DAP)")
+  remap("n", "<leader>vm", jdtls.test_nearest_method, bufopts, "Testear método (DAP)")
+  remap("n", "<space>ev", jdtls.extract_variable, bufopts, "Extraer variable")
+  remap("n", "<space>ec", jdtls.extract_constant, bufopts, "Extraer constante")
+  remap("v", "<space>em", [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]], bufopts, "Extraer método")
 end
 -- vim.list_extend(bundles, vim.split(vim.fn.glob(javaTest_path .. '/server/*.jar'), "\n"))
 
@@ -134,18 +134,20 @@ local config = {
     -- '-Djava.net.preferIPv4Stack=true', 
     -- '-Xdebug',
     -- '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=127.0.0.1:5005',
+    
+    -- ESTO PETABA
     -- '--add-modules=ALL-SYSTEM',
     
-    -- '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-    -- '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+    '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
     '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
     '-configuration', jdtls_path .. '/config_win',
     '-data', workspace_folder,
   },
   
 }
-
-print(vim.inspect(config.cmd))
+--Debugar
+--print(vim.inspect(config.cmd))
 
 local M = {}
 function M.make_jdtls_config()

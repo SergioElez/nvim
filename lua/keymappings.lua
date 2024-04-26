@@ -40,26 +40,26 @@ remap("n", "tn", "<cmd>:tabmove -1<cr>", bufopts, "Move tab next")
 remap("n", "tm", "<cmd>:tabmove +1<cr>", bufopts, "Move tab previous")
 
 -- window management
-remap("n", "<C-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimize window")
-remap("n", "<C-Left>", "<cmd>:vertical resize +1<cr>", bufopts, "Maximize window")
+remap("n", "<C-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimizar ventana")
+remap("n", "<C-Left>", "<cmd>:vertical resize +1<cr>", bufopts, "Maximizar ventana")
 
 require("which-key").register({
   Q = {
-    name = "Formatear parágrafo",
+    name = "Formatear párrafo",
   },
 }, { prefix = "<leader>" })
 
 -- formatting
-remap("n", "Q", "gqap", bufopts, "Format paragraph")
-remap("x", "Q", "gq", bufopts, "Format paragraph")
-remap("n", "<leader>Q", "vapJgqap", bufopts, "Merge paragraphs")
+remap("n", "Q", "gqap", bufopts, "Formatear párrafo")
+remap("x", "Q", "gq", bufopts, "Formatear párrafo")
+remap("n", "<leader>Q", "vapJgqap", bufopts, "Mergear párrafos")
 
 --
 -- Plugins
 --
 
 -- vim-marked
-remap("n", "<leader>mo", "<cmd>MarkedOpen<cr>", bufopts, "Open marked")
+remap("n", "<leader>qm", "<cmd>MarkedOpen<cr>", bufopts, "Abrir marked")
 
 require("which-key").register({
   q = {
@@ -72,16 +72,16 @@ remap("n", "<leader>qc", "<Plug>ReplaceWithCurly", bufopts, "Curl quotes")
 remap("n", "<leader>qs", "<Plug>ReplaceWithStraight", bufopts, "Straighten quotes")
 
 -- telescope
-remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
+remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Buscar archivo")
 remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")
-remap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", bufopts, "Find buffer")
-remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Find mark")
-remap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", bufopts, "Find references (LSP)")
-remap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols (LSP)")
-remap("n", "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls (LSP)")
-remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls (LSP)")
-remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Find implementations (LSP)")
-remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
+remap("n", "<leader>fb", "<cmd>Telescope buffers<cr>", bufopts, "Buscar buffers")
+remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Buscar marks")
+remap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", bufopts, "Buscar referencias (LSP)")
+remap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Buscar símbolos (LSP)")
+remap("n", "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Buscar llamadas entrantes(LSP)")
+remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Buscar llamadas salientes (LSP)")
+remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Buscar implementaciones (LSP)")
+remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Buscar errores (LSP)")
 require("which-key").register({
   f = {
     name = "Buscar",
@@ -89,17 +89,19 @@ require("which-key").register({
 }, { prefix = "<leader>" })
 
 -- trouble
-remap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", bufopts, "Display errors")
-remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Display workspace errors")
-remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
+remap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", bufopts, "Mostrar errores")
+remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Mostrar errores del workspace ")
+remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Mostrar errores del documento")
 require("which-key").register({
   x = {
     name = "Errores",
   },
 }, { prefix = "<leader>" })
 
+
+
 -- symbols-outline
-remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
+remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Símbolos")
 
 
 function get_current_directory()
@@ -114,16 +116,15 @@ end
 
 -- Nvim tree
 remap("n", "<leader><leader>", "<cmd>lua require('nvim-tree.api').tree.open({ path = get_current_directory() })<cr>", bufopts, "Explorador de archivos")
-remap("n", "<leader>vv", "<cmd>lua require('nvim-tree.api').node.navigate.opened.prev()<cr>", bufopts, "Open prev")
-remap("n", "<leader>cc", "<cmd>lua require('nvim-tree.api').node.navigate.sibling.prev()<cr>", bufopts, "Open prev")
+-- remap("n", "<leader><leader>", "<cmd>lua require('nvim-tree.api').tree.open()<cr>", bufopts, "Explorador de archivos")
 remap("n", "<F3>", "<cmd>lua require'oil'.open_float()<cr>", bufopts, "Explorador de archivos")
 
 -- vim-test
-remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test nearest")
-remap("n", "<leader>vf", "<cmd>TestFile<cr>", bufopts, "Test file")
-remap("n", "<leader>vs", "<cmd>TestSuite<cr>", bufopts, "Test suite")
-remap("n", "<leader>vl", "<cmd>TestLast<cr>", bufopts, "Test last")
-remap("n", "<leader>vg", "<cmd>TestVisit<cr>", bufopts, "Go to test")
+remap("n", "<leader>vt", "<cmd>TestNearest<cr>", bufopts, "Test más cercano")
+remap("n", "<leader>vf", "<cmd>TestFile<cr>", bufopts, "Testear archivo")
+remap("n", "<leader>vs", "<cmd>TestSuite<cr>", bufopts, "Testear suite")
+remap("n", "<leader>vl", "<cmd>TestLast<cr>", bufopts, "Testear último test")
+remap("n", "<leader>vg", "<cmd>TestVisit<cr>", bufopts, "Ir al test")
 require("which-key").register({
   v = {
     name = "Testing",
@@ -131,17 +132,17 @@ require("which-key").register({
 }, { prefix = "<leader>" })
 
 
-remap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
-remap("n", "<leader>bb", "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
+remap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", bufopts, "Poner breakpoint")
+remap("n", "<leader>bb", "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>", bufopts, "Poner breakpoint")
 
-remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts, "Set conditional breakpoint")
-remap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", bufopts, "Set conditional breakpoint")
+remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts, "Poner breakpoint condicional")
+remap("n", "<leader>bc", "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>", bufopts, "Poner breakpoint condicional")
 
-remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
-remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", bufopts, "Clear breakpoints")
+remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Borrar breakpoints")
+remap("n", "<leader>br", "<cmd>lua require('persistent-breakpoints.api').clear_all_breakpoints()<cr>", bufopts, "Borrar breakpoints")
 
-remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Set log point")
-remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
+remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", bufopts, "Poner punto de log")
+remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "Lista de breakpoints")
 
 
 local skip_breakpoints = false
@@ -258,18 +259,18 @@ require("which-key").register({
   },
 }, { prefix = "<leader>d" })
 
-remap('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', bufopts, 'Toggle UI')
-remap('n', '<leader>dus', ':lua require("dapui").toggle("sidebar")<CR>', bufopts, 'Toggle sidebar')
-remap('n', '<leader>dut', ':lua require("dapui").toggle("tray")<CR>', bufopts, 'Toggle tray')
+remap('n', '<leader>dui', ':lua require("dapui").toggle()<CR>', bufopts, 'Alternar DAP UI')
+remap('n', '<leader>dus', ':lua require("dapui").toggle("sidebar")<CR>', bufopts, 'Alternar barra lateral')
+remap('n', '<leader>dut', ':lua require("dapui").toggle("tray")<CR>', bufopts, 'Alternar tray')
 
 -- DAP Widgets
-remap('n', '<leader>dwu', require('dap.ui.widgets').hover, bufopts, 'Show expression under cursor')
+remap('n', '<leader>dwu', require('dap.ui.widgets').hover, bufopts, 'Mostrar expresión bajo el cursor')
 remap('n', '<leader>dws',
     ':lua local widgets=require("dap.ui.widgets");widgets.sidebar(widgets.scopes).open()<CR>', bufopts,
-    'Show scopes')
+    'Mostrar scopes')
 remap('n', '<leader>dwf',
     ':lua local widgets=require("dap.ui.widgets");widgets.sidebar(widgets.frames).open()<CR>', bufopts,
-    'Show frames')
+    'Mostrar frames')
 
 require("which-key").register({
   b = {
@@ -277,21 +278,21 @@ require("which-key").register({
   },
 }, { prefix = "<leader>" })
 
-remap("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
-remap("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
+remap("n", "<F5>", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continuar")
+remap("n", "<F6>", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Siguiente paso")
 
-remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
-remap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
-remap("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>", bufopts, "Step into")
-remap("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>", bufopts, "Step out")
-remap("n", "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>", bufopts, "Disconnect")
-remap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", bufopts, "Terminate")
-remap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", bufopts, "Open REPL")
-remap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", bufopts, "Run last")
+remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continuar")
+remap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Siguiente paso")
+remap("n", "<leader>dk", "<cmd>lua require'dap'.step_into()<cr>", bufopts, "Siguiente paso entrando dentro")
+remap("n", "<leader>do", "<cmd>lua require'dap'.step_out()<cr>", bufopts, "Paso atrás")
+remap("n", "<leader>dd", "<cmd>lua require'dap'.disconnect()<cr>", bufopts, "Desconectar")
+remap("n", "<leader>dx", "<cmd>lua require'dap'.terminate()<cr>", bufopts, "Terminar")
+remap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", bufopts, "Abrir REPL")
+remap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", bufopts, "Ejecutar último adaptador")
 remap("n", "<leader>di", function() require"dap.ui.widgets".hover() end, bufopts, "Variables")
 remap("n", "<leader>d?", function() local widgets=require"dap.ui.widgets";widgets.centered_float(widgets.scopes) end, bufopts, "Scopes")
-remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "List frames")
-remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List commands")
+remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "Lista de frames")
+remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "Lista de comandos")
 
 
 require("which-key").register({
@@ -302,7 +303,7 @@ require("which-key").register({
 
 require("which-key").register({
   w = {
-    name = "Wildcat",
+    name = "Tomcat",
   },
 }, { prefix = "<leader>d" })
 
@@ -363,12 +364,12 @@ function deploy_tomcat()
     end
 end
 
-remap("n", "<F4>", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
-remap("n", "<leader>dww", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Wildcat Up")
-remap("n", "<leader>dwd", "<cmd>WildcatDown<cr>", bufopts, "Wildcat Down")
+remap("n", "<F4>", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Desplegar tomcat")
+remap("n", "<leader>dww", "<cmd>lua deploy_tomcat()<cr>", bufopts, "Desplegar tomcat")
+remap("n", "<leader>dwd", "<cmd>WildcatDown<cr>", bufopts, "Parar tomcat")
 
 -- DESPLIEGUE DE WAR A TOMCAT
-remap("n", "<leader>dwr", "<cmd>lua deploy_to_tomcat()<cr>", bufopts, "Desplegar war a Tomcat")
+remap("n", "<leader>dwr", "<cmd>lua deploy_to_tomcat()<cr>", bufopts, "Desplegar war a tomcat")
 
 function deploy_to_tomcat()
   -- Find the root directory of the project using the utility function from 'utils.lua'
@@ -471,18 +472,24 @@ remap("n", "<C-F2>", "V:normal! <c-u>HSRmHighlight 0<cr>", bufopts, "Limpiar lin
 
 
 require("which-key").register({
+  n = {
+    name = "Historial de Noice",
+  },
+}, { prefix = "<leader>" })
+
+require("which-key").register({
   g = {
     name = "Git",
   },
 }, { prefix = "<leader>" })
 
 remap("n", "<leader>gc", "<cmd>DiffviewOpen<cr>", bufopts, "Git commit")
-remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Toggle git files")
-remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Commits History")
-remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "File History")
+remap("n", "<leader>gt", "<cmd>DiffviewToggleFiles<cr>", bufopts, "Alternar archivos de git")
+remap("n", "<leader>gh", "<cmd>DiffviewFileHistory<cr>", bufopts, "Historial de commits")
+remap("n", "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", bufopts, "Historial de este archivo")
 remap("n", "<leader>gg", "<cmd>Git pull<cr>", bufopts, "Git pull")
-remap("n", "<leader>gp", "<cmd>lua git_push()<cr>", bufopts, "Git Push")
-remap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", bufopts, "Git Branches")
+remap("n", "<leader>gp", "<cmd>lua git_push()<cr>", bufopts, "Git push")
+remap("n", "<leader>gb", "<cmd>Telescope git_branches<cr>", bufopts, "Ramas de git")
 
 
 function git_push()
@@ -497,15 +504,13 @@ require("which-key").register({
 }, { prefix = "<leader>" })
 
 -- TABS
-vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>to", ":tabonly<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tn", ":tabn<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tp", ":tabp<CR>", { noremap = true })
--- move current tab to previous position
-vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
--- move current tab to next position
-vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
+remap("n", "<leader>ta", ":$tabnew<CR>", bufopts, 'Nueva tab')
+remap("n", "<leader>tc", ":tabclose<CR>", bufopts, 'Cerrar tab')
+remap("n", "<leader>to", ":tabonly<CR>", bufopts, 'Mover todo a una tab')
+remap("n", "<leader>tn", ":tabn<CR>", bufopts, 'Tabn')
+remap("n", "<leader>tp", ":tabp<CR>", bufopts, 'Tabp')
+remap("n", "<leader>tmp", ":-tabmove<CR>", bufopts, 'Mover tab atrás')
+remap("n", "<leader>tmn", ":+tabmove<CR>", bufopts, 'Mover tab adelante')
 
 require("which-key").register({
   s = {
@@ -513,15 +518,30 @@ require("which-key").register({
   },
 }, { prefix = "<leader>" })
 
---Buffers
-remap("n", "<leader>sp", '<Cmd>BufferLineTogglePin<CR>', bufopts, 'Toggle pin')
-remap("n", "<leader>sP", '<Cmd>BufferLineGroupClose ungrouped<CR>', bufopts, 'Delete non-pinned buffers')
-remap("n", "<leader>so", '<Cmd>BufferLineCloseOthers<CR>', bufopts, 'Delete other buffers')
-remap("n", "<leader>sr", '<Cmd>BufferLineCloseRight<CR>', bufopts, 'Delete buffers to the right')
-remap("n", "<leader>sl", '<Cmd>BufferLineCloseLeft<CR>', bufopts, 'Delete buffers to the left')
-remap("n", "<leader>tp", '<Cmd>BufferLinePick<CR>', bufopts, 'Tab Pick')
-
 --SESIONES 
 remap("n", "<leader>sd", [[<cmd>lua require("persistence").load()<cr>]], bufopts, "Cargar sesion del directorio")
 remap("n", "<leader>ss", [[<cmd>lua require("persistence").load({ last = true })<cr>]], bufopts, "Cargar ultima sesion")
 remap("n", "<leader>sq", [[<cmd>lua require("persistence").stop()<cr>]], bufopts, "No guardar sesion al salir")
+
+require("which-key").register({
+  b = {
+    name = "Buffers",
+  },
+}, { prefix = "<leader>s" })
+
+--Buffers
+remap("n", "<leader>sbp", '<Cmd>BufferLineTogglePin<CR>', bufopts, 'Toggle pin')
+remap("n", "<leader>sbP", '<Cmd>BufferLineGroupClose ungrouped<CR>', bufopts, 'Delete non-pinned buffers')
+remap("n", "<leader>sbo", '<Cmd>BufferLineCloseOthers<CR>', bufopts, 'Delete other buffers')
+remap("n", "<leader>sbr", '<Cmd>BufferLineCloseRight<CR>', bufopts, 'Delete buffers to the right')
+remap("n", "<leader>sbl", '<Cmd>BufferLineCloseLeft<CR>', bufopts, 'Delete buffers to the left')
+remap("n", "<leader>tp", '<Cmd>BufferLinePick<CR>', bufopts, 'Tab Pick')
+
+
+function open_explorer()
+  local current_directory = vim.fn.expand('%:p:h')
+  local explorer_command = 'start explorer "' .. current_directory .. '"'
+  vim.fn.system(explorer_command)
+end
+--Extras
+remap("n", "<leader>p", "<cmd>lua open_explorer()<cr>", bufopts, "Abrir explorador")

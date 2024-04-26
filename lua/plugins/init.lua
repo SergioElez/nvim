@@ -384,6 +384,10 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("oil").setup({
+        keymaps = {
+          ["<space>"] = "actions.select",
+          ["<CR>"] = "actions.select"
+        },
         skip_confirm_for_simple_edits = true,
         float = {
           padding = 2,
@@ -509,6 +513,9 @@ return {
       cmdline = {
         enabled = false
       },
+      presets = {
+        long_message_to_split = true
+      },
       messages = {
         enabled = true, -- enables the Noice messages UI
         view = "notify", -- default view for messages
@@ -613,12 +620,14 @@ return {
 				-- indicator = {
 				-- 	style = 'underline',
 				-- },
-				diagnostics_indicator = function(_, _, diag)
-					local icons = require('lazyvim.config').icons.diagnostics
-					local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
-						.. (diag.warning and icons.Warn .. diag.warning or '')
-					return vim.trim(ret)
-				end,
+				
+				-- ESTO PETA
+				-- diagnostics_indicator = function(_, _, diag)
+					-- local icons = require('lazyvim.config').icons.diagnostics
+					-- local ret = (diag.error and icons.Error .. diag.error .. ' ' or '')
+						-- .. (diag.warning and icons.Warn .. diag.warning or '')
+					-- return vim.trim(ret)
+				-- end,
 				custom_areas = {
 					right = function()
 						local result = {}
