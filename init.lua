@@ -1,6 +1,9 @@
 local username = vim.loop.os_getenv('USERNAME')
 vim.env["HOME"] = username
-vim.env["CATALINA_HOME"] = [[/mnt/b/apache-tomcat-10.1.11]]
+-- vim.env["CATALINA_HOME"] = [[/mnt/b/apache-tomcat-10.1.11]]
+vim.env["CATALINA_HOME"] = [[C:/apache-tomcat-8.5.100]]
+
+
 
 vim.g.mapleader = ' '
 

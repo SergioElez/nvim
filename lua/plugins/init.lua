@@ -8,16 +8,22 @@ return {
         vim.cmd.colorscheme 'molokai'
       end,
   },
+  {"SergioElez/bracketpair.nvim"},
   -- Rainbow Bracket
-  {'HiPhish/nvim-ts-rainbow2'},
-  -- TODO
+  -- {'HiPhish/nvim-ts-rainbow2'},
   {
     "AmeerTaweel/todo.nvim",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-        require("todo").setup {
-        }
+      require("todo").setup {
+      }
     end
+  },
+  {
+    "jiaoshijie/undotree",
+    dependencies  = {
+        "nvim-lua/plenary.nvim",
+    },
   },
   {
     'mfussenegger/nvim-dap',
@@ -480,53 +486,11 @@ return {
     'gelguy/wilder.nvim',
     config = function() require('config/wilder') end,
   },
+
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-      routes = {
-        {
-        -- Quita el aviso de cuando guardas
-          filter = {
-            event = "msg_show",
-            kind = "",
-            find = "escritos",
-          },
-          -- Quita el aviso de cuando abres un archivo
-          filter = {
-            event = "msg_show",
-            kind = "",
-            find = "--",
-          },
-          opts = { skip = true },
-        },
-      },
-      notify = {
-        enabled = false,
-        view = "notify",
-      },
-      lsp = {
-        message = { enabled = false},
-        progress = {
-          enabled = false}
-      },
-      cmdline = {
-        enabled = false
-      },
-      presets = {
-        long_message_to_split = true
-      },
-      messages = {
-        enabled = true, -- enables the Noice messages UI
-        view = "notify", -- default view for messages
-        -- view = "false", -- default view for messages
-        view_error = "notify", -- view for errors
-        view_warn = "notify", -- view for warnings
-        view_history = "messages", -- view for :messages
-        view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
-      },
-
-    },
+    config = function() require('config/noice') end,
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
@@ -786,5 +750,6 @@ return {
       })
     end
   },
-}
+ }
+
 

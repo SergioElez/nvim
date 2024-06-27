@@ -25,7 +25,18 @@ require'nvim-treesitter.configs'.setup {
     -- disable = { 'jsx', 'cpp' },
     -- query = 'rainbow-parens',
     -- strategy = require('ts-rainbow').strategy.global,
+    -- hlgroups = {
+      -- 'TSRainbowRed',
+      -- 'TSRainbowYellow',
+      -- 'TSRainbowBlue',
+      -- 'TSRainbowOrange',
+      -- 'TSRainbowGreen',
+      -- 'TSRainbowViolet',
+      -- 'TSRainbowCyan'
+  --  },
   -- }
+  
+  
 }
 -- Define la función de plegado para Java
 function FoldJavaImports()

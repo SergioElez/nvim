@@ -49,3 +49,4 @@ probar bien los workspaces
 - DONE - hacer que salga en lualine los caracteres selccionados si hay commit por subir o por bajar
 
 hacer que no salga las concurrencias en nvim tree
+hacer que si pulsas spacio m y no hay mensajes que salga un mensaje diciendo que no hay mensajes
