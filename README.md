@@ -7,7 +7,6 @@ My personal nvim conf
 
 ## Dependencias
 ``choco install neovim neovide git make fzf maven openjdk17 python ripgrep nerd-fonts-RobotoMono`` 
-- Descargar Nerdfont y ponerla en el terminal de windows
 - Instalar wsl ubuntu
 - Instalar tmux en el wsl
 - Hacer clone del dotfile de tmux
