@@ -37,16 +37,17 @@ lspconfig['lua_ls'].setup {
   }
 }
 
-lspconfig['ltex'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
-  settings = {
-    ltex = {
-      language = "en-CA",
-    }
-  }
-}
+--DESCOMENTAR SI SE USA LATEX
+-- lspconfig['ltex'].setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   filetypes = { "bib", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc" },
+--   settings = {
+--     ltex = {
+--       language = "en-CA",
+--     }
+--   }
+-- }
 
 -- lspconfig['gopls'].setup {
   -- on_attach = on_attach,
@@ -61,24 +62,25 @@ lspconfig['ltex'].setup {
   -- }
 -- }
 
-lspconfig['pyright'].setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    pyright = {
-      analysis = {
-        useLibraryCodeForTypes = true,
-      },
-    },
-  }
-}
+--DESCOMENTAR SI SE USA PYTHON
+-- lspconfig['pyright'].setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   settings = {
+--     pyright = {
+--       analysis = {
+--         useLibraryCodeForTypes = true,
+--       },
+--     },
+--   }
+-- }
 
 -- lspconfig['solargraph'].setup {
   -- on_attach = on_attach,
   -- capabilities = capabilities,
 -- }
 
-lspconfig['tsserver'].setup {
+lspconfig['ts_ls'].setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }

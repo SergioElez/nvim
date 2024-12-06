@@ -233,6 +233,7 @@ return {
   },
   {
     'folke/which-key.nvim',
+    dependencies = { 'echasnovski/mini.icons' },
     config = function()
       require("which-key").setup({
         icons = {
@@ -435,7 +436,7 @@ return {
               'java-debug-adaptor',
               'jsonls',
               'lua_ls',
-              'tsserver',
+              'ts_ls',
           },
         automatic_installation = true,
       })
@@ -719,6 +720,12 @@ return {
       process_comment_signs = 'spaces',
     })
    end
+  },
+  -- Color Picker
+  { "nvzone/volt", lazy = true },
+  {
+    "nvzone/minty",
+    cmd = { "Shades", "Huefy" },
   },
   -- GIT
   {

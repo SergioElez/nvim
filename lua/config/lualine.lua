@@ -73,7 +73,7 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {
-      { 'mode', separator = { left = ' ', right = '  ' }, right_padding = 2, icon = get_mode_icon() },
+      { 'mode', separator = { left = ' ', right = '  ' }, right_padding = 2},
     },
     lualine_b = {
       { 'filename', separator = { left = '', right = '' }, right_padding = 2,
