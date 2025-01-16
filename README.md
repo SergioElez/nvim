@@ -24,6 +24,7 @@ My personal nvim conf
 ## Instalación
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
   Linux
+`` curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/RobotoMono.tar.xz`` <br/>
 ``sudo apt install neovim`` <br/>
 ``git clone https://github.com/SergioElez/nvim ~/.conf/nvim`` <br/>
 - Instalar tomcat
