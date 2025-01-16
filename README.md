@@ -23,6 +23,9 @@ My personal nvim conf
   
 ## Instalación
 ``git clone https://github.com/SergioElez/nvim $env:LOCALAPPDATA\nvim`` <br/>
+  Linux
+``sudo apt install neovim`` <br/>
+``git clone https://github.com/SergioElez/nvim ~/.conf/nvim`` <br/>
 - Instalar tomcat
 - Comprobar que tomcat se ha instalado bien por chocolatey, si no instalarlo a mano IMPORTANTE, INSTALARLO A MANO EN UNA RUTA SIN ESPACIOS
 - Abrir nvim como admin
