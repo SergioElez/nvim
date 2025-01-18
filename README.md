@@ -11,9 +11,11 @@ My personal nvim conf
 ``sudo tar -C /opt -xzf nvim-linux64.tar.gz`` <br/>
 ``echo export PATH=\"\$PATH:/opt/nvim-linux64/bin\" >> ~/.bashrc`` <br/>
 ``mkdir -p ~/Programs && curl -L -o ~/Programs/neovide.AppImage https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage && chmod +x ~/Programs/neovide.AppImage`` <br/>
-``Agregar como programa y poner como argumento --neovim-bin /opt/nvim-linux64/bin/nvim`` <br/>
+Agregar como programa y poner como argumento 
+``--neovim-bin /opt/nvim-linux64/bin/nvim`` <br/>
 ``git clone https://github.com/SergioElez/nvim ~/.conf/nvim`` <br/>
 `` curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/RobotoMono.tar.xz`` <br/>
+Abrir zip y instalar la fuente Regular
 
 ## Requisitos Tomcat en Windows
 - Settear CATALINA_HOME = /mnt/b/apache-tomcat-10.1.11
@@ -24,15 +26,13 @@ My personal nvim conf
 - Hacer clone del dotfile de tmux
 - wget -O ~/.tmux.conf https://raw.githubusercontent.com/SergioElez/dotfiles/master/.tmux.conf
 
-## Version portable (Sin admin)
+## Version portable en Windows (Sin admin)
 - Abrir cmd
 - SET INSTALLDIR=c:\ProgramData\chocoportable
 - setx ChocolateyInstall %INSTALLDIR%
 - ``@powershell -NoProfile -ExecutionPolicy Bypass -Command "(iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))) >$null 2>&1" && SET PATH="%PATH%;%INSTALLDIR%\bin"`` <br/>
 - ``choco install neovim neovide.portable git.portable make fzf maven openjdk17 python ripgrep --force --ignore-dependencies`` 
 - https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/RobotoMono.zip
-
-
 
 ## Poner en marcha
 - Instalar tomcat
