@@ -7,7 +7,6 @@ My personal nvim conf
 
 ## Linux
 ``curl -LO https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz`` <br/>
-``sudo rm -rf /opt/nvim`` <br/>
 ``sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz`` <br/>
 ``echo export PATH=\"\$PATH:/opt/nvim-linux64/bin\" >> ~/.bashrc`` <br/>
 ``mkdir -p ~/Programs && curl -L -o ~/Programs/neovide.AppImage https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage && chmod +x ~/Programs/neovide.AppImage`` <br/>
