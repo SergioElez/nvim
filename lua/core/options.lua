@@ -2,7 +2,7 @@
 -- General Neovim settings and configuration
 -----------------------------------------------------------
 
-local home = os.getenv("HOME")
+local home = os.getenv("HOME") or "~"
 local g = vim.g
 local opt = vim.opt
 local opt_global = vim.opt_global

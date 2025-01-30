@@ -65,7 +65,6 @@
         "RPG.sln": true,
         "Temp": true,
         "UserSettings": true,
-        "Assets/Scripts": true,
         "Assets/AutoSave": true,
         "Assets/EModules": true,
         "Assets/Plugins": true,
@@ -76,7 +75,8 @@
         ".*": true,
         "*gitignore": true,
         "*/*.gitignore": true,
-        "*/**/**.meta": true
+        "*/**/**.meta": true,
+        "Assets/Scripts": true
     },
     "hide-files.files": [],
     "workbench.colorCustomizations": {
