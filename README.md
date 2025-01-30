@@ -12,7 +12,7 @@ My personal nvim conf
 ``mkdir -p ~/Programs && curl -L -o ~/Programs/neovide.AppImage https://github.com/neovide/neovide/releases/latest/download/neovide.AppImage && chmod +x ~/Programs/neovide.AppImage`` <br/>
 Agregar como programa y poner como argumento 
 ``--neovim-bin /opt/nvim-linux-x86_64/bin/nvim`` <br/>
-``git clone https://github.com/SergioElez/nvim ~/.conf/nvim`` <br/>
+``git clone https://github.com/SergioElez/nvim ~/.config/nvim`` <br/>
 `` curl -OL https://github.com/ryanoasis/nerd-fonts/releases/latest/download/RobotoMono.tar.xz`` <br/>
 Abrir zip y instalar la fuente Regular
 
